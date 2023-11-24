@@ -1,0 +1,24 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "node index.js",
+    "dev": "nodemon index.js",
+    "frontAndBackDev": "concurrently \"npm run dev\" \"cd .. && cd front && npm run dev\"",
+    "frontAndBackBuild": "concurrently \"npm run build\" \"cd .. && cd front && npm run build\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cd": "^0.3.3",
+    "chalk": "^5.3.0",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.3.1",
+    "front": "^0.0.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.1"
+  }
+}
