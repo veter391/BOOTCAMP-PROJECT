@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import chalk from 'chalk';
 import express from 'express'
 import morgan from 'morgan';
-import cors from 'cros'
+import cors from 'cors'
 
 dotenv.config({ path: '../.env' });
 
