@@ -1,0 +1,42 @@
+@import '../../styles/tools/_pxconvert.scss';
+
+.header {
+  background-color: rgba(var(--dark-theme) , .5);
+  padding: rem(30) 0;
+  color: rgba(var(--light-theme));
+
+  &__container {
+    display: flex;
+  }
+
+  &__logo {
+    margin-right: auto;
+  }
+
+  &__link {
+    font-size: rem(20);
+    border-bottom: 2px solid transparent;
+    transition-property: color, border-color;
+    transition-timing-function: ease-in-out;
+    transition-duration: .3s;
+
+    &:not(:last-child) {
+      margin-right: rem(30);
+    }
+
+    &.active {
+      color: rgba(var(--primary));
+    }
+
+    &:hover {
+      color: rgb(var(--hover));
+      border-color: rgb(var(--hover));
+    }
+
+    &:active,
+    &.focus-visible {
+      color: rgb(var(--focus));
+      border-color: rgb(var(--focus));
+    }
+  }
+}

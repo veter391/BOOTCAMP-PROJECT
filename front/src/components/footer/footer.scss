@@ -1,0 +1,36 @@
+@import '../../styles/tools/pxconvert';
+
+.footer {
+    background-color: rgba(var(--dark-theme), .5);
+    padding: rem(30) 0;
+    color: rgb(var(--light-theme));
+
+  &__container {
+    text-align: center;
+  }
+
+  &__link {
+    transition-property: opacity, color, border-color;
+    transition-timing-function: ease;
+    transition-duration: .3s;
+    border-bottom: 1px solid transparent;
+
+    &:hover {
+      border-color: rgb(var(--hover));
+      color: rgb(var(--hover));
+      .colored {
+        color: rgb(var(--light-theme));
+      }
+    }
+
+    &.focus-visible,
+    &:active {
+      border-color: rgb(var(--focus));
+      color: rgb(var(--focus));
+    }
+
+    &:active {
+      opacity: .7;
+    }
+  }
+}
