@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LogIn from '../../components/login/Login';
 import SignUp from '../../components/signup/SignUp';
-import './home.scss'
+import './home.scss';
 
 function Home () {
   const [login, setLogin] = useState(true);
@@ -18,7 +18,7 @@ function Home () {
         <div className="home__right">
 
           { (login && <LogIn />) || <SignUp />}
-          <button onClick={() => setLogin(!login)} className='home__btn-change btn-reset'>{ login &&'SignUp now' || 'LogIn here' }</button>
+          <button onClick={() => setLogin(!login)} className='home__btn-change btn-reset'>{ (login && 'SignUp now') || 'LogIn here' }</button>
         </div>
 
         <video autoPlay muted loop className='home__video'>

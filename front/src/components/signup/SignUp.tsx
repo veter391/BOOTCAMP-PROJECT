@@ -1,14 +1,13 @@
-import { useState } from 'react';
-import './signup.scss'
+import { useState, FormEvent } from 'react';
+import './signup.scss';
 
-function SignUp() {
-
-  const [isCompany, setIsCompany] = useState(false)
+function SignUp () {
+  const [isCompany, setIsCompany] = useState(false);
 
   // funciton to run where submit form
-  function signUp(e: any) {
+  function signUp (e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('sign up')
+    console.log('sign up');
   }
 
   return (
@@ -32,7 +31,7 @@ function SignUp() {
       }
 
       <label className="form__label form__label-last form__label-checkbox">
-        <input onChange={() => setIsCompany( !isCompany )} className="form__label-checkbox__field" type="checkbox" name="checkbox" />
+        <input onChange={() => setIsCompany(!isCompany)} className="form__label-checkbox__field" type="checkbox" name="checkbox" />
         <span className="form__label-checkbox__content"></span>
         Are you company?
       </label>
@@ -41,10 +40,10 @@ function SignUp() {
   );
 }
 
-function CompanyForm() {
-  return(
+function CompanyForm () {
+  return (
     <>
-      <h2 style={{padding:'20px 20px 0 20px'}}>Company data:</h2>
+      <h2 style={{ padding: '20px 20px 0 20px' }}>Company data:</h2>
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="companyName" placeholder="Name of company..." />
       </label>
@@ -52,7 +51,7 @@ function CompanyForm() {
         <input className="input-reset form__input" type="text" name="street" placeholder="Street..." />
       </label>
     </>
-  )
+  );
 }
 
 export default SignUp;

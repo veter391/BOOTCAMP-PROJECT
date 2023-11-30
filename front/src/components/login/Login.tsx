@@ -1,11 +1,11 @@
-import './login.scss'
+import './login.scss';
+import { FormEvent } from 'react';
 
-function LogIn() {
-
+function LogIn () {
   // funciton to run where submit form
-  function login(e: any) {
+  function login (e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('login')
+    console.log('login');
   }
 
   return (

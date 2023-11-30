@@ -1,16 +1,16 @@
 // styles
-import './app.scss'
+import './app.scss';
 
+// scripts / components
 import { Route, Routes } from 'react-router-dom';
-import Header from '../header/Header'
-import Footer from '../footer/Footer'
+import Header from '../header/Header';
+import Footer from '../footer/Footer';
 import Home from '../../pages/home/Home';
 import About from '../../pages/about/About';
 import ErrorPage from '../../pages/error/ErrorPage';
 import Account from '../../pages/account/Account';
 
-
-function App() {
+function App () {
   return (
     <div className='wrapper'>
       <Header />
@@ -30,7 +30,7 @@ function App() {
 
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

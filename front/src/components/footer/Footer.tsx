@@ -1,6 +1,6 @@
-import './footer.scss'
+import './footer.scss';
 
-function Footer() {
+function Footer () {
   return (
     <footer className="footer">
       <div className="container footer__container">
