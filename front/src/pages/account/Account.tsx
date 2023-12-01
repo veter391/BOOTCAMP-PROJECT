@@ -1,3 +1,4 @@
+import Contacs from '../../components/contacts/Contacs';
 import './account.scss';
 
 function Account () {
@@ -12,11 +13,7 @@ function Account () {
           </article>
         </div>
 
-        <ul className="account__followers">
-          <li>follower</li>
-          <li>follower</li>
-          <li>follower</li>
-        </ul>
+        <Contacs/>
       </div>
     </section>
   );
