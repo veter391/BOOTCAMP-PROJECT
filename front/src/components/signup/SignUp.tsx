@@ -1,29 +1,50 @@
 import { useState, FormEvent } from 'react';
 import './signup.scss';
+import InputValidate from '../inputValidate/InputValidate';
+import validationScheme from '../../helpers/validationScheme';
+import { useForm, UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
 
 function SignUp () {
   const [isCompany, setIsCompany] = useState(false);
+  const { handleSubmit, register, formState: { errors } } = useForm();
+  const handlers: handlersType = { register, errors };
 
   // funciton to run where submit form
-  function signUp (e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function signUp (values) {
     console.log('sign up');
+    const data = {
+      email: values.email,
+      password: values.password
+    };
+
+    console.log(data);
   }
 
   return (
-    <form onSubmit={signUp} className="form">
+    <form onSubmit={handleSubmit(signUp)} className="form">
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="name" placeholder="Name..." />
       </label>
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="surname" placeholder="Surname..." />
       </label>
-      <label className="form__label">
-        <input className="input-reset form__input" type="email" name="mail" placeholder="E-mail..." />
-      </label>
-      <label className="form__label">
-        <input className="input-reset form__input" type="password" name="password" placeholder="Password..." />
-      </label>
+
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="email"
+        name='email'
+        placeholder="Email..."
+        handlers={handlers}
+        scheme={validationScheme.email} />
+
+      <InputValidate
+        classNameLabel="form__label form__label-last"
+        className="input-reset form__input"
+        type="password"
+        name='password' placeholder="Password..."
+        handlers={handlers}
+        scheme={validationScheme.password} />
 
       {
         // N: check if is company and if is add more inputs
@@ -43,7 +64,11 @@ function SignUp () {
 function CompanyForm () {
   return (
     <>
-      <h2 style={{ padding: '20px 20px 0 20px' }}>Company data:</h2>
+      <div className="form__company-subtitle">
+        <h2 className='form__company-subtitle-text'>Company data</h2>
+
+      </div>
+
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="companyName" placeholder="Name of company..." />
       </label>

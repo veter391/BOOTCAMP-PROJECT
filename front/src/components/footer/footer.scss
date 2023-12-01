@@ -1,8 +1,7 @@
 @import '../../styles/tools/pxconvert';
 
 .footer {
-    background-color: rgba(var(--dark-theme), .5);
-    padding: rem(30) 0;
+    padding: rem(10) 0;
     color: rgb(var(--light-theme));
 
   &__container {
@@ -17,10 +16,7 @@
 
     &:hover {
       border-color: rgb(var(--hover));
-      color: rgb(var(--hover));
-      .colored {
-        color: rgb(var(--light-theme));
-      }
+      color: rgb(var(--light-theme));
     }
 
     &.focus-visible,
@@ -32,5 +28,9 @@
     &:active {
       opacity: .7;
     }
+  }
+
+  &__description {
+    font-size: rem(12);
   }
 }
