@@ -9,26 +9,28 @@ import Home from '../../pages/home/Home';
 import About from '../../pages/about/About';
 import ErrorPage from '../../pages/error/ErrorPage';
 import Account from '../../pages/account/Account';
+import AppProvider from '../../context/AppProvider';
 
 function App () {
   return (
     <div className='wrapper'>
-      <Header />
+      <AppProvider>
+        <Header />
 
-      <main className='main'>
-        <h1 className='visually-hidden'> Connect Peaple </h1>
+        <main className='main'>
+          <h1 className='visually-hidden'> Connect Peaple </h1>
 
-        {/* N: Routers to pages */}
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/about' element={<About />} />
-          <Route path='/account' element={<Account />} />
-          <Route path='*' element={<ErrorPage />} />
-        </Routes>
+          {/* N: Routers to pages */}
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/about' element={<About />} />
+            <Route path='/account' element={<Account />} />
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        </main>
 
-      </main>
-
-      <Footer />
+        <Footer />
+      </AppProvider>
     </div>
   );
 }

@@ -1,23 +1,25 @@
-import { useState, FormEvent } from 'react';
 import './signup.scss';
+
+import { useState, useContext } from 'react';
 import InputValidate from '../inputValidate/InputValidate';
 import validationScheme from '../../helpers/validationScheme';
-import { useForm, UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
+import userRegister from '../../services/userRegister';
+import { AppContext } from '../../context/AppProvider';
 
 function SignUp () {
+  // get variavles from context
+  const { handleSubmit } = useContext(AppContext);
+
+  // company checkbox
   const [isCompany, setIsCompany] = useState(false);
-  const { handleSubmit, register, formState: { errors } } = useForm();
-  const handlers: handlersType = { register, errors };
 
   // funciton to run where submit form
-  function signUp (values) {
+  function signUp (values: object) {
     console.log('sign up');
-    const data = {
-      email: values.email,
-      password: values.password
-    };
 
-    console.log(data);
+    // N: register function for users
+    userRegister(values);
+    console.log(values);
   }
 
   return (
@@ -35,7 +37,6 @@ function SignUp () {
         type="email"
         name='email'
         placeholder="Email..."
-        handlers={handlers}
         scheme={validationScheme.email} />
 
       <InputValidate
@@ -43,7 +44,6 @@ function SignUp () {
         className="input-reset form__input"
         type="password"
         name='password' placeholder="Password..."
-        handlers={handlers}
         scheme={validationScheme.password} />
 
       {
@@ -66,7 +66,6 @@ function CompanyForm () {
     <>
       <div className="form__company-subtitle">
         <h2 className='form__company-subtitle-text'>Company data</h2>
-
       </div>
 
       <label className="form__label">

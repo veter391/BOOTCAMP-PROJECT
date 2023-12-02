@@ -1,25 +1,20 @@
 import './login.scss';
-import { useForm, UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
 import validationScheme from '../../helpers/validationScheme';
 import InputValidate from '../inputValidate/InputValidate';
-
-export type handlersType = {
-  register: UseFormRegister<FieldValues>,
-  errors: FieldErrors<FieldValues>,
-}
+import userLogIn from '../../services/userLogIn';
+import { AppContext } from '../../context/AppProvider';
+import { useContext } from 'react';
 
 function LogIn () {
-  const { handleSubmit, register, formState: { errors } } = useForm();
-  const handlers: handlersType = { register, errors };
+  // get variavles from context
+  const { handleSubmit } = useContext(AppContext);
 
-  const logIn = values => {
+  const logIn = (values : object) => {
     console.log('login');
-    const data = {
-      email: values.email,
-      password: values.password
-    };
 
-    console.log(data);
+    // N: login user
+    userLogIn(values);
+    console.log(values);
   };
 
   return (
@@ -30,7 +25,6 @@ function LogIn () {
         type="email"
         name='email'
         placeholder="Email..."
-        handlers={handlers}
         scheme={validationScheme.email} />
 
       <InputValidate
@@ -38,7 +32,6 @@ function LogIn () {
         className="input-reset form__input"
         type="password"
         name='password' placeholder="Password..."
-        handlers={handlers}
         scheme={validationScheme.password} />
 
       <a className="form__forgot-password" href="#">Forgot password?</a>
