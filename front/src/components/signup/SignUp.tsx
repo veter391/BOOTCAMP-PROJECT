@@ -24,12 +24,28 @@ function SignUp () {
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
-      <label className="form__label">
+      {/* <label className="form__label">
         <input className="input-reset form__input" type="text" name="name" placeholder="Name..." />
       </label>
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="surname" placeholder="Surname..." />
-      </label>
+      </label> */}
+
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="text"
+        name="firstName"
+        placeholder="Name..."
+        scheme={validationScheme.name} />
+
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="text"
+        name="lastName"
+        placeholder="Surname..."
+        scheme={validationScheme.surname} />
 
       <InputValidate
         classNameLabel="form__label"

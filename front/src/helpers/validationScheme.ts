@@ -20,6 +20,37 @@ const validationScheme = {
       value: /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/,
       message: 'Password requirements: 8-20 characters, 1 number, 1 letter, 1 symbol.'
     }
+  },
+  name: {
+    required: '*Name is Requiered',
+    maxLength: {
+      value: 20,
+      message: 'max 20 characters'
+    },
+    minLenght: {
+      value: 2,
+      message: 'min 2 characters'
+    },
+    pattern: {
+      value: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/i, // no se que hace este i
+      message: 'Invalid name'
+    }
+
+  },
+  surname: {
+    required: '*Surname is Requiered',
+    maxLength: {
+      value: 20,
+      message: 'max 20 characters'
+    },
+    minLenght: {
+      value: 2,
+      message: 'min 2 characters'
+    },
+    pattern: {
+      value: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/i, // no se que hace este i
+      message: 'Invalid name'
+    }
   }
 };
 
