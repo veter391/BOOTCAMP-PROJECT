@@ -1,8 +1,10 @@
 import React from 'react';
+import './contacts.scss';
 
 function Contacs () {
   return (
-    <>
+    <div className='contacts'>
+      <h2>Contacts</h2>
       <input type="text" placeholder='Search...' />
       <ul>
         <ContactItem />
@@ -10,7 +12,7 @@ function Contacs () {
         <ContactItem />
         <ContactItem />
       </ul>
-    </>
+    </div>
   );
 }
 
