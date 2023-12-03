@@ -21,6 +21,7 @@ function SignUp () {
     userRegister(values);
     console.log(values);
   }
+  console.log(validationScheme);
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
@@ -35,7 +36,7 @@ function SignUp () {
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name="firstName"
+        name="name"
         placeholder="Name..."
         scheme={validationScheme.name} />
 
@@ -43,7 +44,7 @@ function SignUp () {
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name="lastName"
+        name="surname"
         placeholder="Surname..."
         scheme={validationScheme.surname} />
 

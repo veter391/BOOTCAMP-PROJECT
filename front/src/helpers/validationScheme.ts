@@ -27,7 +27,7 @@ const validationScheme = {
       value: 20,
       message: 'max 20 characters'
     },
-    minLenght: {
+    minLength: {
       value: 2,
       message: 'min 2 characters'
     },
@@ -43,13 +43,13 @@ const validationScheme = {
       value: 20,
       message: 'max 20 characters'
     },
-    minLenght: {
+    minLength: {
       value: 2,
       message: 'min 2 characters'
     },
     pattern: {
       value: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/i, // no se que hace este i
-      message: 'Invalid name'
+      message: 'Invalid surname'
     }
   }
 };
