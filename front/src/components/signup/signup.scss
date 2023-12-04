@@ -1,6 +1,9 @@
 @import '../../styles/tools/pxconvert';
 
 .form__label-checkbox {
+  width: fit-content;
+  cursor: pointer;
+  margin: 0 auto;
   padding-top: rem(40);
   margin-bottom: rem(40);
 }
