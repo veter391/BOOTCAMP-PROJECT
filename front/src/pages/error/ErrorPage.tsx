@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Error from '../../components/errors/Error';
+import './error-page.scss';
 
 function ErrorPage () {
   const [counter, setCounter] = useState(5);
@@ -19,11 +20,11 @@ function ErrorPage () {
   }, []);
 
   return (
-    <>
+    <section className='error'>
       <Error />
       <p>Go home in {counter}s.</p>
-      <small>Click <Link to='/'>here</Link> to go home</small>
-    </>
+      <small>Click <Link className='colored' style={{ textDecoration: 'underline' }} to='/'>here</Link> to go home</small>
+    </section>
   );
 }
 

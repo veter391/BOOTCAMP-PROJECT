@@ -1,30 +1,50 @@
-import { useState } from 'react';
-import './signup.scss'
+import './signup.scss';
 
-function SignUp() {
+import { useState, useContext } from 'react';
+import InputValidate from '../inputValidate/InputValidate';
+import validationScheme from '../../helpers/validationScheme';
+import userRegister from '../../services/userRegister';
+import { AppContext } from '../../context/AppProvider';
 
-  const [isCompany, setIsCompany] = useState(false)
+function SignUp () {
+  // get variavles from context
+  const { handleSubmit } = useContext(AppContext);
+
+  // company checkbox
+  const [isCompany, setIsCompany] = useState(false);
 
   // funciton to run where submit form
-  function signUp(e: any) {
-    e.preventDefault();
-    console.log('sign up')
+  function signUp (values: object) {
+    console.log('sign up');
+
+    // N: register function for users
+    userRegister(values);
+    console.log(values);
   }
 
   return (
-    <form onSubmit={signUp} className="form">
+    <form onSubmit={handleSubmit(signUp)} className="form">
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="name" placeholder="Name..." />
       </label>
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="surname" placeholder="Surname..." />
       </label>
-      <label className="form__label">
-        <input className="input-reset form__input" type="email" name="mail" placeholder="E-mail..." />
-      </label>
-      <label className="form__label">
-        <input className="input-reset form__input" type="password" name="password" placeholder="Password..." />
-      </label>
+
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="email"
+        name='email'
+        placeholder="Email..."
+        scheme={validationScheme.email} />
+
+      <InputValidate
+        classNameLabel="form__label form__label-last"
+        className="input-reset form__input"
+        type="password"
+        name='password' placeholder="Password..."
+        scheme={validationScheme.password} />
 
       {
         // N: check if is company and if is add more inputs
@@ -32,7 +52,7 @@ function SignUp() {
       }
 
       <label className="form__label form__label-last form__label-checkbox">
-        <input onChange={() => setIsCompany( !isCompany )} className="form__label-checkbox__field" type="checkbox" name="checkbox" />
+        <input onChange={() => setIsCompany(!isCompany)} className="form__label-checkbox__field" type="checkbox" name="checkbox" />
         <span className="form__label-checkbox__content"></span>
         Are you company?
       </label>
@@ -41,10 +61,13 @@ function SignUp() {
   );
 }
 
-function CompanyForm() {
-  return(
+function CompanyForm () {
+  return (
     <>
-      <h2 style={{padding:'20px 20px 0 20px'}}>Company data:</h2>
+      <div className="form__company-subtitle">
+        <h2 className='form__company-subtitle-text'>Company data</h2>
+      </div>
+
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="companyName" placeholder="Name of company..." />
       </label>
@@ -52,7 +75,7 @@ function CompanyForm() {
         <input className="input-reset form__input" type="text" name="street" placeholder="Street..." />
       </label>
     </>
-  )
+  );
 }
 
 export default SignUp;

@@ -1,0 +1,13 @@
+.is-invalid {
+  position: absolute;
+  top: 4px;
+  left: 15px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #DF3600;
+
+  &+input {
+    border-color: #DF3600;
+    box-shadow: 0 0 10px #DF3600;
+  }
+}

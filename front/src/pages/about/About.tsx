@@ -1,4 +1,4 @@
-function About() {
+function About () {
   return (
     <section className="account">
       <div className="container account__container">

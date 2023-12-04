@@ -14,6 +14,7 @@ $body-font: "OpenSans";
 
 //-Required Variables!!
 :root {
+  --black: 0, 0, 0;
   --dark-theme: 51, 51, 51;
   --light-theme: 237, 237, 237;
   --primary: 255, 74, 104;
@@ -44,7 +45,7 @@ body {
   font-family: $body-font, Arial, sans-serif;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1;
   /* space between lines in text. */
   color: rgba(var(--light-theme));
@@ -137,7 +138,7 @@ section {
   overflow: hidden;
   /* if you use position: sticky on the site - remove this setting */
   // overflow: ;
-  // background-color: rgba(var(--dark-theme));
+  background-color: rgba(var(--black), .5);
 }
 
 .container {
@@ -201,13 +202,14 @@ section {
 
 .form {
   width: 100%;
-  margin-bottom: rem(20);
+  margin-bottom: rem(30);
 
   &__label {
+    position: relative;
     display: block;
     padding-top: 20px;
     &-last {
-      margin-bottom: rem(20);
+      margin-bottom: rem(30);
     }
     &-checkbox {
       text-align: center;
@@ -218,32 +220,36 @@ section {
 
   &__input {
     width: 100%;
-    border: 2px solid transparent;
+    border: 1px solid rgba(var(--light-theme));
     padding: rem(15);
-    border-radius: rem(30);
-    background-color: rgba(var(--dark-theme), .5);
+    border-radius: rem(20);
+    background-color: transparent;
     color: rgb(var(--light-theme));
-    transition: border-color .3s ease-in-out;
 
     &::placeholder {
-      color: var(--light-theme);
+      color: rgba(var(--light-theme));
       transition: color .3s ease-in-out;
     }
 
-    &:hover {
-      border-color: var(--pasive);
+    &:hover, &.focus-visible {
+      &::placeholder {
+        color: rgb(var(--primary));
+      }
     }
 
-    &.focus-visible {
-      border-color: var(--light-theme);
+    &:active {
+      &::placeholder {
+        color: rgb(var(--focus));
+      }
     }
   }
 
   &__btn {
     display: block;
     width: auto;
+    min-width: 150px;
     margin: 0 auto;
-    padding: 15px 20px;
+    padding: rem(11) rem(20);
     border: 2px solid rgba(var(--light-theme));
     background-color: transparent;
     color: rgba(var(--light-theme));
@@ -261,15 +267,25 @@ section {
       background-color: rgba(var(--light-theme), .5);
     }
   }
+
+  &__forgot-password {
+    display: block;
+    width: fit-content;
+    margin-bottom: rem(20);
+    border-bottom: 1px solid transparent;
+    transition-property: color, border-color;
+    transition-timing-function: ease-in-out;
+    transition-duration: .3s;
+    &:hover {
+      color: rgb(var(--primary));
+      border-color: rgb(var(--primary));
+    }
+  }
 }
 
 //? ::::::: My Scss ::::::::
 
 // active classes
-.is-invalid {
-  border-style: dotted;
-  box-shadow: 0 0 10px red;
-}
 
 .is-fixed {
   position: fixed;

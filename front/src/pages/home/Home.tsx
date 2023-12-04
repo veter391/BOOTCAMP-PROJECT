@@ -16,9 +16,11 @@ function Home () {
           </p>
         </div>
         <div className="home__right">
-
           { (login && <LogIn />) || <SignUp />}
-          <button onClick={() => setLogin(!login)} className='home__btn-change btn-reset'>{ login &&'SignUp now' || 'LogIn here' }</button>
+          <div className="home__join">
+            {(login && 'New to Connect People? ') || 'Already registered? '}
+            <button onClick={() => setLogin(!login)} className='home__btn-change btn-reset'>{(login && 'Join now') || 'Log in' }</button>
+          </div>
         </div>
 
         <video autoPlay muted loop className='home__video'>

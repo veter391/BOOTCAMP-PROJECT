@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom';
 import { FC } from 'react';
 
 type PrivateRoutePropsType = {
@@ -7,20 +7,20 @@ type PrivateRoutePropsType = {
   children: FC // functionComponent type
 }
 
-function PrivateRoute({data ,pathTo, children} : PrivateRoutePropsType) {
-  if(!data) {
-    return <Navigate to={pathTo} replace />
+function PrivateRoute ({ data, pathTo, children } : PrivateRoutePropsType) {
+  if (!data) {
+    return <Navigate to={pathTo} replace />;
   }
 
-  return children
+  return children;
 }
 
-function PublicRoute({ data, children }: PrivateRoutePropsType) {
+function PublicRoute ({ data, children }: PrivateRoutePropsType) {
   if (!data) {
-    return <Navigate to={'/login'} replace />
+    return <Navigate to={'/login'} replace />;
   }
 
-  return children
+  return children;
 }
 
 export {

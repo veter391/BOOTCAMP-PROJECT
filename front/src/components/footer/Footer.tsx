@@ -1,19 +1,18 @@
-import './footer.scss'
+import './footer.scss';
 
-function Footer() {
+function Footer () {
   return (
     <footer className="footer">
       <div className="container footer__container">
-
-        <a className="footer__link"
-          href="https://www.instagram.com/_veter_n/"
-          target="_blank"
-          aria-label="project developer">
-          2022 ©
-
-          <span className="colored"> Nazar Shypot</span>
-        </a>
-
+        <p className='footer__description'>
+          <span style={{ marginRight: '15px' }}>Connect People © 2023</span>
+          <a className="footer__link colored"
+            href=""
+            target="_blank"
+            aria-label="project developer">
+            About the team
+          </a>
+        </p>
       </div>
     </footer>
   );

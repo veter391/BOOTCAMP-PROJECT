@@ -1,9 +1,9 @@
 @import '../../styles/tools/_pxconvert.scss';
 
 .header {
-  background-color: rgba(var(--dark-theme) , .5);
   padding: rem(30) 0;
   color: rgba(var(--light-theme));
+  font-weight: 600;
 
   &__container {
     display: flex;
