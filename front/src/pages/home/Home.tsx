@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LogIn from '../../components/login/Login';
 import SignUp from '../../components/signup/SignUp';
-import './home.scss'
+import './home.scss';
 
 function Home () {
   const [login, setLogin] = useState(true);
