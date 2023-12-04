@@ -21,15 +21,32 @@ function SignUp () {
     userRegister(values);
     console.log(values);
   }
+  console.log(validationScheme);
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
-      <label className="form__label">
+      {/* <label className="form__label">
         <input className="input-reset form__input" type="text" name="name" placeholder="Name..." />
       </label>
       <label className="form__label">
         <input className="input-reset form__input" type="text" name="surname" placeholder="Surname..." />
-      </label>
+      </label> */}
+
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="text"
+        name="name"
+        placeholder="Name..."
+        scheme={validationScheme.name} />
+
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="text"
+        name="surname"
+        placeholder="Surname..."
+        scheme={validationScheme.surname} />
 
       <InputValidate
         classNameLabel="form__label"
@@ -67,13 +84,19 @@ function CompanyForm () {
       <div className="form__company-subtitle">
         <h2 className='form__company-subtitle-text'>Company data</h2>
       </div>
+      <InputValidate
+        classNameLabel="form__label"
+        className="input-reset form__input"
+        type="text"
+        name='companyName' placeholder="Company name..."
+        scheme={validationScheme.companyName} />
 
-      <label className="form__label">
-        <input className="input-reset form__input" type="text" name="companyName" placeholder="Name of company..." />
-      </label>
-      <label className="form__label">
-        <input className="input-reset form__input" type="text" name="street" placeholder="Street..." />
-      </label>
+      <InputValidate
+        classNameLabel="form__label form__label-last"
+        className="input-reset form__input"
+        type="text"
+        name='companyAddress' placeholder="Company address..."
+        scheme={validationScheme.companyAddress} />
     </>
   );
 }
