@@ -197,7 +197,6 @@ section {
 
 
 //? ::::::: My Scss ::::::::
-// @import 'styles';
 // @import 'media-queries';
 
 .form {
@@ -282,6 +281,8 @@ section {
     }
   }
 }
+
+@import 'style';
 
 //? ::::::: My Scss ::::::::
 
