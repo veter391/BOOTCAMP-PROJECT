@@ -1,9 +1,10 @@
 import http from 'node:http'
 import dotenv from 'dotenv';
 import chalk from 'chalk';
-import express from 'express'
+import express from 'express';
 import morgan from 'morgan';
-import cors from 'cros'
+import cors from 'cors';
+import userRouter from '../back/src/routes/usersRoutes.js'
 
 dotenv.config({ path: '../.env' });
 
@@ -23,7 +24,8 @@ app.use(express.json())
 // alloweed to share data between front&back
 app.use(cors({ origin: `http://localhost:${PORT}` }))
 
-
+//Router to user routes
+app.use('/users/', userRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !
