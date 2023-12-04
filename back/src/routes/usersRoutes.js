@@ -1,5 +1,6 @@
 import express from 'express';
 import usersController from '../controllers/users/usersController.js';
+
 const userRouter = express.Router();
 
 // CREATE ROUTES

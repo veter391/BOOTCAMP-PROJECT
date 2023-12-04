@@ -6,13 +6,38 @@ const dataBase = new DB();
 // N: querys from DB class
 const query = dataBase.query;
 
-const { CreateUserSchema, GetAllUsersSchema, GetUserByIdSchema, UpdateUserSchema, DeleteUserSchema } = userSchemas;
+const {
+  CreateUserSchema,
+  GetUserByIdSchema,
+  GetAllUsersSchema,
+  UpdateUserSchema,
+  DeleteUserSchema
+} = userSchemas;
 
 // CREATE USER
 const createUser = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, lastUpdate, usertype } = CreateUserSchema.parse(req.body);
-    const newUser = await query.createUser(firstName, lastName, email, password, lastUpdate, usertype);
+    const {
+      first_name,
+      last_name,
+      email,
+      password,
+      last_update,
+      usertype
+    } = CreateUserSchema.parse(req.body);
+
+    const newUser = await dataBase.sendQuery(
+      queriesUsers.createUser,
+      [
+        first_name,
+        last_name,
+        email,
+        password,
+        last_update,
+        usertype
+      ]
+    );
+
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ error: error.errors });
@@ -22,7 +47,7 @@ const createUser = async (req, res) => {
 // GET ALL USERS
 const getAllUsers = async (req, res) => {
   try {
-    const allUsers = await query.getAllUsers();
+    const allUsers = await dataBase.sendQuery(queriesUsers.getAllUsers);
     const validateUsers = GetAllUsersSchema.parse(allUsers);
     res.status(200).json(validateUsers);
   } catch (error) {
@@ -34,7 +59,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const { id } = GetUserByIdSchema.parse(req.body);
-    const user = await query.getUserById(id);
+    const [user] = await dataBase.sendQuery(queriesUsers.getUserById, [id]);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -48,8 +73,26 @@ const getUserById = async (req, res) => {
 // UPDATE USER{id}
 const updateUser = async (req, res) => {
   try {
-    const { id, firstName, lastName, email, password, lastUpdate, usertype } = UpdateUserSchema.parse(req.body);
-    const updatedUser = await query.updateUser(id, firstName, lastName, email, password, lastUpdate, usertype);
+    const {
+      id,
+      first_name,
+      last_name,
+      email,
+      password,
+      last_update,
+      usertype
+    } = UpdateUserSchema.parse(req.body);
+
+    const updatedUser = await dataBase.sendQuery(queriesUsers.updateUser,
+      id,
+      first_name,
+      last_name,
+      email,
+      password,
+      last_update,
+      usertype
+    );
+
     res.status(200).json(updatedUser);
   } catch (error) {
     res.status(400).json({ error: error.errors });
@@ -60,7 +103,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = DeleteUserSchema.parse(req.body);
-    await query.deleteUser(id);
+    await queriesUsers.deleteUser(id);
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     res.status(400).json({ error: error.errors });
