@@ -1,5 +1,5 @@
 import usersQueries from '../../config/queries/usersQueries.js';
-import userSchemas from './ruta/a/tu/schemas';
+import userSchemas from '../../schemas/userSchema.js';
 
 const { CreateUserSchema, GetAllUsersSchema, GetUserByIdSchema, UpdateUserSchema, DeleteUserSchema } = userSchemas;
 
