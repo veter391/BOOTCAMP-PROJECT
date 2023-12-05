@@ -5,6 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 // import { UploadedFile } from 'express-fileupload';
+import userRouter from './src/routes/usersRoutes.js';
 
 dotenv.config({ path: '../.env' });
 
@@ -30,16 +31,8 @@ const corsOptions = {}; // N: justone path { origin: 'http://exemple.com' }
 app.use(cors(corsOptions));
 // :::
 
-// todo N: log in and other requests... MOVE TO SEPARATE FILE!
-app.use('/users/login', (req, res) => {
-  console.log(req.body, ok('=> new login data'));
-  res.status(200).send(req.body);
-});
-
-app.use('/users/register', (req, res) => {
-  console.log(req.body, ok('=> new registered user'));
-  res.status(200).send(req.body);
-});
+// Jose: Router to user routes
+app.use('/users', userRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !
