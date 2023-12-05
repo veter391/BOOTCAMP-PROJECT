@@ -32,7 +32,7 @@ app.use(cors(corsOptions));
 // :::
 
 // Jose: Router to user routes
-app.use('/users/', userRouter);
+app.use('/users', userRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !
