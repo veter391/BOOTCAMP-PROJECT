@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
 import './header.scss';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
 function Header () {
@@ -24,15 +24,19 @@ function Header () {
             </li>
 
             <li className='nav__item'>
-              <NavLink className='nav__link' to="/about">About</NavLink>
-            </li>
-
-            <li className='nav__item'>
               <NavLink className='nav__link' to="/account">Account</NavLink>
             </li>
 
             <li className='nav__item'>
               <NavLink className='nav__link' to="/profile">Profile</NavLink>
+            </li>
+
+            <li className='nav__item'>
+              <NavLink className='nav__link' to="/chat">Chat</NavLink>
+            </li>
+
+            <li className='nav__item'>
+              <NavLink className='nav__link' to="/discover">Discover</NavLink>
             </li>
           </ul>
         </nav>
