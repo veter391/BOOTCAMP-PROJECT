@@ -7,7 +7,6 @@ function Account () {
   return (
     <section className="account">
       <section className="container account__container">
-        <h2>Account</h2>
         <div className='maincontainer'>
           <User />
           <EventFeed />
