@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 function LogIn () {
   // get variavles from context
-  const { handleSubmit } = useContext(AppContext);
+  const { handleSubmit } : any = useContext(AppContext);
 
   const logIn = (values : object) => {
     console.log('login');

@@ -23,7 +23,7 @@ function ErrorPage () {
     <section className='error'>
       <Error />
       <p>Go home in {counter}s.</p>
-      <small>Click <Link className='colored' style={{ textDecoration: 'underline' }} to='/'>here</Link> to go home</small>
+      <small>Click <Link className='colored-error' style={{ textDecoration: 'underline' }} to='/'>here</Link> to go home</small>
     </section>
   );
 }

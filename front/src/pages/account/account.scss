@@ -1,21 +1,9 @@
 @import '../../styles/tools/pxconvert';
 
-.account {
-  &__container {
-    width: 100%;
-    height: 100%;
-    padding: rem(25);
-    border-radius: rem(25);
-    background-color: rgba(var(--light-theme), .3);
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    gap: 10px;
-    & .maincontainer{
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 50px;
-    }
-  }
+.maincontainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 50px;
 }

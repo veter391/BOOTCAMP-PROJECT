@@ -1,26 +1,32 @@
-import React from 'react';
 import './creators.scss';
+
+type creatorType = {
+  name: string;
+  text: string;
+}
 
 function Creators () {
   return (
-    <div className='creators'>
-    <Creator name='Joan'/>
-    <Creator name='Nazar'/>
-    <Creator name='Jose'/>
-    <Creator name='Oscar'/>
-    </div>
+    <ul className='creators list-reset'>
+      <Creator className='card' name='Joan' text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, blanditiis?' />
+      <Creator className='card' name='Nazar' text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, blanditiis?' />
+      <Creator className='card' name='Jose' text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, blanditiis?' />
+      <Creator className='card' name='Oscar' text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, blanditiis?' />
+    </ul>
   );
 }
 
-function Creator ({ name }) {
+function Creator( props ) {
+  const { name, text } : creatorType = props;
+
   return (
-  <div className='card'>
+  <li {...props} >
     <img src="https://picsum.photos/85/85" alt="avatar" />
-    <ul>
+    <div>
       <h2>{name}</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero, blanditiis?</p>
-    </ul>
-  </div>
+      <p>{text}</p>
+    </div>
+  </li>
   );
 }
 export default Creators;

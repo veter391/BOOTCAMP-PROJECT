@@ -18,8 +18,6 @@ function App () {
         <Header />
 
         <main className='main'>
-          <h1 className='visually-hidden'> Connect Peaple </h1>
-
           {/* N: Routers to pages */}
           <Routes>
             <Route path='/' element={<Home />}/>

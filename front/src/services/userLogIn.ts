@@ -10,7 +10,7 @@ async function userLogIn (obj : object) {
       body: JSON.stringify(obj)
     });
     return await resp.json();
-  } catch (error) {
+  } catch (error : any) {
     console.error(error.message);
   }
 }

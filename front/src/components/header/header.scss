@@ -3,11 +3,13 @@
 .header {
   position: relative;
   padding: rem(30) 0;
-  color: rgba(var(--light-theme));
+  border-bottom:1px solid var(--active);
+  color: var(--light-theme);
   font-weight: 600;
 
   &__container {
     display: flex;
+    align-items: center;
   }
 
   &__logo {
@@ -17,44 +19,48 @@
 
 .nav {
   justify-self: end;
-  padding-left: rem(30);
-  color: rgb(var(--dark-theme));
+  color: var(--light-theme);
   transition: transform .3s ease;
 
   &__list {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    font-weight: 600;
-    letter-spacing: rem(2);
+    font-weight: 500;
   }
 
   &__item {
-    font-size: rem(22);
 
     &:not(:last-child) {
-      margin-right: rem(30);
+      margin-right: rem(5);
     }
   }
 
   &__link {
+    display: block;
     position: relative;
+    padding: rem(14) rem(28);
+    border-radius: 8px;
     overflow: hidden;
     border-bottom: 2px solid transparent;
     transform-origin: color, border;
     transition-timing-function: ease-in-out;
     transition-duration: .3s;
 
-    &.active,
+    &.active {
+      color: var(--primary);
+      background-color: var(--active);
+    }
+
     &:hover {
-      color: rgb(var(--primary));
-      border-color: rgb(var(--primary));
+      color: var(--primary);
+      border-color: var(--primary);
     }
 
     &:active,
     &.focus-visible {
-      color: rgb(var(--focus));
-      border-color: rgb(var(--focus));
+      color: var(--focus);
+      border-color: var(--focus);
     }
 
     &.focus-visible {
@@ -70,7 +76,7 @@ $burder-width: 30px;
 $burder-height: 26px;
 $burder-position: relative;
 $burder-line-height: 2px;
-$burder-line-color: rgb(var(--light-theme));
+$burder-line-color: var(--light-theme);
 $nav-index: 5;
 $nav-min-width: 350px;
 $burder-mediaquery: 1024px; // if you change this value, you must also change it in scripts window.matchMedia("(max-width: 1024px)")
@@ -144,7 +150,7 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
 
   &::before,
   &::after {
-    background-color: rgb(var(--light-theme));
+    background-color: var(--light-theme);
     animation: burger-open .3s ease 1 forwards;
     transition-delay: .3s;
   }
@@ -162,7 +168,7 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
   transform: none !important;
   visibility: visible;
   display: block;
-  color: rgb(var(--light-theme));
+  color: var(--light-theme);
 }
 
 @keyframes burger-open {
@@ -195,7 +201,7 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
     border-radius: rem(16);
     min-width: 320px;
     list-style: none;
-    background-color: rgba(var(--dark-theme));
+    background-color: var(--dark-theme);
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;

@@ -8,7 +8,7 @@ import { AppContext } from '../../context/AppProvider';
 
 function SignUp () {
   // get variavles from context
-  const { handleSubmit } = useContext(AppContext);
+  const { handleSubmit } : any = useContext(AppContext);
 
   // company checkbox
   const [isCompany, setIsCompany] = useState(false);
@@ -25,13 +25,6 @@ function SignUp () {
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
-      {/* <label className="form__label">
-        <input className="input-reset form__input" type="text" name="name" placeholder="Name..." />
-      </label>
-      <label className="form__label">
-        <input className="input-reset form__input" type="text" name="surname" placeholder="Surname..." />
-      </label> */}
-
       <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
@@ -57,7 +50,7 @@ function SignUp () {
         scheme={validationScheme.email} />
 
       <InputValidate
-        classNameLabel="form__label form__label-last"
+        classNameLabel="form__label"
         className="input-reset form__input"
         type="password"
         name='password' placeholder="Password..."
@@ -92,7 +85,7 @@ function CompanyForm () {
         scheme={validationScheme.companyName} />
 
       <InputValidate
-        classNameLabel="form__label form__label-last"
+        classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
         name='companyAddress' placeholder="Company address..."

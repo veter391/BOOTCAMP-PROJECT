@@ -26,12 +26,12 @@ class DB {
   // N: the function for send queryes to database
   static async sendQuery (query, values) {
     try {
-      const connection = await this.connection()
+      const connection = await this.connection();
       const [results] = await connection.query(query, values);
-  
-      return results;      
+
+      return results;
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error.message);
     }
   };
 }
