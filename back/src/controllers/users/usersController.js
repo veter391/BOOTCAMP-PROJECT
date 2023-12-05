@@ -37,6 +37,7 @@ const createUser = async (req, res) => {
         usertype
       ]
     );
+    console.log(typeof usertype);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {
@@ -48,8 +49,7 @@ const createUser = async (req, res) => {
 const getAllUsers = async (req, res) => {
   try {
     const allUsers = await DB.sendQuery(DB.query.getAllUsers);
-    const validateUsers = GetAllUsersSchema.parse(allUsers);
-    res.status(200).json(validateUsers);
+    res.status(200).json(allUsers);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -58,44 +58,56 @@ const getAllUsers = async (req, res) => {
 // GET USER{id}
 const getUserById = async (req, res) => {
   try {
-    const { id } = GetUserByIdSchema.parse(req.body);
-    const [user] = await DB.sendQuery(DB.getUserById, [id]);
+    const { id } = req.params;
+    const [user] = await DB.sendQuery(DB.query.getUserById, [id]);
     if (user) {
       res.status(200).json(user);
     } else {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error) {
-    res.status(400).json({ error: error.errors });
+    res.status(400).json({ error: error.message });
   }
 };
 
 // UPDATE USER{id}
 const updateUser = async (req, res) => {
   try {
+    const {id} = req.params;
+
     const {
-      id,
       first_name,
       last_name,
       email,
       password,
       last_update,
       usertype
-    } = UpdateUserSchema.parse(req.body);
+    } = req.body;
 
-    const updatedUser = await DB.sendQuery(DB.updateUser,
-      id,
+    // const [user] = await DB.sendQuery(DB.query.getUserById, [id])
+
+    // if (!user) {
+    //   return res.status(404).send({ message: 'User not found or no changes applied' })
+    // }
+    
+
+    const dbInfo = await DB.sendQuery(DB.query.updateUser, [
       first_name,
       last_name,
       email,
       password,
       last_update,
-      usertype
-    );
-
-    res.status(200).json(updatedUser);
+      usertype,
+      id
+    ]);
+    
+    if (dbInfo.affectedRows !== 0) { 
+      res.status(200).json({ message: `User ${id} updated successfully` });
+    } else {
+      res.status(404).json({ message: 'User not found or no changes applied' });
+    }
   } catch (error) {
-    res.status(400).json({ error: error.errors });
+    res.status(500).json({ error: error.message });
   }
 };
 
