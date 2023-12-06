@@ -6,14 +6,15 @@ import './account.scss';
 function Account () {
   return (
     <section className="account">
-      <section className="container">
+      <div className="container">
         <h2>Account</h2>
         <div className='maincontainer'>
           <User />
           <EventFeed />
           <Contacs/>
         </div>
-      </section>
+        <button>ADD EVENT +</button>
+      </div>
     </section>
   );
 }

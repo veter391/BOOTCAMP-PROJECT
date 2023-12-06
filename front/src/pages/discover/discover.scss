@@ -45,12 +45,10 @@
 }
 .filter{
   display: flex;
-  justify-content: space-evenly;
-  gap: 10px;
-  color: rgb(105, 105, 105);
-}
-.maincontainer{
-  display: flex;
-  justify-content: flex-start;
-  gap: 25vw;
+  justify-content: space-between;
+  color: var(--dark-theme);
+  &__label {
+    display: flex;
+    margin-right: rem(5);
+  }
 }

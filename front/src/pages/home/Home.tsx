@@ -25,7 +25,7 @@ function Home () {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde accusamus nihil perferendis fugit eum cupiditate id vel voluptates. Impedit doloribus possimus error commodi quisquam maxime iste iusto distinctio nesciunt!
           </p>
 
-          <a onClick={scrolling} className='btn hero__btn' href="#user-place">scroll to bottom</a>
+          <a onClick={scrolling} className='btn hero__btn' href="#user-place">SCROLL DOWN</a>
 
         </div>
       </section>
