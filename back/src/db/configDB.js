@@ -1,13 +1,18 @@
 import mysql from 'mysql2/promise';
 
 class DB {
-  // N: all possibles connections to SQL database
   static query = {
     createUser: 'INSERT INTO users (first_name, last_name, email, password, last_update, usertype) VALUES (?, ?, ?, ?, ?, ?)',
     getUserById: 'SELECT * FROM users WHERE id = ?',
     getAllUsers: 'SELECT * FROM users',
     updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), password = IFNULL(?, password), last_update = IFNULL(?, last_update), usertype = IFNULL(?, usertype)  WHERE id = ?',
-    deleteUser: 'DELETE FROM users WHERE id = ?'
+    deleteUser: 'DELETE FROM users WHERE id = ?',
+    //Publications queries
+    createPost: 'INSERT INTO posts (user_id, post_content, post_media, post_date) VALUES (?, ?, ?, NOW())',
+    getPostsByUser: 'SELECT * FROM posts WHERE user_id = ?',
+    getAllPosts: 'SELECT * FROM posts',
+    updatePost: 'UPDATE posts SET post_content = ?, post_media = ?, post_date = NOW() WHERE id = ?',
+    deletePost: 'DELETE FROM posts WHERE id = ?'
   };
 
   // N: fuvction return the object with all info about connection
