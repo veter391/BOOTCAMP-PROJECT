@@ -4,8 +4,7 @@ const createEvent = async (req, res) => {
   try {
     const { user_id, event_name, event_description, event_date } = req.body;
 
-    // Realizar lógica para crear un nuevo evento en la base de datos
-    const dbInfo = await DB.sendQuery('INSERT INTO events (user_id, event_name, event_description, event_date) VALUES (?, ?, ?, ?)', [
+    const dbInfo = await DB.sendQuery(DB.query.createEvent, [
       user_id,
       event_name,
       event_description,
@@ -20,8 +19,7 @@ const createEvent = async (req, res) => {
   
   const getAllEvents = async (req, res) => {
     try {
-      // Realizar lógica para obtener todos los eventos desde la base de datos
-      const allEvents = await DB.sendQuery('SELECT * FROM events');
+      const allEvents = await DB.sendQuery(DB.query.getAllEvents);
       
       res.status(200).json(allEvents);
     } catch (error) {
@@ -32,8 +30,7 @@ const createEvent = async (req, res) => {
   const getEventById = async (req, res) => {
     try {
       const { id } = req.params;
-  
-      // Realizar lógica para obtener un evento por su ID desde la base de datos
+
       const event = await DB.sendQuery(DB.query.getEventById, [id]);
       
       res.status(200).json(event);
@@ -47,8 +44,7 @@ const createEvent = async (req, res) => {
       const { id } = req.params;
       const { event_name, event_description, event_date } = req.body;
   
-      // Realizar lógica para actualizar información de un evento en la base de datos
-      const dbInfo = await DB.sendQuery('UPDATE events SET event_name = ?, event_description = ?, event_date = ? WHERE id = ?', [
+      const dbInfo = await DB.sendQuery(DB.query.updateEvent, [
         event_name,
         event_description,
         event_date,
@@ -69,8 +65,7 @@ const createEvent = async (req, res) => {
     try {
       const { id } = req.params;
   
-      // Realizar lógica para eliminar un evento de la base de datos
-      await DB.sendQuery('DELETE FROM events WHERE id = ?', [id]);
+      await DB.sendQuery(DB.query.deleteEvent, [id]);
   
       res.status(200).json({ message: 'Event deleted successfully' });
     } catch (error) {
