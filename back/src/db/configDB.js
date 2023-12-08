@@ -7,7 +7,14 @@ class DB {
     getUserById: 'SELECT * FROM users WHERE id = ?',
     getAllUsers: 'SELECT * FROM users',
     updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), password = IFNULL(?, password), last_update = IFNULL(?, last_update), usertype = IFNULL(?, usertype)  WHERE id = ?',
-    deleteUser: 'DELETE FROM users WHERE id = ?'
+    deleteUser: 'DELETE FROM users WHERE id = ?',
+
+    //J: Comments queries
+    addComment: 'INSERT INTO comments (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, ?)',
+    getCommentsById: 'SELECT * FROM comments WHERE post_id = ?',
+    getAllComments: 'SELECT * FROM comments WHERE post_id = ?',
+    updateComment: 'UPDATE comments SET comment_text = ? WHERE id = ?',
+    deleteComment: 'DELETE FROM comments WHERE id = ?'
   };
 
   // N: fuvction return the object with all info about connection
