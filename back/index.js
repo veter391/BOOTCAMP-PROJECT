@@ -8,6 +8,8 @@ import cors from 'cors';
 import userRouter from './src/routes/usersRoutes.js';
 import commentRouter from './src/routes/commentsRoutes.js';
 import eventRouter from './src/routes/eventsRoutes.js';
+import searchRouter from './src/routes/searchRoutes.js'
+
 
 dotenv.config({ path: '../.env' });
 
@@ -41,6 +43,9 @@ app.use('/comments', commentRouter);
 
 //Jose: Router to events routes
 app.use('/events', eventRouter);
+
+//Jose: Router to search routes
+app.use('/search', searchRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !

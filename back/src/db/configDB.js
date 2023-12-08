@@ -20,16 +20,20 @@ class DB {
     createEvent: 'INSERT INTO events (user_id, event_name, event_description, event_date) VALUES (?, ?, ?, ?)',
     getAllEvents: 'SELECT * FROM events',
     getEventById: 'SELECT * FROM events WHERE id = ?',
-    updateEvent: 'UPDATE events SET event_name = ?, event_description = ?, event_date = ? WHERE id = ?',
+    updateEvent: 'UPDATE events SET event_name = IFNULL(?, event_name), event_description = IFNULL(?, event_description), event_date = IFNULL(?, event_date) WHERE id = ?',
     deleteEvent: 'DELETE FROM events WHERE id = ?',
 
-    //J: User search queries
-    //search user by user_name, etc
-
+    //J: Search queries
+    searchEventsByName: 'SELECT * FROM events WHERE event_name LIKE ?',
+    searchEventsByType: 'SELECT * FROM events WHERE event_type = ?',
+    searchEventsByDate: 'SELECT * FROM events WHERE event_date = ?',
+    searchEventsByLocation: 'SELECT * FROM events WHERE event_location = ?',
+    //search user by user_name
+    searchUserByName: 'SELECT * FROM users WHERE first_name LIKE ? OR last_name LIKE ?',
     //search by "criterios": user_type, date, city, etc
-    searchByUserType: 'SELECT * FROM users WHERE usertype = ?',
-    searchByDate: 'SELECT * FROM users WHERE date = ?',
-    searchByCity: 'SELECT * FROM users WHERE city = ?',
+    searchUserByUserType: 'SELECT * FROM users WHERE usertype = ?',
+    searchUserByDate: 'SELECT * FROM users WHERE date = ?',
+    searchUserByCity: 'SELECT * FROM users WHERE city = ?',
   };
 
   // N: fuvction return the object with all info about connection
