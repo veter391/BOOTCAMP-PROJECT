@@ -21,7 +21,15 @@ class DB {
     getAllEvents: 'SELECT * FROM events',
     getEventById: 'SELECT * FROM events WHERE id = ?',
     updateEvent: 'UPDATE events SET event_name = ?, event_description = ?, event_date = ? WHERE id = ?',
-    deleteEvent: 'DELETE FROM events WHERE id = ?'
+    deleteEvent: 'DELETE FROM events WHERE id = ?',
+
+    //J: User search queries
+    //search user by user_name, etc
+
+    //search by "criterios": user_type, date, city, etc
+    searchByUserType: 'SELECT * FROM users WHERE usertype = ?',
+    searchByDate: 'SELECT * FROM users WHERE date = ?',
+    searchByCity: 'SELECT * FROM users WHERE city = ?',
   };
 
   // N: fuvction return the object with all info about connection
