@@ -14,7 +14,14 @@ class DB {
     getCommentsById: 'SELECT * FROM comments WHERE post_id = ?',
     getAllComments: 'SELECT * FROM comments WHERE post_id = ?',
     updateComment: 'UPDATE comments SET comment_text = ? WHERE id = ?',
-    deleteComment: 'DELETE FROM comments WHERE id = ?'
+    deleteComment: 'DELETE FROM comments WHERE id = ?',
+
+    //J: Events queries
+    createEvent: 'INSERT INTO events (user_id, event_name, event_description, event_date) VALUES (?, ?, ?, ?)',
+    getAllEvents: 'SELECT * FROM events',
+    getEventById: 'SELECT * FROM events WHERE id = ?',
+    updateEvent: 'UPDATE events SET event_name = ?, event_description = ?, event_date = ? WHERE id = ?',
+    deleteEvent: 'DELETE FROM events WHERE id = ?'
   };
 
   // N: fuvction return the object with all info about connection

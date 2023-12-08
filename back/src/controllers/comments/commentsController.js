@@ -8,7 +8,6 @@ const addComment = async (req, res) => {
       // Obtener la fecha actual
       const created_at = new Date(); 
   
-      // Insertar el comentario en la base de datos
       const dbInfo = await DB.sendQuery(queries.addComment, [post_id, user_id, comment_text, created_at]);
   
       res.status(201).json({ ...req.body, id: dbInfo.insertId });
@@ -22,7 +21,6 @@ const addComment = async (req, res) => {
     try {
       const { post_id } = req.params;
   
-      // Obtener los comentarios de la base de datos para una publicación específica
       const comments = await DB.sendQuery(queries.getCommentsById, [post_id]);
   
       res.status(200).json(comments);
@@ -49,7 +47,6 @@ const addComment = async (req, res) => {
       const { id } = req.params;
       const { comment_text } = req.body;
   
-      // Actualizar el comentario en la base de datos
       const dbInfo = await DB.sendQuery(queries.updateComment, [comment_text, id]);
   
       if (dbInfo.affectedRows !== 0) {
@@ -67,7 +64,6 @@ const addComment = async (req, res) => {
     try {
       const { id } = req.params;
   
-      // Eliminar el comentario de la base de datos
       await DB.sendQuery(queries.deleteComment, [id]);
   
       res.status(200).json({ message: 'Comment deleted successfully' });
