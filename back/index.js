@@ -6,6 +6,10 @@ import morgan from 'morgan';
 import cors from 'cors';
 // import { UploadedFile } from 'express-fileupload';
 import userRouter from './src/routes/usersRoutes.js';
+import commentRouter from './src/routes/commentsRoutes.js';
+import eventRouter from './src/routes/eventsRoutes.js';
+import searchRouter from './src/routes/searchRoutes.js';
+import followRouter from './src/routes/followersRoutes.js';
 
 dotenv.config({ path: '../.env' });
 
@@ -33,6 +37,18 @@ app.use(cors(corsOptions));
 
 // Jose: Router to user routes
 app.use('/users', userRouter);
+
+// Jose: Router to comments routes
+app.use('/comments', commentRouter);
+
+// Jose: Router to events routes
+app.use('/events', eventRouter);
+
+// Jose: Router to search routes
+app.use('/search', searchRouter);
+
+// Jose: Router to follow routes
+app.use('/follow', followRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !

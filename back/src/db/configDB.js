@@ -1,13 +1,44 @@
 import mysql from 'mysql2/promise';
 
 class DB {
-  // N: all possibles connections to SQL database
   static query = {
     createUser: 'INSERT INTO users (first_name, last_name, email, password, last_update, usertype) VALUES (?, ?, ?, ?, ?, ?)',
     getUserById: 'SELECT * FROM users WHERE id = ?',
     getAllUsers: 'SELECT * FROM users',
-    updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), password = IFNULL(?, password), last_update = IFNULL(?, last_update), usertype = IFNULL(?, usertype) WHERE id = ?',
-    deleteUser: 'DELETE FROM users WHERE id = ?'
+    updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), password = IFNULL(?, password), last_update = IFNULL(?, last_update), usertype = IFNULL(?, usertype)  WHERE id = ?',
+    deleteUser: 'DELETE FROM users WHERE id = ?',
+
+    // J: Comments queries
+    addComment: 'INSERT INTO comments (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, ?)',
+    getCommentsById: 'SELECT * FROM comments WHERE post_id = ?',
+    getAllComments: 'SELECT * FROM comments WHERE post_id = ?',
+    updateComment: 'UPDATE comments SET comment_text = ? WHERE id = ?',
+    deleteComment: 'DELETE FROM comments WHERE id = ?',
+
+    // J: Events queries
+    createEvent: 'INSERT INTO events (user_id, event_name, event_description, event_date) VALUES (?, ?, ?, ?)',
+    getAllEvents: 'SELECT * FROM events',
+    getEventById: 'SELECT * FROM events WHERE id = ?',
+    updateEvent: 'UPDATE events SET event_name = IFNULL(?, event_name), event_description = IFNULL(?, event_description), event_date = IFNULL(?, event_date) WHERE id = ?',
+    deleteEvent: 'DELETE FROM events WHERE id = ?',
+
+    // J: Search queries
+    searchEventsByName: 'SELECT * FROM events WHERE event_name LIKE ?',
+    searchEventsByType: 'SELECT * FROM events WHERE event_type = ?',
+    searchEventsByDate: 'SELECT * FROM events WHERE event_date = ?',
+    searchEventsByLocation: 'SELECT * FROM events WHERE event_location = ?',
+    // search user by user_name
+    searchUserByName: 'SELECT * FROM users WHERE first_name LIKE ? OR last_name LIKE ?',
+    // search by "criterios": user_type, date, city, etc
+    searchUserByUserType: 'SELECT * FROM users WHERE usertype = ?',
+    searchUserByDate: 'SELECT * FROM users WHERE date = ?',
+    searchUserByCity: 'SELECT * FROM users WHERE city = ?',
+
+    // J: Follow queries
+    followUser: 'INSERT INTO followers (follower_id, user_id) VALUES (?, ?)',
+    unfollowUser: 'DELETE FROM followers WHERE follower_id = ? AND user_id = ?',
+    getFollowers: 'SELECT * FROM followers WHERE user_id = ?',
+    getFollowing: 'SELECT * FROM followers WHERE follower_id = ?'
   };
 
   // N: fuvction return the object with all info about connection
@@ -35,5 +66,5 @@ class DB {
     }
   };
 }
-
+export const { query, sendQuery } = DB;
 export default DB;

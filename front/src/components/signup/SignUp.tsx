@@ -19,9 +19,7 @@ function SignUp () {
 
     // N: register function for users
     userRegister(values);
-    console.log(values);
   }
-  console.log(validationScheme);
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">

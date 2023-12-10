@@ -8,4 +8,7 @@
     border-radius: rem(25);
     background-color: rgba(var(--light-theme), .3)
   }
+  &__title {
+    margin-bottom: rem(40);
+  }
 }
