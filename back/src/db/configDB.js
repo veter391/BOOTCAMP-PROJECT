@@ -34,6 +34,12 @@ class DB {
     searchUserByUserType: 'SELECT * FROM users WHERE usertype = ?',
     searchUserByDate: 'SELECT * FROM users WHERE date = ?',
     searchUserByCity: 'SELECT * FROM users WHERE city = ?',
+
+    //J: Follow queries
+    followUser: 'INSERT INTO followers (follower_id, user_id) VALUES (?, ?)',
+    unfollowUser: 'DELETE FROM followers WHERE follower_id = ? AND user_id = ?',
+    getFollowers: 'SELECT * FROM followers WHERE user_id = ?',
+    getFollowing: 'SELECT * FROM followers WHERE follower_id = ?'
   };
 
   // N: fuvction return the object with all info about connection
