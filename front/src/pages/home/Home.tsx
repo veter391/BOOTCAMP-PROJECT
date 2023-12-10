@@ -4,7 +4,7 @@ import SignUp from '../../components/signup/SignUp';
 import './home.scss';
 
 function Home () {
-  const [login, setLogin] = useState(true);
+  const [loged, setLoged] = useState(false);
 
   const scrolling = (e : any) => {
     e.preventDefault();
@@ -33,16 +33,33 @@ function Home () {
       <section id='user-place' className="user-place">
         <div className="container user-place__container">
           <div className="user-place__box">
-            { (login && <LogIn />) || <SignUp />}
-
-            <div className="user-place__join">
-              {(login && 'New to Connect People? ') || 'Already registered? '}
-              <button onClick={() => setLogin(!login)} className='user-place__btn-change btn-reset'>{(login && 'Join now') || 'Log in' }</button>
-            </div>
+            {(loged && <IsLogedMessage />) || <FormBox />}
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+function FormBox () {
+  const [login, setLogin] = useState(true);
+
+  return (
+    <>
+      <h2 className='colored'>{(login && 'Log in') || 'Sign up'}</h2>
+      {(login && <LogIn />) || <SignUp />}
+
+      <div className="user-place__join">
+        {(login && 'New to Connect People? ') || 'Already registered? '}
+        <button onClick={() => setLogin(!login)} className='user-place__btn-change btn-reset'>{(login && 'Join now') || 'Log in'}</button>
+      </div>
+    </>
+  );
+}
+
+function IsLogedMessage () {
+  return (
+    <h2>You are loged {':)'}</h2>
   );
 }
 
