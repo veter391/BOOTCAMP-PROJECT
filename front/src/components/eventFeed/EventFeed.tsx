@@ -19,10 +19,11 @@ function EventFeed () {
 
 function EventCard () {
   return (
-    <article>
+    <article className='eventCard'>
       <h3>Post title</h3>
       <p>Post description ...</p>
     </article>
   );
 }
 export default EventFeed;
+export { EventCard };
