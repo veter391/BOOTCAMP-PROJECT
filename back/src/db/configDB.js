@@ -8,6 +8,13 @@ class DB {
     updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), password = IFNULL(?, password), last_update = IFNULL(?, last_update), usertype = IFNULL(?, usertype)  WHERE id = ?',
     deleteUser: 'DELETE FROM users WHERE id = ?',
 
+    // Publications queries
+    createPost: 'INSERT INTO posts (user_id, post_content, post_media, post_date) VALUES (?, ?, ?, NOW())',
+    getPostsByUser: 'SELECT * FROM posts WHERE user_id = ?',
+    getAllPosts: 'SELECT * FROM posts',
+    updatePost: 'UPDATE posts SET post_content = ?, post_media = ?, post_date = NOW() WHERE id = ?',
+    deletePost: 'DELETE FROM posts WHERE id = ?',
+
     // J: Comments queries
     addComment: 'INSERT INTO comments (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, ?)',
     getCommentsById: 'SELECT * FROM comments WHERE post_id = ?',
@@ -38,7 +45,13 @@ class DB {
     followUser: 'INSERT INTO followers (follower_id, user_id) VALUES (?, ?)',
     unfollowUser: 'DELETE FROM followers WHERE follower_id = ? AND user_id = ?',
     getFollowers: 'SELECT * FROM followers WHERE user_id = ?',
-    getFollowing: 'SELECT * FROM followers WHERE follower_id = ?'
+    getFollowing: 'SELECT * FROM followers WHERE follower_id = ?',
+
+    // J: Queries para reacciones
+    addReactionToPost: 'INSERT INTO reactions (post_id, user_id, reaction_type) VALUES (?, ?, ?)',
+    getReactionsForPost: 'SELECT * FROM reactions WHERE post_id = ?',
+    updateReaction: 'UPDATE reactions SET reaction_type = IFNULL(?, reaction_type) WHERE post_id = ? AND user_id = ?',
+    deleteReaction: 'DELETE FROM reactions WHERE post_id = ? AND user_id = ?'
   };
 
   // N: fuvction return the object with all info about connection
@@ -66,5 +79,6 @@ class DB {
     }
   };
 }
+
 export const { query, sendQuery } = DB;
 export default DB;
