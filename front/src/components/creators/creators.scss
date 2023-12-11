@@ -1,18 +1,28 @@
 .creators{
   display: flex;
   margin-top: 25px;
+  gap: 50px;
+  justify-content: space-evenly;
   .card {
-    & img{
+    padding: 20px 10px;
+    background-color: rgb(10, 82, 50);
+    border-radius: 5px;
+    min-width: 250px;
+    & .creatorImg{
       margin: auto;
+      height: 85px;
+      width: 85px;
+      border-radius: 50%;
     }
-  
-    & ul{
-      margin-top: 25px;
-  
-      & p{
-        margin-top: 10px;
-      }
+    & .imgLink{
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
     }
-
+    & h2{
+      text-align: center;
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
   }
 }
