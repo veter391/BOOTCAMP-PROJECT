@@ -23,21 +23,21 @@ function SignUp () {
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
-      <InputValidate
+      {!isCompany && <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
         name="name"
-        placeholder="Name..."
-        scheme={validationScheme.name} />
+        placeholder="Nombre..."
+        scheme={validationScheme.name} />}
 
-      <InputValidate
+      {!isCompany && <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name="surname"
-        placeholder="Surname..."
-        scheme={validationScheme.surname} />
+        name="last_name"
+        placeholder="Apellido..."
+        scheme={validationScheme.surname} />}
 
       <InputValidate
         classNameLabel="form__label"
@@ -51,7 +51,7 @@ function SignUp () {
         classNameLabel="form__label"
         className="input-reset form__input"
         type="password"
-        name='password' placeholder="Password..."
+        name='password' placeholder="Contraseña..."
         scheme={validationScheme.password} />
 
       {
@@ -88,7 +88,14 @@ function CompanyForm () {
         type="text"
         name='companyAddress' placeholder="Company address..."
         scheme={validationScheme.companyAddress} />
-    </>
+
+      <InputValidate
+      classNameLabel="form__label"
+      className="input-reset form__input"
+      type="text"
+      name='cif' placeholder="Company CIF..."
+      scheme={validationScheme.cif} />
+      </>
   );
 }
 

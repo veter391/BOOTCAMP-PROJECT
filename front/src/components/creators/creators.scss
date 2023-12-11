@@ -3,18 +3,21 @@
   margin-top: 25px;
   gap: 50px;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   .card {
     padding: 20px 10px;
-    background-color: rgb(10, 82, 50);
+    outline: 1px solid white;
+    background-color: rgb(10, 82, 50, 0.3);
     border-radius: 5px;
-    min-width: 250px;
+    width: 250px;
+    min-height: 275px;
     & .creatorImg{
       margin: auto;
       height: 85px;
       width: 85px;
       border-radius: 50%;
     }
-    & .imgLink{
+    & .socialLinks{      
       height: 30px;
       width: 30px;
       border-radius: 50%;
@@ -22,7 +25,21 @@
     & h2{
       text-align: center;
       margin-top: 15px;
-      margin-bottom: 15px;
+      margin-bottom: 30px;
     }
+  }
+}
+.socials{
+  display: flex;
+  gap: 10px;
+  align-items:center;
+  font-size: small;
+  margin-left: 15px;
+  & :first-child{
+    margin-bottom: 5px;
+  }
+  & img{
+    position: relative;
+    top: 4px;
   }
 }

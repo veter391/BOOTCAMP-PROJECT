@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Session, Inbox } from '@talkjs/react';
-import Talk from 'talkjs';
+// import { Session, Inbox } from '@talkjs/react';
+// import Talk from 'talkjs';
 import './chat.scss';
 
 type SessionUserType = {
