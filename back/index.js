@@ -53,7 +53,7 @@ app.use('/search', searchRouter);
 app.use('/follow', followRouter);
 
 //Jose: Router to reactions routes
-app.use('/reaction', reactionRouters);
+app.use('/reaction', reactionRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !
