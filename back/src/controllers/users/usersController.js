@@ -1,18 +1,11 @@
 import DB from '../../db/configDB.js';
-import userSchemas from '../../schemas/userSchema.js';
+
 
 // connect data base
 // const database = new DB();
 // // N: querys from DB class
 // const query = dataBase.query;
 
-const {
-  CreateUserSchema,
-  GetUserByIdSchema,
-  GetAllUsersSchema,
-  UpdateUserSchema,
-  DeleteUserSchema
-} = userSchemas;
 
 // CREATE USER
 const createUser = async (req, res) => {
@@ -24,7 +17,7 @@ const createUser = async (req, res) => {
       password,
       last_update,
       usertype
-    } = CreateUserSchema.parse(req.body);
+    } = req.body;
 
     const dbInfo = await DB.sendQuery(
       DB.query.createUser,
@@ -114,7 +107,7 @@ const updateUser = async (req, res) => {
 // DELETE USER{id}
 const deleteUser = async (req, res) => {
   try {
-    const { id } = DeleteUserSchema.parse(req.body);
+    const { id } = req.body;
     await DB.sendQuery(DB.query.deleteUser, [id]);
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {

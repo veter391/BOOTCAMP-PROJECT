@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 // import { UploadedFile } from 'express-fileupload';
 import userRouter from './src/routes/usersRoutes.js';
+import postRouter from './src/routes/postsRoutes.js';
 import commentRouter from './src/routes/commentsRoutes.js';
 import eventRouter from './src/routes/eventsRoutes.js';
 import searchRouter from './src/routes/searchRoutes.js'
@@ -39,6 +40,9 @@ app.use(cors(corsOptions));
 
 // Jose: Router to user routes
 app.use('/users', userRouter);
+
+//Jose: Router to post routes
+app.use('/posts', postRouter);
 
 //Jose: Router to comments routes
 app.use('/comments', commentRouter);
