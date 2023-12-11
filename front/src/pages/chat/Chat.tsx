@@ -23,28 +23,7 @@ function Chat () {
   // N: unic room id
   const roomID = 'room-1';
   // N: user data and unic id
-  const userData = {
-    id: 'rick',
-    name: 'rick',
-    email: 'nina@example.com',
-    photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
-    welcomeMessage: 'Hi!',
-    role: 'default'
-  };
-  // N: second user data and unic id
-  const seccionWithUser = {
-    id: 'frank',
-    name: 'Frank',
-    email: 'frank@example.com',
-    photoUrl: 'https://talkjs.com/new-web/avatar-8.jpg',
-    welcomeMessage: 'Hey, how can I help?',
-    role: 'default'
-  };
-
-  // const bar = document.querySelector('.NoticeBar');
-  // console.log(bar);
-
-  // const seccionWithUser = {
+  // const userData = {
   //   id: 'rick',
   //   name: 'rick',
   //   email: 'nina@example.com',
@@ -52,7 +31,8 @@ function Chat () {
   //   welcomeMessage: 'Hi!',
   //   role: 'default'
   // };
-  // const userData = {
+  // // N: second user data and unic id
+  // const seccionWithUser = {
   //   id: 'frank',
   //   name: 'Frank',
   //   email: 'frank@example.com',
@@ -60,6 +40,26 @@ function Chat () {
   //   welcomeMessage: 'Hey, how can I help?',
   //   role: 'default'
   // };
+
+  // const bar = document.querySelector('.NoticeBar');
+  // console.log(bar);
+
+  const seccionWithUser = {
+    id: 'rick',
+    name: 'rick',
+    email: 'nina@example.com',
+    photoUrl: 'https://talkjs.com/new-web/avatar-7.jpg',
+    welcomeMessage: 'Hi!',
+    role: 'default'
+  };
+  const userData = {
+    id: 'frank',
+    name: 'Frank',
+    email: 'frank@example.com',
+    photoUrl: 'https://talkjs.com/new-web/avatar-8.jpg',
+    welcomeMessage: 'Hey, how can I help?',
+    role: 'default'
+  };
 
   // ! N: add to context !
   const [loading, setLoading] = useState(true);
