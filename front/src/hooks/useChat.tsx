@@ -18,24 +18,18 @@ export default function useChat (meID: idType, otherID: idType) {
 
   useEffect(() => {
     async function createRoom (newRoomID: idType, userid1: idType, userid2: idType) {
-      // await fetch('./files/users.json/chats', {
-      //   method: 'POST',
-      //   headers: {
-      //     // 'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     room: uuidv4(), users: [2, 1]
-      //   })
-      // });
-      // create new room id and add users
-      const newRoom = {
-        room: newRoomID,
-        users: [userid1, userid2]
-      };
-
-      // chats.push(newRoom);
-      console.log(newRoom);
+      await fetch('./files/users.json/chats', {
+        method: 'POST',
+        headers: {
+          // 'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          room: newRoomID,
+          userId1: userid1,
+          userId2: userid2
+        })
+      });
     }
 
     async function getUsers () {
