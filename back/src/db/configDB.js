@@ -51,7 +51,10 @@ class DB {
     addReactionToPost: 'INSERT INTO reactions (post_id, user_id, reaction_type) VALUES (?, ?, ?)',
     getReactionsForPost: 'SELECT * FROM reactions WHERE post_id = ?',
     updateReaction: 'UPDATE reactions SET reaction_type = IFNULL(?, reaction_type) WHERE post_id = ? AND user_id = ?',
-    deleteReaction: 'DELETE FROM reactions WHERE post_id = ? AND user_id = ?'
+    deleteReaction: 'DELETE FROM reactions WHERE post_id = ? AND user_id = ?',
+
+    //J: Queries para CHAT
+    createChat: 'INSERT INTO chats (idRoom, userSenderId, userReceiverId) VALUES (?, ?, ?)'
   };
 
   // N: fuvction return the object with all info about connection

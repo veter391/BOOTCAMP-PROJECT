@@ -12,6 +12,7 @@ import eventRouter from './src/routes/eventsRoutes.js';
 import searchRouter from './src/routes/searchRoutes.js';
 import followRouter from './src/routes/followersRoutes.js';
 import reactionRouter from './src/routes/followersRoutes.js';
+import chatRouter from './src/routes/chatRoutes.js';
 
 
 dotenv.config({ path: '../.env' });
@@ -58,6 +59,9 @@ app.use('/follow', followRouter);
 
 // Jose: Router to reactions routes
 app.use('/reaction', reactionRouter);
+
+// Jose: Router to chat routes
+app.use('/chat', chatRouter);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !
