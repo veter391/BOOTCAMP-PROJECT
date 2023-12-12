@@ -54,7 +54,9 @@ class DB {
     deleteReaction: 'DELETE FROM reactions WHERE post_id = ? AND user_id = ?',
 
     //J: Queries para CHAT
-    createChat: 'INSERT INTO chats (idRoom, userSenderId, userReceiverId) VALUES (?, ?, ?)'
+    createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
+    getAllChat: 'SELECT * FROM chats',
+    getChatById: 'SELECT * FROM chats WHERE room_id = ?'
   };
 
   // N: fuvction return the object with all info about connection
