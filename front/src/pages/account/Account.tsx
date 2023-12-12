@@ -1,4 +1,3 @@
-import Contacs from '../../components/contacts/Contacs';
 import EventFeed from '../../components/eventFeed/EventFeed';
 import User from '../../components/user/User';
 import './account.scss';
@@ -11,7 +10,6 @@ function Account () {
         <div className='maincontainer'>
           <User />
           <EventFeed />
-          <Contacs/>
         </div>
         <button>ADD EVENT +</button>
       </div>
