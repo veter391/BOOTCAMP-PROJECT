@@ -56,7 +56,8 @@ class DB {
     //J: Queries para CHAT
     createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
     getAllChat: 'SELECT * FROM chats',
-    getChatById: 'SELECT * FROM chats WHERE room_id = ?'
+    getChatById: 'SELECT * FROM chats WHERE room_id = ?',
+    deleteChat: 'DELETE FROM chats WHERE room_id = ?'
   };
 
   // N: fuvction return the object with all info about connection

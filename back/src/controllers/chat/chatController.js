@@ -36,8 +36,21 @@ const createChat = async (req, res) => {
     }
   };
 
+  const deleteChat = async (req, res) => {
+    try {
+      const { room_id } = req.body;
+
+      const result = await sendQuery(query.deleteChat, [room_id]);
+      res.status(200).json(result);
+
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+
   export default {
     createChat,
     getChat,
-    getChatById
+    getChatById,
+    deleteChat
   }
