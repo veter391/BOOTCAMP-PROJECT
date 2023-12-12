@@ -53,7 +53,7 @@ class DB {
     updateReaction: 'UPDATE reactions SET reaction_type = IFNULL(?, reaction_type) WHERE post_id = ? AND user_id = ?',
     deleteReaction: 'DELETE FROM reactions WHERE post_id = ? AND user_id = ?',
 
-    //J: Queries para CHAT
+    // J: Queries para CHAT
     createChat: 'INSERT INTO chats (idRoom, userSenderId, userReceiverId) VALUES (?, ?, ?)'
   };
 
