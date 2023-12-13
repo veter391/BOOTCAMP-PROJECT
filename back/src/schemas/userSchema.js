@@ -4,7 +4,7 @@ const CreateUserSchema = z.object({
   first_name: z.string().min(1),
   last_name: z.string().min(1),
   email: z.string().email(),
-  password: z.string().min(3).max(8),
+  password: z.string().min(8).max(20),
   last_update: z.string(),
   usertype: z.string()
 });

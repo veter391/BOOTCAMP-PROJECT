@@ -13,7 +13,8 @@ function LogIn () {
     console.log('login');
 
     // N: login user
-    userLogIn(values);
+    const {token} = userLogIn(values);
+    console.log(token);
   };
 
   return (

@@ -16,10 +16,10 @@ const User = z.object({
     invalid_type_error: 'Tiene que ser un string',
     required_error: 'Campo obligatorio'
   })
-    .min(3, {
+    .min(8, {
       message: 'Mínimo 3 caracteres.'
     })
-    .max(8, {
+    .max(20, {
       message: 'Máximo 8 caracteres.'
     })
 });
