@@ -58,7 +58,8 @@ class DB {
     getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
     // getChatUsers: 'SELECT * FROM users, chats',
 
-    getChatById: 'SELECT * FROM chats WHERE room_id = ?'
+    getChatById: 'SELECT * FROM chats WHERE room_id = ?',
+    deleteChat: 'DELETE FROM chats WHERE room_id = ?'
   };
 
   // N: fuvction return the object with all info about connection
