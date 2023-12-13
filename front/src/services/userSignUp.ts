@@ -1,5 +1,5 @@
 async function userLogIn (obj : object) {
-  const baseUrl = 'http://localhost:8080/users/login';
+  const baseUrl = 'http://localhost:8080/users/signup';
 
   try {
     console.log(obj);

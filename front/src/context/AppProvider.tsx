@@ -13,9 +13,10 @@ const Provider = AppContext.Provider;
 function AppProvider ({ children }) {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const handlers: handlersType = { register, errors };
+  const token = localStorage.getItem('token');
 
   return (
-    <Provider value={{ handlers, handleSubmit }}>
+    <Provider value={{ handlers, handleSubmit, token }}>
       { children }
     </Provider>
   );
