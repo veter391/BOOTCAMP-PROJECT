@@ -14,7 +14,6 @@ function LogIn () {
 
     // N: login user
     userLogIn(values);
-    console.log(values);
   };
 
   return (
