@@ -78,7 +78,7 @@ export default function useChat (meID: idType, otherID: idType) {
           const roomID = meRoom === otherRoom ? meRoom : '';
 
           // modify user object and return simple user objects
-          const myObject = newData.map(user => {
+          const myObject = newData.map((user: SessionUserType) => {
             return {
               id: user.id,
               otherId: user.id === meID ? user.receiver_id : user.sender_id,
