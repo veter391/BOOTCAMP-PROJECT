@@ -1,5 +1,4 @@
-import { sendQuery, query } from '../../db/configDB.js';
-// import DB from '../../db/configDB.js';
+import DB from '../../db/configDB.js';
 
 const searchEventsByName = async (req, res) => {
   try {
@@ -8,7 +7,7 @@ const searchEventsByName = async (req, res) => {
     // partial search
     const searchTerm = `%${eventName}%`;
 
-    const events = await sendQuery(query.searchEventsByName, [searchTerm]);
+    const events = await DB.sendQuery(DB.query.searchEventsByName, [searchTerm]);
 
     res.status(200).json(events);
   } catch (error) {
@@ -20,7 +19,7 @@ const searchEventsByType = async (req, res) => {
   try {
     const { eventType } = req.params;
 
-    const events = await sendQuery(query.searchEventsByType, [eventType]);
+    const events = await DB.sendQuery(DB.query.searchEventsByType, [eventType]);
 
     res.status(200).json(events);
   } catch (error) {
@@ -32,7 +31,7 @@ const searchEventsByDate = async (req, res) => {
   try {
     const { eventDate } = req.params;
 
-    const events = await sendQuery(query.searchEventsByDate, [eventDate]);
+    const events = await DB.sendQuery(DB.query.searchEventsByDate, [eventDate]);
 
     res.status(200).json(events);
   } catch (error) {
@@ -44,7 +43,7 @@ const searchEventsByLocation = async (req, res) => {
   try {
     const { eventLocation } = req.params;
 
-    const events = await sendQuery(query.searchEventsByLocation, [eventLocation]);
+    const events = await DB.sendQuery(DB.query.searchEventsByLocation, [eventLocation]);
 
     res.status(200).json(events);
   } catch (error) {
@@ -57,7 +56,7 @@ const searchUserByName = async (req, res) => {
     const { userName } = req.params;
     const searchTerm = `%${userName}%`;
 
-    const users = await sendQuery(query.searchUserByName, [searchTerm]);
+    const users = await DB.sendQuery(DB.query.searchUserByName, [searchTerm]);
 
     res.status(200).json(users);
   } catch (error) {
@@ -69,7 +68,7 @@ const searchUserByUserType = async (req, res) => {
   try {
     const { userType } = req.params;
 
-    const users = await sendQuery(query.searchUserByUserType, [userType]);
+    const users = await DB.sendQuery(DB.query.searchUserByUserType, [userType]);
 
     res.status(200).json(users);
   } catch (error) {
@@ -81,7 +80,7 @@ const searchUserByDate = async (req, res) => {
   try {
     const { date } = req.params;
 
-    const users = await sendQuery(query.searchUserByDate, [date]);
+    const users = await DB.sendQuery(DB.query.searchUserByDate, [date]);
 
     res.status(200).json(users);
   } catch (error) {
@@ -93,7 +92,7 @@ const searchUserByCity = async (req, res) => {
   try {
     const { city } = req.params;
 
-    const users = await sendQuery(query.searchUserByCity, [city]);
+    const users = await DB.sendQuery(DB.query.searchUserByCity, [city]);
 
     res.status(200).json(users);
   } catch (error) {

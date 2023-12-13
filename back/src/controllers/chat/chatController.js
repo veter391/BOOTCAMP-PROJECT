@@ -1,11 +1,11 @@
-import { sendQuery, query } from '../../db/configDB.js';
+import DB from '../../db/configDB.js';
 
 const createChat = async (req, res) => {
   try {
     const { room, userId1, userId2 } = req.body;
 
     // insertar chat en la bbdd
-    const result = await sendQuery(query.createChat, [room, userId1, userId2]);
+    const result = await DB.sendQuery(DB.query.createChat, [room, userId1, userId2]);
 
     res.status(200).json(result);
   } catch (error) {
@@ -15,7 +15,7 @@ const createChat = async (req, res) => {
 
 const getChat = async (req, res) => {
   try {
-    const result = await sendQuery(query.getChat);
+    const result = await DB.sendQuery(DB.query.getChatUsers);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -26,7 +26,7 @@ const getChatById = async (req, res) => {
   try {
     const { room_id } = req.body;
 
-    const result = await sendQuery(query.getChatById, [room_id]);
+    const result = await DB.sendQuery(DB.query.getChatById, [room_id]);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -55,7 +55,9 @@ class DB {
 
     // J: Queries para CHAT
     createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
-    getAllChat: 'SELECT * FROM chats',
+    getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
+    // getChatUsers: 'SELECT * FROM users, chats',
+
     getChatById: 'SELECT * FROM chats WHERE room_id = ?'
   };
 
@@ -85,5 +87,4 @@ class DB {
   };
 }
 
-export const { query, sendQuery } = DB;
 export default DB;

@@ -1,11 +1,11 @@
-import { sendQuery, query } from '../../db/configDB.js';
+import DB from '../../db/configDB.js';
 // import DB from '../../db/configDB.js';
 
 const createEvent = async (req, res) => {
   try {
     const { user_id, event_name, event_description, event_date } = req.body;
 
-    const dbInfo = await sendQuery(query.createEvent, [
+    const dbInfo = await DB.sendQuery(DB.query.createEvent, [
       user_id,
       event_name,
       event_description,
@@ -20,7 +20,7 @@ const createEvent = async (req, res) => {
 
 const getAllEvents = async (req, res) => {
   try {
-    const allEvents = await sendQuery(query.getAllEvents);
+    const allEvents = await DB.sendQuery(DB.query.getAllEvents);
 
     res.status(200).json(allEvents);
   } catch (error) {
@@ -32,7 +32,7 @@ const getEventById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const event = await sendQuery(query.getEventById, [id]);
+    const event = await DB.sendQuery(DB.query.getEventById, [id]);
 
     res.status(200).json(event);
   } catch (error) {
@@ -45,7 +45,7 @@ const updateEvent = async (req, res) => {
     const { id } = req.params;
     const { event_name, event_description, event_date } = req.body;
 
-    const dbInfo = await sendQuery(query.updateEvent, [
+    const dbInfo = await DB.sendQuery(DB.query.updateEvent, [
       event_name,
       event_description,
       event_date,
@@ -66,7 +66,7 @@ const deleteEvent = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await sendQuery(query.deleteEvent, [id]);
+    await DB.sendQuery(DB.query.deleteEvent, [id]);
 
     res.status(200).json({ message: 'Event deleted successfully' });
   } catch (error) {

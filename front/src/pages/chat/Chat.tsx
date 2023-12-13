@@ -13,7 +13,8 @@ type SessionType = {
 
 function Chat () {
   // N: users id
-  const { loading, chatTemplate } = useChat(4, 2);
+  // ! N: useChat( currentUserID, userForConversation!)
+  const { loading, chatTemplate } = useChat(1, 2);
   const { roomID, meData, otherUser } = chatTemplate;
 
   return (
@@ -22,6 +23,7 @@ function Chat () {
         <h2 className='subtitle chat__title'>Chat</h2>
         {/* N: login chat and set chat params */}
         {!loading && chatTemplate && <ChatSession room={roomID} me={meData} otherUser={otherUser} />}
+
       </div>
     </section>
   );

@@ -1,4 +1,4 @@
-import { sendQuery, query } from '../../db/configDB.js';
+import DB from '../../db/configDB.js';
 // import DB from '../../db/configDB.js';
 
 // Agregar un comentario a una publicación
@@ -9,7 +9,7 @@ const addComment = async (req, res) => {
     // Obtener la fecha actual
     const created_at = new Date();
 
-    const dbInfo = await sendQuery(query.addComment, [post_id, user_id, comment_text, created_at]);
+    const dbInfo = await DB.sendQuery(DB.query.addComment, [post_id, user_id, comment_text, created_at]);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {
@@ -22,7 +22,7 @@ const getCommentsById = async (req, res) => {
   try {
     const { post_id } = req.params;
 
-    const comments = await sendQuery(query.getCommentsById, [post_id]);
+    const comments = await DB.sendQuery(DB.query.getCommentsById, [post_id]);
 
     res.status(200).json(comments);
   } catch (error) {
@@ -34,7 +34,7 @@ const getAllComments = async (req, res) => {
   try {
     const { post_id } = req.params;
 
-    const comments = await sendQuery(query.getAllCommentsForPost, [post_id]);
+    const comments = await DB.sendQuery(DB.query.getAllCommentsForPost, [post_id]);
 
     res.status(200).json(comments);
   } catch (error) {
@@ -48,7 +48,7 @@ const updateComment = async (req, res) => {
     const { id } = req.params;
     const { comment_text } = req.body;
 
-    const dbInfo = await sendQuery(query.updateComment, [comment_text, id]);
+    const dbInfo = await DB.sendQuery(DB.query.updateComment, [comment_text, id]);
 
     if (dbInfo.affectedRows !== 0) {
       res.status(200).json({ message: `Comment ${id} updated successfully` });
@@ -65,7 +65,7 @@ const deleteComment = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await sendQuery(query.deleteComment, [id]);
+    await DB.sendQuery(DB.query.deleteComment, [id]);
 
     res.status(200).json({ message: 'Comment deleted successfully' });
   } catch (error) {

@@ -1,4 +1,4 @@
-import { sendQuery, query } from '../../db/configDB.js';
+import DB from '../../db/configDB.js';
 // import DB from '../../db/configDB.js';
 
 // CREATE PUBLICATION
@@ -7,7 +7,7 @@ const createPost = async (req, res) => {
     const { user_id, post_content, post_media } = req.body;
 
     // Realiza la inserción en la base de datos
-    const dbInfo = await sendQuery(query.createPost, [user_id, post_content, post_media]);
+    const dbInfo = await DB.sendQuery(DB.query.createPost, [user_id, post_content, post_media]);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {
@@ -20,7 +20,7 @@ const getPostsByUser = async (req, res) => {
   try {
     const { user_id } = req.params;
 
-    const userPosts = await sendQuery(query.getPostsByUser, [user_id]);
+    const userPosts = await DB.sendQuery(DB.query.getPostsByUser, [user_id]);
 
     res.status(200).json(userPosts);
   } catch (error) {
@@ -31,7 +31,7 @@ const getPostsByUser = async (req, res) => {
 // GET ALL POSTS
 const getAllPosts = async (req, res) => {
   try {
-    const allPosts = await sendQuery(query.getAllPosts);
+    const allPosts = await DB.sendQuery(DB.query.getAllPosts);
 
     res.status(200).json(allPosts);
   } catch (error) {
@@ -45,7 +45,7 @@ const updatePost = async (req, res) => {
     const { id } = req.params;
     const { post_content, post_media } = req.body;
 
-    const dbInfo = await sendQuery(query.updatePost, [post_content, post_media, id]);
+    const dbInfo = await DB.sendQuery(DB.query.updatePost, [post_content, post_media, id]);
 
     if (dbInfo.affectedRows !== 0) {
       res.status(200).json({ message: `Post ${id} updated successfully` });
@@ -62,7 +62,7 @@ const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await sendQuery(query.deletePost, [id]);
+    await DB.sendQuery(DB.query.deletePost, [id]);
 
     res.status(200).json({ message: 'Post deleted successfully' });
   } catch (error) {

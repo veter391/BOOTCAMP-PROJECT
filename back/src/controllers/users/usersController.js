@@ -1,11 +1,5 @@
-import { sendQuery, query } from '../../db/configDB.js';
-// import DB from '../../db/configDB.js';
+import DB from '../../db/configDB.js';
 import userSchemas from '../../schemas/userSchema.js';
-
-// connect data base
-// const database = new DB();
-// // N: querys from DB class
-// const query = dataBase.query;
 
 const {
   CreateUserSchema,
@@ -27,8 +21,8 @@ const createUser = async (req, res) => {
       usertype
     } = CreateUserSchema.parse(req.body);
 
-    const dbInfo = await sendQuery(
-      query.createUser,
+    const dbInfo = await DB.sendQuery(
+      DB.query.createUser,
       [
         first_name,
         last_name,
@@ -49,7 +43,7 @@ const createUser = async (req, res) => {
 // GET ALL USERS
 const getAllUsers = async (req, res) => {
   try {
-    const allUsers = await sendQuery(query.getAllUsers);
+    const allUsers = await DB.sendQuery(DB.query.getAllUsers);
     res.status(200).json(allUsers);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -60,7 +54,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const [user] = await sendQuery(query.getUserById, [id]);
+    const [user] = await DB.sendQuery(DB.query.getUserById, [id]);
     if (user) {
       res.status(200).json(user);
     } else {
@@ -85,13 +79,13 @@ const updateUser = async (req, res) => {
       usertype
     } = req.body;
 
-    // const [user] = await sendQuery(query.getUserById, [id])
+    // const [user] = await DB.sendQuery(DB.query.getUserById, [id])
 
     // if (!user) {
     //   return res.status(404).send({ message: 'User not found or no changes applied' })
     // }
 
-    const dbInfo = await sendQuery(query.updateUser, [
+    const dbInfo = await DB.sendQuery(DB.query.updateUser, [
       first_name,
       last_name,
       email,
@@ -115,7 +109,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = DeleteUserSchema.parse(req.body);
-    await sendQuery(query.deleteUser, [id]);
+    await DB.sendQuery(DB.query.deleteUser, [id]);
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     res.status(400).json({ error: error.errors });
