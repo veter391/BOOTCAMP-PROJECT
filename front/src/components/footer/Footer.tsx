@@ -9,7 +9,6 @@ function Footer () {
           <span style={{ marginRight: '15px' }}>Connect People © 2023</span>
           <Link className="footer__link colored"
             to="/about"
-            target="_blank"
             aria-label="project developer">
             About the team
           </Link>

@@ -14,3 +14,4 @@ function EventFeed () {
 }
 
 export default EventFeed;
+export { EventCard };

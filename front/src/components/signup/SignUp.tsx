@@ -23,21 +23,21 @@ function SignUp () {
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
-      <InputValidate
+      {!isCompany && <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
         name="name"
-        placeholder="Name..."
-        scheme={validationScheme.name} />
+        placeholder="Nombre..."
+        scheme={validationScheme.name} />}
 
-      <InputValidate
+      {!isCompany && <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name="surname"
-        placeholder="Surname..."
-        scheme={validationScheme.surname} />
+        name="last_name"
+        placeholder="Apellido..."
+        scheme={validationScheme.surname} />}
 
       <InputValidate
         classNameLabel="form__label"
@@ -51,7 +51,7 @@ function SignUp () {
         classNameLabel="form__label"
         className="input-reset form__input"
         type="password"
-        name='password' placeholder="Password..."
+        name='password' placeholder="Contraseña..."
         scheme={validationScheme.password} />
 
       {
@@ -62,9 +62,9 @@ function SignUp () {
       <label className="form__label form__label-last form__label-checkbox">
         <input onChange={() => setIsCompany(!isCompany)} className="form__label-checkbox__field" type="checkbox" name="checkbox" />
         <span className="form__label-checkbox__content"></span>
-        Are you company?
+        Eres una empresa?
       </label>
-      <button className="btn-reset form__btn btn" type="submit">Create Account</button>
+      <button className="btn-reset form__btn btn" type="submit">Crear cuenta</button>
     </form>
   );
 }
@@ -73,22 +73,29 @@ function CompanyForm () {
   return (
     <>
       <div className="form__company-subtitle">
-        <h2 className='form__company-subtitle-text'>Company data</h2>
+        <h2 className='form__company-subtitle-text'>Datos de la empresa</h2>
       </div>
       <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name='companyName' placeholder="Company name..."
+        name='companyName' placeholder="Nombre..."
         scheme={validationScheme.companyName} />
 
       <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name='companyAddress' placeholder="Company address..."
+        name='companyAddress' placeholder="Dirección..."
         scheme={validationScheme.companyAddress} />
-    </>
+
+      <InputValidate
+      classNameLabel="form__label"
+      className="input-reset form__input"
+      type="text"
+      name='cif' placeholder="CIF..."
+      scheme={validationScheme.cif} />
+      </>
   );
 }
 
