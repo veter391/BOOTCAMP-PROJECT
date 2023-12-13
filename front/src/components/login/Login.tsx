@@ -10,11 +10,13 @@ function LogIn () {
   const { handleSubmit } : any = useContext(AppContext);
 
   const logIn = (values : object) => {
-    console.log('login');
-
     // N: login user
-    userLogIn(values);
-    console.log(values);
+    userLogIn(values)
+      .then(data => {
+        const { token, message } = data;
+        console.log(message);
+        localStorage.setItem('token', token);
+      }).catch(err => console.log(err));
   };
 
   return (

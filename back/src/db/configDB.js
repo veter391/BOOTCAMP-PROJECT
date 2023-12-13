@@ -56,10 +56,11 @@ class DB {
     // J: Queries para CHAT
     createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
     getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
-    // getChatUsers: 'SELECT * FROM users, chats',
-
     getChatById: 'SELECT * FROM chats WHERE room_id = ?',
-    deleteChat: 'DELETE FROM chats WHERE room_id = ?'
+    deleteChat: 'DELETE FROM chats WHERE room_id = ?',
+
+    // N: check user info
+    checkEmail: 'SELECT * FROM users WHERE email = ?'
   };
 
   // N: fuvction return the object with all info about connection

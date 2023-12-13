@@ -13,6 +13,7 @@ import searchRouter from './src/routes/searchRoutes.js';
 import followRouter from './src/routes/followersRoutes.js';
 import reactionRouter from './src/routes/followersRoutes.js';
 import chatRouter from './src/routes/chatRoutes.js';
+import errorHandler from './src/controllers/errors/errorHandler.js';
 
 
 dotenv.config({ path: '../.env' });
@@ -62,6 +63,9 @@ app.use('/reaction', reactionRouter);
 
 // Jose: Router to chat routes
 app.use('/chat', chatRouter);
+
+// MIDDLEWARE FOR CHECK ERRORS
+app.use(errorHandler);
 
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !

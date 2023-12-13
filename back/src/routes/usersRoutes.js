@@ -1,5 +1,8 @@
 import express from 'express';
 import usersController from '../controllers/users/usersController.js';
+import userAuth from '../middlewares/userAuth.js';
+import { logIn } from '../controllers/users/login.js';
+// import { registerUser } from '../controllers/users/register.js';
 
 const userRouter = express.Router();
 
@@ -7,9 +10,11 @@ const userRouter = express.Router();
 
 // Routes for Users
 userRouter.post('/create', usersController.createUser);
-userRouter.get('/', usersController.getAllUsers);
-userRouter.get('/:id', usersController.getUserById);
-userRouter.put('/:id', usersController.updateUser);
+userRouter.get('/', userAuth, usersController.getAllUsers);
+userRouter.get('/:id', userAuth, usersController.getUserById);
+userRouter.put('/:id', userAuth, usersController.updateUser);
+// userRouter.post('/register', registerUser);
+userRouter.post('/login', logIn);
 userRouter.delete('/:id', usersController.deleteUser);
 
 // CREATE ROUTER

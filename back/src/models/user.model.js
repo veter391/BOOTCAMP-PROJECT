@@ -1,10 +1,6 @@
 import { z } from 'zod';
 
 const User = z.object({
-  username: z.string({
-    invalid_type_error: 'Tiene que ser un string',
-    required_error: 'Campo obligatorio'
-  }).refine((val) => isNaN(val), { message: 'El usuario no puede ser un número' }),
   email: z.string({
     invalid_type_error: 'Tiene que ser un string',
     required_error: 'Campo obligatorio'
@@ -16,14 +12,14 @@ const User = z.object({
     invalid_type_error: 'Tiene que ser un string',
     required_error: 'Campo obligatorio'
   })
-    .min(3, {
+    .min(8, {
       message: 'Mínimo 3 caracteres.'
     })
-    .max(8, {
+    .max(20, {
       message: 'Máximo 8 caracteres.'
     })
 });
 
-const LoginUser = User.omit({ username: true });
+const LoginUser = User.omit({ });
 
 export { User, LoginUser };
