@@ -1,15 +1,26 @@
 import DB from '../../db/configDB.js';
-// import DB from '../../db/configDB.js';
+import eventSchemas from '../../schemas/eventSchema.js';
+
+const {
+  CreateEventSchema,
+  UpdateEventSchema,
+} = eventSchemas;
 
 const createEvent = async (req, res) => {
   try {
-    const { user_id, event_name, event_description, event_date } = req.body;
+    const { user_id, organization_id, name, description, date, city, address, is_finished, created_at, last_update } = CreateEventSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.createEvent, [
       user_id,
-      event_name,
-      event_description,
-      event_date
+      organization_id,
+      name,
+      description,
+      date,
+      city,
+      address,
+      is_finished,
+      created_at,
+      last_update
     ]);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
@@ -31,7 +42,6 @@ const getAllEvents = async (req, res) => {
 const getEventById = async (req, res) => {
   try {
     const { id } = req.params;
-
     const event = await DB.sendQuery(DB.query.getEventById, [id]);
 
     res.status(200).json(event);
@@ -43,12 +53,15 @@ const getEventById = async (req, res) => {
 const updateEvent = async (req, res) => {
   try {
     const { id } = req.params;
-    const { event_name, event_description, event_date } = req.body;
+    const { name, description, date, city, address, is_finished } = UpdateEventSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.updateEvent, [
-      event_name,
-      event_description,
-      event_date,
+      name,
+      description,
+      date,
+      city,
+      address,
+      is_finished,
       id
     ]);
 
@@ -65,7 +78,6 @@ const updateEvent = async (req, res) => {
 const deleteEvent = async (req, res) => {
   try {
     const { id } = req.params;
-
     await DB.sendQuery(DB.query.deleteEvent, [id]);
 
     res.status(200).json({ message: 'Event deleted successfully' });

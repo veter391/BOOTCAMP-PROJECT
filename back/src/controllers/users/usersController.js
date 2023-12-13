@@ -86,7 +86,8 @@ const updateUser = async (req, res) => {
       email,
       city,
       password,
-      avatar
+      avatar,
+      id
     ]);
 
     if (dbInfo.affectedRows !== 0) {
