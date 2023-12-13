@@ -3,8 +3,6 @@ import userSchemas from '../../schemas/userSchema.js';
 
 const {
   CreateUserSchema,
-  GetUserByIdSchema,
-  GetAllUsersSchema,
   UpdateUserSchema,
   DeleteUserSchema
 } = userSchemas;
@@ -16,10 +14,13 @@ const createUser = async (req, res) => {
       first_name,
       last_name,
       email,
+      city,
       password,
-      last_update,
-      usertype
+      avatar
     } = CreateUserSchema.parse(req.body);
+
+    //Comprueba si hay un avatar sino asigna NULL
+    const avatarValue = avatar || null;
 
     const dbInfo = await DB.sendQuery(
       DB.query.createUser,
@@ -27,9 +28,9 @@ const createUser = async (req, res) => {
         first_name,
         last_name,
         email,
+        city,
         password,
-        last_update,
-        usertype
+        avatarValue
       ]
     );
     console.log(typeof usertype);
@@ -74,25 +75,18 @@ const updateUser = async (req, res) => {
       first_name,
       last_name,
       email,
+      city,
       password,
-      last_update,
-      usertype
-    } = req.body;
-
-    // const [user] = await DB.sendQuery(DB.query.getUserById, [id])
-
-    // if (!user) {
-    //   return res.status(404).send({ message: 'User not found or no changes applied' })
-    // }
+      avatar
+    } = UpdateUserSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.updateUser, [
       first_name,
       last_name,
       email,
+      city,
       password,
-      last_update,
-      usertype,
-      id
+      avatar
     ]);
 
     if (dbInfo.affectedRows !== 0) {
