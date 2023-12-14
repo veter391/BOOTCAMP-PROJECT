@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { AppContext } from '../context/AppProvider';
 import { Navigate } from 'react-router-dom';
 
-function PrivateRoute ({ children }) {
+function PrivateRoute ({ children }: any) {
   const { user } = useContext(AppContext);
-  const isExpired = user?.exp < Date.now();
-  console.log(user?.exp);
-
-  if (!user || isExpired) {
+  const token = localStorage.getItem('token');
+  console.log(token);
+  // const isTokenExpired = jwt.verify(token, process.env.JWT_SECRET);
+  const isUserExpired = user?.exp < Date.now();
+  // console.log(isTokenExpired);
+  //* Añadir al if --->  || isTokenExpired
+  if (!user || isUserExpired) {
     return <Navigate to='/*'/>;
   }
   return children;

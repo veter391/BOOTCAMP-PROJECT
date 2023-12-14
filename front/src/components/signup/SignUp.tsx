@@ -8,18 +8,30 @@ import { AppContext } from '../../context/AppProvider';
 
 function SignUp () {
   // get variavles from context
-  const { handleSubmit } : any = useContext(AppContext);
+  const { handleSubmit, userSetter } : any = useContext(AppContext);
 
   // company checkbox
   const [isCompany, setIsCompany] = useState(false);
 
   // funciton to run where submit form
-  function signUp (values: object) {
+  const signUp = (values: object) => {
     console.log('sign up');
-
     // N: register function for users
-    userRegister(values);
-  }
+    userRegister(values)
+      .then(data => {
+        const { token, message, user } = data;
+        localStorage.setItem('token', token);
+        const userLS = {
+          exp: Date.now() + (1000 * 60 * 60 * 24),
+          ...user
+        };
+        console.log('data new user:' + data);
+
+        userSetter(userLS);
+      })
+      .catch(err => err
+      );
+  };
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
@@ -27,7 +39,7 @@ function SignUp () {
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name="name"
+        name="first_name"
         placeholder="Nombre..."
         scheme={validationScheme.name} />}
 

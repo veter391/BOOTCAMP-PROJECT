@@ -44,13 +44,20 @@ async function logIn (req, res, next) {
 
     infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
 
-    res.send({
-      ok: true,
-      message: 'User is logged!',
-      error: null,
-      token,
-      user
-    });
+    if (token !== undefined) {
+      res.send({
+        ok: true,
+        message: 'User is logged!',
+        error: null,
+        token,
+        user
+      });
+    } else {
+      res.send({
+        ok: false,
+        message: 'Wrong login'
+      });
+    }
   } catch (error) {
     return next(error);
   }

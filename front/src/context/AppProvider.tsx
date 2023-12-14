@@ -18,8 +18,6 @@ function AppProvider ({ children }) {
   const token = storageToken && storageToken !== 'undefined' ? storageToken : false;
   // Oscar--> create state of user and send it via context to all the app
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')));
-  console.log(user);
-  
 
   function userSetter (user) {
     localStorage.setItem('user', JSON.stringify(user));
