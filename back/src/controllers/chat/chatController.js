@@ -49,4 +49,4 @@ export default {
   getChat,
   getChatById,
   deleteChat
-}
+};

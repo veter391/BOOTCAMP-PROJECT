@@ -4,7 +4,7 @@ const searchEventsByName = async (req, res) => {
   try {
     const { eventName } = req.params;
 
-    //partial search
+    // partial search
     const searchTerm = `%${eventName}%`;
 
     const events = await DB.sendQuery(DB.query.searchEventsByName, [searchTerm]);

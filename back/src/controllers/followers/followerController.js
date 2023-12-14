@@ -4,17 +4,15 @@ import DB from '../../db/configDB.js';
 // seguir a un usuario
 const follow = async (req, res) => {
   try {
-    const { followed, follower, type} = req.body;
+    const { followed, follower, type } = req.body;
 
     if (type === 'user') {
       const dbInfo = await DB.sendQuery(DB.query.followUser, [followed, follower]);
       res.status(201).json({ dbInfo, ...req.body, message: 'Usuario seguido exitosamente' });
-      
-    } else if(type === 'org') {
+    } else if (type === 'org') {
       const dbInfo = await DB.sendQuery(DB.query.followOrganization, [followed, follower]);
       res.status(201).json({ dbInfo, ...req.body, message: 'Organizacion seguida exitosamente' });
-
-    } else{
+    } else {
       res.status(404).json({ error: error.message });
     }
   } catch (error) {
@@ -25,18 +23,15 @@ const follow = async (req, res) => {
 // dejar de seguir a un usuario
 const unfollowUser = async (req, res) => {
   try {
-    const { followed, follower, type} = req.body;
+    const { followed, follower, type } = req.body;
     // const dbInfo = await DB.sendQuery(DB.query.unfollowUser, [followed, user_id]);
-    
     if (type === 'user') {
       const dbInfo = await DB.sendQuery(DB.query.unfollowUser, [followed, follower]);
       res.status(200).json({ dbInfo, ...req.body, message: 'Dejaste de seguir al usuario' });
-      
-    } else if(type === 'org') {
+    } else if (type === 'org') {
       const dbInfo = await DB.sendQuery(DB.query.unfollowOrganization, [followed, follower]);
       res.status(200).json({ dbInfo, ...req.body, message: 'Dejaste de seguir a la organización' });
-
-    } else{
+    } else {
       res.status(404).json({ error: error.message });
     }
   } catch (error) {
@@ -65,8 +60,6 @@ const getFollowingUser = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
-//CRUD FOLLOWE ORGANIZATION
 
 export default {
   follow,

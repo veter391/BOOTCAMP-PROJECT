@@ -14,7 +14,7 @@ const createUser = async (req, res) => {
       last_name,
       email,
       city,
-      password,
+      password
     } = CreateUserSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(
@@ -23,8 +23,8 @@ const createUser = async (req, res) => {
         first_name,
         last_name,
         email,
-        city,
-        password
+        password,
+        city
       ]
     );
     console.log(typeof usertype);

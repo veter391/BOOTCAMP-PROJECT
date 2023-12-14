@@ -14,7 +14,7 @@ const createOrganization = async (req, res) => {
       password,
       description,
       city,
-      addres,
+      address,
       cif
     } = CreateOrganizationSchema.parse(req.body);
 
@@ -26,7 +26,7 @@ const createOrganization = async (req, res) => {
         password,
         description,
         city,
-        addres,
+        address,
         cif
       ]
     );

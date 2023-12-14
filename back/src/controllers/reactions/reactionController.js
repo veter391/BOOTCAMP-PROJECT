@@ -38,7 +38,6 @@ const deleteReaction = async (req, res) => {
   try {
     const { id, user_id } = req.params;
     const dbInfo = await DB.sendQuery(DB.query.deleteReaction, [id, user_id]);
-    
     res.status(200).json({ dbInfo, ...req.body, message: 'Reacción eliminada' });
   } catch (error) {
     res.status(400).json({ error: error.message });

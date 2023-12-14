@@ -2,14 +2,14 @@ import mysql from 'mysql2/promise';
 
 class DB {
   static query = {
-    //User queries
-    createUser: 'INSERT INTO users (first_name, last_name, email, city, password) VALUES (?, ?, ?, ?, ?)',
+    // User queries
+    createUser: 'INSERT INTO users (first_name, last_name, email, password, city) VALUES (?, ?, ?, ?, ?)',
     getUserById: 'SELECT * FROM users WHERE id = ?',
     getAllUsers: 'SELECT * FROM users',
     updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), city = IFNULL(?, city), password = IFNULL(?, password), avatar = IFNULL(?, avatar), last_update = NOW(), is_active = true WHERE id = ?',
     deleteUser: 'DELETE FROM users WHERE id = ?',
 
-    //Organization queries
+    // Organization queries
     createOrganization: 'INSERT INTO organization (name, email, password, description, city, address, cif) VALUES (?, ?, ?, ?, ?, ?, ?)',
     getOrganizationById: 'SELECT * FROM organization WHERE id = ?',
     getAllOrganizations: 'SELECT * FROM organization',
@@ -44,7 +44,7 @@ class DB {
     // search user by user_name
     searchUserByName: 'SELECT * FROM users WHERE first_name LIKE ? OR last_name LIKE ?',
     searchUserByCity: 'SELECT * FROM users WHERE city = ?',
-    //search organization by
+    // Search organization by
     searchOrganizationByName: 'SELECT * FROM organization WHERE name LIKE ? OR last_name LIKE ?',
     searchOrganizationByCity: 'SELECT * FROM organization WHERE city = ?',
 
@@ -54,12 +54,11 @@ class DB {
     getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
     getFollowingUser: 'SELECT * FROM followers_users WHERE follower_id = ?',
     getUserFollowsByID: 'SELECT * FROM followers_users WHERE user_id = ? AND follower_id = ?',
-    
 
     // Follow Organization queries
     followOrganization: 'INSERT INTO followers_org (organization_id, follower_id) VALUES (?, ?)',
     unfollowOrganization: 'DELETE FROM followers_org WHERE organization_id = ? AND follower_id = ?',
-    getFollowersOrganizations:'SELECT * FROM followers_org WHERE organization_id = ?',
+    getFollowersOrganizations: 'SELECT * FROM followers_org WHERE organization_id = ?',
     getFollowingOrganizations: 'SELECT * FROM followers_org WHERE follower_id = ?',
 
     // J: Queries para reacciones
