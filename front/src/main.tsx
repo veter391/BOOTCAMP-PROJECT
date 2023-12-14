@@ -1,7 +1,7 @@
 // import global styles
 import './styles/index.scss';
 
-// import React from 'react'
+// import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/App.tsx';
 import 'focus-visible';
@@ -13,5 +13,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  // </React.StrictMode>,
+  // </React.StrictMode>
 );

@@ -1,0 +1,54 @@
+@import '../../styles/tools/pxconvert';
+
+.event-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: rem(15);
+  border-radius: rem(10);
+
+  small {
+    display: block;
+    font-style: italic;
+  }
+
+  &__body {
+    margin-right: rem(20);
+  }
+
+  &__foto {
+    max-width: rem(120);
+    max-height: rem(120);
+  }
+  &__title, &__descr {
+    margin-bottom: rem(15);
+  }
+  &__name {
+    text-wrap: nowrap;
+  }
+  &__foto {
+    margin: 0 auto;
+    margin-bottom: rem(20);
+  }
+
+  &__btns {
+    display: flex;
+  }
+  &__date {
+    margin-bottom: rem(35);
+  }
+
+  &__btn {
+    max-width: rem(50);
+    color: red;
+    transition: color .3s ease-in-out;
+    color: var(--light-theme);
+
+    &:hover {
+      color: var(--primary);
+    }
+    &-star {
+      margin-right: rem(15);
+    }
+  }
+}

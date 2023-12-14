@@ -1,4 +1,3 @@
-import Contacs from '../../components/contacts/Contacs';
 import EventFeed from '../../components/eventFeed/EventFeed';
 import User from '../../components/user/User';
 import './account.scss';
@@ -6,14 +5,14 @@ import './account.scss';
 function Account () {
   return (
     <section className="account">
-      <section className="container account__container">
-        <h2>Account</h2>
+      <div className="container">
+        <h2 className='subtitle'>Account</h2>
         <div className='maincontainer'>
           <User />
           <EventFeed />
-          <Contacs/>
         </div>
-      </section>
+        <button>ADD EVENT +</button>
+      </div>
     </section>
   );
 }

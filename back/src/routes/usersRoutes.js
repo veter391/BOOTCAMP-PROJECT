@@ -6,7 +6,11 @@ const userRouter = express.Router();
 
 // CREATE ROUTES
 
+<<<<<<< HEAD
 //Routes for Users
+=======
+// Routes for Users
+>>>>>>> fixedBugsBack/jose
 userRouter.post('/create', usersController.createUser);
 userRouter.get('/', usersController.getAllUsers);
 userRouter.get('/:id', usersController.getUserById);

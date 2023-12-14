@@ -22,7 +22,7 @@
         height: 1px;
         margin-left: rem(10);
         content: '';
-        background-color: rgb(var(--light-theme));
+        background-color: var(--light-theme);
         border-radius: 2px;
       }
     }

@@ -8,7 +8,7 @@ function Error () {
 
   return (
     <>
-      <h2>Error <span className="colored">{error.status}</span></h2>
+      <h2>Error <span className="colored-error">{error.status}</span></h2>
       <h3>{error.message}</h3>
     </>
   );

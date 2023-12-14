@@ -1,8 +1,8 @@
 @import '../../styles/tools/pxconvert';
 
 .footer {
-    padding: rem(10) 0;
-    color: rgb(var(--light-theme));
+    padding: rem(30) 0;
+    color: var(--light-theme);
 
   &__container {
     text-align: center;
@@ -15,14 +15,14 @@
     border-bottom: 1px solid transparent;
 
     &:hover {
-      border-color: rgb(var(--hover));
-      color: rgb(var(--light-theme));
+      border-color: var(--hover);
+      color: var(--light-theme);
     }
 
     &.focus-visible,
     &:active {
-      border-color: rgb(var(--focus));
-      color: rgb(var(--focus));
+      border-color: var(--focus);
+      color: var(--focus);
     }
 
     &:active {

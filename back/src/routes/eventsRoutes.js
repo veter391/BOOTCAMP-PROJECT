@@ -9,4 +9,8 @@ eventRouter.get('/:id', eventsController.getEventById);
 eventRouter.put('/:id', eventsController.updateEvent);
 eventRouter.delete('/:id', eventsController.deleteEvent);
 
+<<<<<<< HEAD
 export default eventRouter;
+=======
+export default eventRouter;
+>>>>>>> fixedBugsBack/jose

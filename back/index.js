@@ -9,9 +9,16 @@ import userRouter from './src/routes/usersRoutes.js';
 import postRouter from './src/routes/postsRoutes.js';
 import commentRouter from './src/routes/commentsRoutes.js';
 import eventRouter from './src/routes/eventsRoutes.js';
+<<<<<<< HEAD
 import searchRouter from './src/routes/searchRoutes.js'
 import followRouter from './src/routes/followersRoutes.js'
 import reactionRouter from './src/routes/followersRoutes.js'
+=======
+import searchRouter from './src/routes/searchRoutes.js';
+import followRouter from './src/routes/followersRoutes.js';
+import reactionRouter from './src/routes/reactionsRoutes.js';
+import chatRouter from './src/routes/chatRoutes.js';
+>>>>>>> fixedBugsBack/jose
 
 
 dotenv.config({ path: '../.env' });
@@ -41,6 +48,7 @@ app.use(cors(corsOptions));
 // Jose: Router to user routes
 app.use('/users', userRouter);
 
+<<<<<<< HEAD
 //Jose: Router to post routes
 app.use('/posts', postRouter);
 
@@ -59,6 +67,29 @@ app.use('/follow', followRouter);
 //Jose: Router to reactions routes
 app.use('/reaction', reactionRouter);
 
+=======
+// Jose: Router to post routes
+app.use('/posts', postRouter);
+
+// Jose: Router to comments routes
+app.use('/comments', commentRouter);
+
+// Jose: Router to events routes
+app.use('/events', eventRouter);
+
+// Jose: Router to search routes
+app.use('/search', searchRouter);
+
+// Jose: Router to follow routes
+app.use('/follow', followRouter);
+
+// Jose: Router to reactions routes
+app.use('/reaction', reactionRouter);
+
+// Jose: Router to chat routes
+app.use('/chat', chatRouter);
+
+>>>>>>> fixedBugsBack/jose
 // if the path doesn't exist
 // ! this use should be the last one after the others paths !
 app.use('*', (req, res) => res.status(404).send({

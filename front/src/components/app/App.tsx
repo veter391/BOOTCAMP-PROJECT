@@ -9,6 +9,8 @@ import Home from '../../pages/home/Home';
 import About from '../../pages/about/About';
 import ErrorPage from '../../pages/error/ErrorPage';
 import Account from '../../pages/account/Account';
+import Discover from '../../pages/discover/Discover';
+import Chat from '../../pages/chat/Chat';
 import AppProvider from '../../context/AppProvider';
 
 function App () {
@@ -18,14 +20,14 @@ function App () {
         <Header />
 
         <main className='main'>
-          <h1 className='visually-hidden'> Connect Peaple </h1>
-
           {/* N: Routers to pages */}
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/about' element={<About />} />
             <Route path='/account' element={<Account />} />
             <Route path='*' element={<ErrorPage />} />
+            <Route path='/discover' element={<Discover/>} />
+            <Route path='/chat' element={<Chat />} />
           </Routes>
         </main>
 

@@ -13,7 +13,7 @@ type ValidInputType = {
 
 function InputValidate ({ type, placeholder, className, classNameLabel, name, scheme }: ValidInputType) {
   // get variavles from context
-  const { handlers } = useContext(AppContext);
+  const { handlers } : any = useContext(AppContext);
   const { errors, register } = handlers;
 
   return (
