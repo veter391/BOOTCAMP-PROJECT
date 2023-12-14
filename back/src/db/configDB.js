@@ -53,6 +53,10 @@ class DB {
     unfollowUser: 'DELETE FROM followers_users WHERE follower_id = ? AND user_id = ?',
     getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
     getFollowing: 'SELECT * FROM followers_users WHERE follower_id = ?',
+<<<<<<< HEAD
+=======
+    getUserFollowsByID: 'SELECT * FROM followers_users WHERE user_id = ? AND follower_id = ?',
+>>>>>>> 29068744ab5196e2af139d84425a08935171fa20
 
     // Follow Organization queries
     followOrganization: 'INSERT INTO followers_org (organization_id, follower_id) VALUES (?, ?)',
