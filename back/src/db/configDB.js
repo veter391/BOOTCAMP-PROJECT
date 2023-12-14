@@ -49,17 +49,17 @@ class DB {
     searchOrganizationByCity: 'SELECT * FROM organization WHERE city = ?',
 
     // J: Follow queries
-    followUser: 'INSERT INTO followers (user_id, follower_id, created_at) VALUES (?, ?, NOW())',
-    unfollowUser: 'DELETE FROM followers WHERE follower_id = ? AND user_id = ?',
-    getFollowers: 'SELECT * FROM followers WHERE user_id = ?',
-    getFollowing: 'SELECT * FROM followers WHERE follower_id = ?',
+    followUser: 'INSERT INTO followers_users (user_id, follower_id, created_at) VALUES (?, ?, NOW())',
+    unfollowUser: 'DELETE FROM followers_users WHERE follower_id = ? AND user_id = ?',
+    getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
+    getFollowing: 'SELECT * FROM followers_users WHERE follower_id = ?',
 
     // Follow Organization queries
     followOrganization: 'INSERT INTO followers_org (organization_id, follower_id) VALUES (?, ?)',
     unfollowOrganization: 'DELETE FROM followers_org WHERE organization_id = ? AND follower_id = ?',
     getFollowersOrganizations:'SELECT * FROM followers_org WHERE organization_id = ?',
     getFollowingOrganizations: 'SELECT * FROM followers_org WHERE follower_id = ?',
-    
+
     // J: Queries para reacciones
     addReactionToPost: 'INSERT INTO reactions (content, media, date, user_id) VALUES (?, ?, ?, ?)',
     getReactionsForPost: 'SELECT * FROM reactions WHERE id = ?',
