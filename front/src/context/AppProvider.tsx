@@ -18,7 +18,7 @@ function AppProvider ({ children }) {
   const token = localStorage.getItem('token');
 
   return (
-    <Provider value={{ handlers, handleSubmit, token, setToken }}>
+    <Provider value={{ handlers, handleSubmit, token }}>
       { children }
     </Provider>
   );
