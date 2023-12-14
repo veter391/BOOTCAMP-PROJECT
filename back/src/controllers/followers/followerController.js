@@ -9,7 +9,7 @@ const follow = async (req, res) => {
     if (type === 'user') {
       const dbInfo = await DB.sendQuery(DB.query.followUser, [followed, follower]);
       res.status(201).json({ dbInfo, ...req.body, message: 'Usuario seguido exitosamente' });
-
+      
     } else if(type === 'org') {
       const dbInfo = await DB.sendQuery(DB.query.followOrganization, [followed, follower]);
       res.status(201).json({ dbInfo, ...req.body, message: 'Organizacion seguida exitosamente' });
