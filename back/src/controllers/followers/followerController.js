@@ -56,7 +56,7 @@ const getFollowing = async (req, res) => {
 };
 
 export default {
-  followUser,
+  follow,
   unfollowUser,
   getFollowers,
   getFollowing
