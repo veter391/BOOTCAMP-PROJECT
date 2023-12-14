@@ -8,7 +8,15 @@ const {
 
 const createEvent = async (req, res) => {
   try {
-    const { user_id, organization_id, name, description, date, city, address, is_finished, created_at, last_update } = CreateEventSchema.parse(req.body);
+    const { 
+      user_id, 
+      organization_id, 
+      name, 
+      description, 
+      date, 
+      city, 
+      address
+    } = CreateEventSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.createEvent, [
       user_id,
@@ -17,10 +25,7 @@ const createEvent = async (req, res) => {
       description,
       date,
       city,
-      address,
-      is_finished,
-      created_at,
-      last_update
+      address
     ]);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });

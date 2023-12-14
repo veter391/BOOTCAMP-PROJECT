@@ -25,9 +25,20 @@ const follow = async (req, res) => {
 // dejar de seguir a un usuario
 const unfollowUser = async (req, res) => {
   try {
-    const { follower_id, user_id } = req.body;
-    const dbInfo = await DB.sendQuery(DB.query.unfollowUser, [follower_id, user_id]);
-    res.status(200).json({ dbInfo, ...req.body, message: 'Dejaste de seguir al usuario' });
+    const { followed, follower, type} = req.body;
+    // const dbInfo = await DB.sendQuery(DB.query.unfollowUser, [followed, user_id]);
+    
+    if (type === 'user') {
+      const dbInfo = await DB.sendQuery(DB.query.unfollowUser, [followed, follower]);
+      res.status(200).json({ dbInfo, ...req.body, message: 'Dejaste de seguir al usuario' });
+      
+    } else if(type === 'org') {
+      const dbInfo = await DB.sendQuery(DB.query.unfollowOrganization, [followed, follower]);
+      res.status(200).json({ dbInfo, ...req.body, message: 'Dejaste de seguir a la organización' });
+
+    } else{
+      res.status(404).json({ error: error.message });
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -45,19 +56,21 @@ const getFollowers = async (req, res) => {
 };
 
 // obtener a quiénes sigue un usuario
-const getFollowing = async (req, res) => {
+const getFollowingUser = async (req, res) => {
   try {
     const { user_id } = req.params;
     const following = await DB.sendQuery(DB.query.getFollowing, [user_id]);
-    res.status(200).json({ following });
+    res.status(200).json(following);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+//CRUD FOLLOWE ORGANIZATION
+
 export default {
   follow,
   unfollowUser,
   getFollowers,
-  getFollowing
+  getFollowingUser
 };

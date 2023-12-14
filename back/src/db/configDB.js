@@ -3,17 +3,17 @@ import mysql from 'mysql2/promise';
 class DB {
   static query = {
     //User queries
-    createUser: 'INSERT INTO users (first_name, last_name, email, city, password, avatar, created_at, last_update, is_active) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), true)',
+    createUser: 'INSERT INTO users (first_name, last_name, email, city, password) VALUES (?, ?, ?, ?, ?)',
     getUserById: 'SELECT * FROM users WHERE id = ?',
     getAllUsers: 'SELECT * FROM users',
     updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), city = IFNULL(?, city), password = IFNULL(?, password), avatar = IFNULL(?, avatar), last_update = NOW(), is_active = true WHERE id = ?',
     deleteUser: 'DELETE FROM users WHERE id = ?',
 
     //Organization queries
-    createOrganization: 'INSERT INTO organization (name, email, password, description, city, avatar, cif, created_at, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+    createOrganization: 'INSERT INTO organization (name, email, password, description, city, address, cif) VALUES (?, ?, ?, ?, ?, ?, ?)',
     getOrganizationById: 'SELECT * FROM organization WHERE id = ?',
     getAllOrganizations: 'SELECT * FROM organization',
-    updateOrganization: 'UPDATE organization SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), avatar = IFNULL(?, avatar), cif = IFNULL(?, cif), last_update = NOW() WHERE id = ?',
+    updateOrganization: 'UPDATE organization SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), address = IFNULL(?, address), avatar = IFNULL(?, avatar), cif = IFNULL(?, cif), last_update = NOW() WHERE id = ?',
     deleteOrganization: 'DELETE FROM organization WHERE id = ?',
 
     // Publications queries (SE PUEDE IMPLEMENTAR MAS ADELANTE)
@@ -24,14 +24,14 @@ class DB {
     deletePost: 'DELETE FROM posts WHERE id = ?',
 
     // J: Comments queries
-    addComment: 'INSERT INTO comments (post_id, user_id, comment_text, created_at) VALUES (?, ?, ?, ?)',
+    addComment: 'INSERT INTO comments (post_id, user_id, comment_text) VALUES (?, ?, ?)',
     getCommentsById: 'SELECT * FROM comments WHERE post_id = ?',
     getAllComments: 'SELECT * FROM comments',
     updateComment: 'UPDATE comments SET comment_text = ? WHERE id = ?',
     deleteComment: 'DELETE FROM comments WHERE id = ?',
 
     // J: Events queries
-    createEvent: 'INSERT INTO events (user_id, organization_id, name, description, date, city, address, is_finished, created_at, last_update) VALUES (?, ?, ?, ?, NOW(), ?, ?, false, NOW(), NOW())',
+    createEvent: 'INSERT INTO events (user_id, organization_id, name, description, date, city, address) VALUES (?, ?, ?, ?, ?, ?, ?)',
     getAllEvents: 'SELECT * FROM events',
     getEventById: 'SELECT * FROM events WHERE id = ?',
     updateEvent: 'UPDATE events SET name = IFNULL(?, name), description = IFNULL(?, description), date = IFNULL(?, date), city = IFNULL(?, city), address = IFNULL(?, address), is_finished = IFNULL(?, is_finished), last_update = NOW() WHERE id = ?',
@@ -49,14 +49,12 @@ class DB {
     searchOrganizationByCity: 'SELECT * FROM organization WHERE city = ?',
 
     // J: Follow queries
-    followUser: 'INSERT INTO followers_users (user_id, follower_id, created_at) VALUES (?, ?, NOW())',
+    followUser: 'INSERT INTO followers_users (user_id, follower_id) VALUES (?, ?)',
     unfollowUser: 'DELETE FROM followers_users WHERE follower_id = ? AND user_id = ?',
     getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
-    getFollowing: 'SELECT * FROM followers_users WHERE follower_id = ?',
-<<<<<<< HEAD
-=======
+    getFollowingUser: 'SELECT * FROM followers_users WHERE follower_id = ?',
     getUserFollowsByID: 'SELECT * FROM followers_users WHERE user_id = ? AND follower_id = ?',
->>>>>>> 29068744ab5196e2af139d84425a08935171fa20
+    
 
     // Follow Organization queries
     followOrganization: 'INSERT INTO followers_org (organization_id, follower_id) VALUES (?, ?)',
@@ -65,9 +63,9 @@ class DB {
     getFollowingOrganizations: 'SELECT * FROM followers_org WHERE follower_id = ?',
 
     // J: Queries para reacciones
-    addReactionToPost: 'INSERT INTO reactions (content, media, date, user_id) VALUES (?, ?, ?, ?)',
+    addReactionToPost: 'INSERT INTO reactions (content, user_id) VALUES (?, ?)',
     getReactionsForPost: 'SELECT * FROM reactions WHERE id = ?',
-    updateReaction: 'UPDATE reactions SET reaction_type = IFNULL(?, reaction_type) WHERE id = ? AND user_id = ?',
+    // updateReaction: 'UPDATE reactions SET reaction_type = IFNULL(?, reaction_type) WHERE id = ? AND user_id = ?',
     deleteReaction: 'DELETE FROM reactions WHERE id = ? AND user_id = ?',
 
     // J: Queries para CHAT

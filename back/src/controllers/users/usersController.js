@@ -3,8 +3,7 @@ import userSchemas from '../../schemas/userSchema.js';
 
 const {
   CreateUserSchema,
-  UpdateUserSchema,
-  DeleteUserSchema
+  UpdateUserSchema
 } = userSchemas;
 
 // CREATE USER
@@ -16,11 +15,7 @@ const createUser = async (req, res) => {
       email,
       city,
       password,
-      avatar
     } = CreateUserSchema.parse(req.body);
-
-    //Comprueba si hay un avatar sino asigna NULL
-    const avatarValue = avatar || null;
 
     const dbInfo = await DB.sendQuery(
       DB.query.createUser,
@@ -29,11 +24,9 @@ const createUser = async (req, res) => {
         last_name,
         email,
         city,
-        password,
-        avatarValue
+        password
       ]
     );
-    console.log(typeof usertype);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {
@@ -103,7 +96,7 @@ const updateUser = async (req, res) => {
 // DELETE USER{id}
 const deleteUser = async (req, res) => {
   try {
-    const { id } = DeleteUserSchema.parse(req.body);
+    const { id } = req.params;
     await DB.sendQuery(DB.query.deleteUser, [id]);
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {

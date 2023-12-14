@@ -3,8 +3,7 @@ import organizationSchemas from '../../schemas/organizationSchema.js';
 
 const {
   CreateOrganizationSchema,
-  UpdateOrganizationSchema,
-  DeleteOrganizationSchema
+  UpdateOrganizationSchema
 } = organizationSchemas;
 
 const createOrganization = async (req, res) => {
@@ -15,11 +14,9 @@ const createOrganization = async (req, res) => {
       password,
       description,
       city,
-      avatar,
+      addres,
       cif
     } = CreateOrganizationSchema.parse(req.body);
-
-    const avatarValue = avatar || null;
 
     const dbInfo = await DB.sendQuery(
       DB.query.createOrganization,
@@ -29,7 +26,7 @@ const createOrganization = async (req, res) => {
         password,
         description,
         city,
-        avatarValue,
+        addres,
         cif
       ]
     );
@@ -100,7 +97,7 @@ const updateOrganization = async (req, res) => {
 
 const deleteOrganization = async (req, res) => {
   try {
-    const { id } = DeleteOrganizationSchema.parse(req.body);
+    const { id } = req.params;
     await DB.sendQuery(DB.query.deleteOrganization, [id]);
     res.status(200).json({ message: 'Organization deleted successfully' });
   } catch (error) {

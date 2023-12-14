@@ -2,8 +2,8 @@ import DB from '../../db/configDB.js';
 
 const addReactionToPost = async (req, res) => {
   try {
-    const { content, media, date, user_id } = req.body;
-    const dbInfo = await DB.sendQuery(DB.query.addReactionToPost, [content, media, date, user_id]);
+    const { content, user_id } = req.body;
+    const dbInfo = await DB.sendQuery(DB.query.addReactionToPost, [content, user_id]);
 
     res.status(201).json({ dbInfo, ...req.body, message: 'Reacción agregada a la publicación' });
   } catch (error) {
@@ -13,7 +13,7 @@ const addReactionToPost = async (req, res) => {
 
 const getReactionsForPost = async (req, res) => {
   try {
-    const { id } = req.params; // Aquí debería ser el ID de la publicación
+    const { id } = req.params;
     const reactions = await DB.sendQuery(DB.query.getReactionsForPost, [id]);
 
     res.status(200).json({ reactions });
@@ -22,17 +22,17 @@ const getReactionsForPost = async (req, res) => {
   }
 };
 
-const updateReaction = async (req, res) => {
-  try {
-    const { id, user_id } = req.params;
-    const { reaction_type } = req.body;
-    const dbInfo = await DB.sendQuery(DB.query.updateReaction, [reaction_type, id, user_id]);
+// const updateReaction = async (req, res) => {
+//   try {
+//     const { id, user_id } = req.params;
+//     const { reaction_type } = req.body;
+//     const dbInfo = await DB.sendQuery(DB.query.updateReaction, [reaction_type, id, user_id]);
 
-    res.status(200).json({ dbInfo, ...req.body, message: 'Reacción actualizada' });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
+//     res.status(200).json({ dbInfo, ...req.body, message: 'Reacción actualizada' });
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
 
 const deleteReaction = async (req, res) => {
   try {
@@ -48,6 +48,6 @@ const deleteReaction = async (req, res) => {
 export default {
   addReactionToPost,
   getReactionsForPost,
-  updateReaction,
+  // updateReaction,
   deleteReaction
 };
