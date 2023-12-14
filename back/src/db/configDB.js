@@ -63,7 +63,7 @@ class DB {
     getFollowingOrganizations: 'SELECT * FROM followers_org WHERE follower_id = ?',
 
     // J: Queries para reacciones
-    addReactionToPost: 'INSERT INTO reactions (content, user_id) VALUES (?, ?)',
+    addReaction: 'INSERT INTO reactions (user_id, event_id) VALUES (?, ?)',
     getReactionsForPost: 'SELECT * FROM reactions WHERE id = ?',
     // updateReaction: 'UPDATE reactions SET reaction_type = IFNULL(?, reaction_type) WHERE id = ? AND user_id = ?',
     deleteReaction: 'DELETE FROM reactions WHERE id = ? AND user_id = ?',

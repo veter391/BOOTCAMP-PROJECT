@@ -1,9 +1,9 @@
 import DB from '../../db/configDB.js';
 
-const addReactionToPost = async (req, res) => {
+const addReaction = async (req, res) => {
   try {
-    const { content, user_id } = req.body;
-    const dbInfo = await DB.sendQuery(DB.query.addReactionToPost, [content, user_id]);
+    const { user_id, event_id } = req.body;
+    const dbInfo = await DB.sendQuery(DB.query.addReaction, [user_id, event_id]);
 
     res.status(201).json({ dbInfo, ...req.body, message: 'Reacción agregada a la publicación' });
   } catch (error) {
@@ -46,7 +46,7 @@ const deleteReaction = async (req, res) => {
 };
 
 export default {
-  addReactionToPost,
+  addReaction,
   getReactionsForPost,
   // updateReaction,
   deleteReaction
