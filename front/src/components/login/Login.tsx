@@ -7,15 +7,20 @@ import { useContext } from 'react';
 
 function LogIn () {
   // get variavles from context
-  const { handleSubmit, setToken} : any = useContext(AppContext);
+  const { handleSubmit, setToken, userSetter} : any = useContext(AppContext);
 
   const logIn = (values : object) => {
     // N: login user
     userLogIn(values)
       .then(data => {
-        const { token, message } = data;
+        const { token, message, user } = data;
         console.log(message);
         localStorage.setItem('token', token);
+        const userLS = {
+          exp: Date.now() + 200000,
+          ...user
+        };
+        userSetter(userLS);
         // setToken(token);
       })
       .catch(err => console.log(err));

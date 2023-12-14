@@ -37,7 +37,6 @@ async function logIn (req, res, next) {
     if (!isValidPassword) {
       return next(new HttpError(400, 'Something wrong password is fail'));
     }
-
     //* If user exists in DB generate the tocken for user
     const infoToUser = { id: user.id };
 
@@ -49,7 +48,8 @@ async function logIn (req, res, next) {
       ok: true,
       message: 'User is logged!',
       error: null,
-      token
+      token,
+      user
     });
   } catch (error) {
     return next(error);
