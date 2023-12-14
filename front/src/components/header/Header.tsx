@@ -5,7 +5,9 @@ import { AppContext } from '../../context/AppProvider';
 
 function Header () {
   const [burgerActive, setBurgerActive] = useState(false);
-  const token = localStorage.getItem('token');
+
+  const { token }: any = useContext(AppContext);
+
   return (
     <header className='header'>
       <div className="container header__container">

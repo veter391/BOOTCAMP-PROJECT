@@ -7,7 +7,7 @@ import { useContext } from 'react';
 
 function LogIn () {
   // get variavles from context
-  const { handleSubmit } : any = useContext(AppContext);
+  const { handleSubmit, setToken} : any = useContext(AppContext);
 
   const logIn = (values : object) => {
     // N: login user
@@ -16,7 +16,9 @@ function LogIn () {
         const { token, message } = data;
         console.log(message);
         localStorage.setItem('token', token);
-      }).catch(err => console.log(err));
+        // setToken(token);
+      })
+      .catch(err => console.log(err));
   };
 
   return (

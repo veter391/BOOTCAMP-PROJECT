@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import { useForm, UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
 
 export type handlersType = {
@@ -13,10 +13,12 @@ const Provider = AppContext.Provider;
 function AppProvider ({ children }) {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const handlers: handlersType = { register, errors };
+  // loged state
+  // const [token, setToken] = useState(localStorage.getItem('token'));
   const token = localStorage.getItem('token');
 
   return (
-    <Provider value={{ handlers, handleSubmit, token }}>
+    <Provider value={{ handlers, handleSubmit, token, setToken }}>
       { children }
     </Provider>
   );
