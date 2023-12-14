@@ -11,7 +11,7 @@ import commentRouter from './src/routes/commentsRoutes.js';
 import eventRouter from './src/routes/eventsRoutes.js';
 import searchRouter from './src/routes/searchRoutes.js';
 import followRouter from './src/routes/followersRoutes.js';
-import reactionRouter from './src/routes/followersRoutes.js';
+import reactionRouter from './src/routes/reactionsRoutes.js';
 import chatRouter from './src/routes/chatRoutes.js';
 
 

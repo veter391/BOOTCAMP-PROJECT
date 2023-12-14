@@ -31,7 +31,8 @@
       "semi": [
         "error",
         "always"
-      ]
+      ],
+      "camelcase": "off"
     }
   },
   "devDependencies": {

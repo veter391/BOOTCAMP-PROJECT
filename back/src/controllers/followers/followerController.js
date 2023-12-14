@@ -2,11 +2,21 @@ import DB from '../../db/configDB.js';
 // import DB from '../../db/configDB.js';
 
 // seguir a un usuario
-const followUser = async (req, res) => {
+const follow = async (req, res) => {
   try {
-    const { follower_id, user_id } = req.body;
-    const dbInfo = await DB.sendQuery(DB.query.followUser, [follower_id, user_id]);
-    res.status(201).json({ dbInfo, ...req.body, message: 'Usuario seguido exitosamente' });
+    const { followed, follower, type} = req.body;
+
+    if (type === 'user') {
+      const dbInfo = await DB.sendQuery(DB.query.followUser, [followed, follower]);
+      res.status(201).json({ dbInfo, ...req.body, message: 'Usuario seguido exitosamente' });
+
+    } else if(type === 'org') {
+      const dbInfo = await DB.sendQuery(DB.query.followOrganization, [followed, follower]);
+      res.status(201).json({ dbInfo, ...req.body, message: 'Organizacion seguida exitosamente' });
+
+    } else{
+      res.status(404).json({ error: error.message });
+    }
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
