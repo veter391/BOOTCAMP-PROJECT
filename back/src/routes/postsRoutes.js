@@ -10,8 +10,4 @@ postRouter.get('/', getAllPosts);
 postRouter.put('/user_id/:id', updatePost);
 postRouter.delete('/delete/:id', deletePost);
 
-<<<<<<< HEAD
 export default postRouter;
-=======
-export default postRouter;
->>>>>>> fixedBugsBack/jose

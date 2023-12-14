@@ -1,16 +1,16 @@
 import DB from '../../db/configDB.js';
-import commentSchemas from '../../schemas/commentSchema.js'; 
+import commentSchemas from '../../schemas/commentSchema.js';
 
 const {
   CreateCommentSchema,
-  UpdateCommentSchema,
+  UpdateCommentSchema
 } = commentSchemas;
 
 const addComment = async (req, res) => {
   try {
     const { post_id, user_id, comment_text } = CreateCommentSchema.parse(req.body);
 
-    //Obtener fecha actual
+    // Obtener fecha actual
     const created_at = new Date();
 
     const dbInfo = await DB.sendQuery(DB.query.addComment, [post_id, user_id, comment_text, created_at]);

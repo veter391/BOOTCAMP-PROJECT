@@ -1,16 +1,4 @@
 import express from 'express';
-<<<<<<< HEAD
-import followController from '../controllers/followers/followerController.js'
-
-const router = express.Router();
-
-router.post('/f', followController.followUser);
-router.post('/un', followController.unfollowUser);
-router.get('/followers/:user_id', followController.getFollowers);
-router.get('/following/:user_id', followController.getFollowing);
-
-export default router;
-=======
 import followController from '../controllers/followers/followerController.js';
 
 const router = express.Router();
@@ -21,4 +9,3 @@ router.get('/followers/:user_id', followController.getFollowers);
 // router.get('/following/:user_id', followController.getFollowing);
 
 export default router;
->>>>>>> fixedBugsBack/jose

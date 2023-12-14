@@ -3,18 +3,18 @@ import eventSchemas from '../../schemas/eventSchema.js';
 
 const {
   CreateEventSchema,
-  UpdateEventSchema,
+  UpdateEventSchema
 } = eventSchemas;
 
 const createEvent = async (req, res) => {
   try {
-    const { 
-      user_id, 
-      organization_id, 
-      name, 
-      description, 
-      date, 
-      city, 
+    const {
+      user_id,
+      organization_id,
+      name,
+      description,
+      date,
+      city,
       address
     } = CreateEventSchema.parse(req.body);
 

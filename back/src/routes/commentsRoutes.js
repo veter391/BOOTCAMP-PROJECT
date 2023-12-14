@@ -13,8 +13,4 @@ commentRouter.delete('/:id', commentsController.deleteComment);
 // CREATE ROUTER
 const commentRoutes = commentRouter;
 
-<<<<<<< HEAD
 export default commentRoutes;
-=======
-export default commentRoutes;
->>>>>>> fixedBugsBack/jose
