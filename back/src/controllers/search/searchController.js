@@ -15,18 +15,6 @@ const searchEventsByName = async (req, res) => {
   }
 };
 
-const searchEventsByType = async (req, res) => {
-  try {
-    const { eventType } = req.params;
-
-    const events = await DB.sendQuery(DB.query.searchEventsByType, [eventType]);
-
-    res.status(200).json(events);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 const searchEventsByDate = async (req, res) => {
   try {
     const { eventDate } = req.params;
@@ -41,9 +29,9 @@ const searchEventsByDate = async (req, res) => {
 
 const searchEventsByLocation = async (req, res) => {
   try {
-    const { eventLocation } = req.params;
+    const { city } = req.body;
 
-    const events = await DB.sendQuery(DB.query.searchEventsByLocation, [eventLocation]);
+    const events = await DB.sendQuery(DB.query.searchEventsByLocation, [city]);
 
     res.status(200).json(events);
   } catch (error) {
@@ -64,30 +52,6 @@ const searchUserByName = async (req, res) => {
   }
 };
 
-const searchUserByUserType = async (req, res) => {
-  try {
-    const { userType } = req.params;
-
-    const users = await DB.sendQuery(DB.query.searchUserByUserType, [userType]);
-
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
-const searchUserByDate = async (req, res) => {
-  try {
-    const { date } = req.params;
-
-    const users = await DB.sendQuery(DB.query.searchUserByDate, [date]);
-
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
 const searchUserByCity = async (req, res) => {
   try {
     const { city } = req.params;
@@ -100,13 +64,37 @@ const searchUserByCity = async (req, res) => {
   }
 };
 
+const searchOrganizationByName = async (req, res) => {
+  try {
+    const { orgName } = req.params;
+    const searchTerm = `%${orgName}%`;
+
+    const organizations = await DB.sendQuery(DB.query.searchOrganizationByName, [searchTerm]);
+
+    res.status(200).json(organizations);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const searchOrganizationByCity = async (req, res) => {
+  try {
+    const { city } = req.params;
+
+    const organizations = await DB.sendQuery(DB.query.searchOrganizationByCity, [city]);
+
+    res.status(200).json(organizations);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   searchEventsByName,
-  searchEventsByType,
   searchEventsByDate,
   searchEventsByLocation,
   searchUserByName,
-  searchUserByUserType,
-  searchUserByDate,
-  searchUserByCity
+  searchUserByCity,
+  searchOrganizationByName,
+  searchOrganizationByCity
 };
