@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { _url } from '../services/configVariables';
 
 type idType = string | number;
 
@@ -20,7 +21,7 @@ export default function useChat (meID: idType, otherID: idType) {
 
   useEffect(() => {
     async function createRoom (userid1: idType, userid2: idType) {
-      await fetch('http://localhost:8080/chat', {
+      await fetch(`${_url}/chat`, {
         method: 'POST',
         headers: {
           // 'Accept': 'application/json',
@@ -38,7 +39,7 @@ export default function useChat (meID: idType, otherID: idType) {
     }
 
     async function getUsers () {
-      await fetch('http://localhost:8080/chat', {
+      await fetch(`${_url}/chat`, {
         method: 'GET',
         // body: JSON.stringify({name: 'Alex'}),
         headers: {

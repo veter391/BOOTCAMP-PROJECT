@@ -1,5 +1,7 @@
+import { _url } from './configVariables';
+
 async function userLogIn (obj : object) {
-  const baseUrl = 'http://localhost:8080/users/signup';
+  const baseUrl = `${_url}/users/signup`;
 
   try {
     console.log(obj);

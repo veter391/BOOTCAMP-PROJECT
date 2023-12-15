@@ -1,5 +1,7 @@
+import { _url } from './configVariables';
+
 async function userLogIn (obj : object) {
-  const baseUrl = 'http://localhost:8080/users/login';
+  const baseUrl = `${_url}/users/login`;
 
   try {
     const resp = await fetch(baseUrl, {

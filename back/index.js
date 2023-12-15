@@ -15,7 +15,6 @@ import reactionRouter from './src/routes/reactionsRoutes.js';
 import chatRouter from './src/routes/chatRoutes.js';
 import errorHandler from './src/controllers/errors/errorHandler.js';
 
-
 dotenv.config({ path: '../.env' });
 
 const PORT = +process.env.PORT || 5000;
