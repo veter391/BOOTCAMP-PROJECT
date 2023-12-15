@@ -14,24 +14,16 @@ function SignUp () {
   const [isCompany, setIsCompany] = useState(false);
 
   // funciton to run where submit form
-  const signUp = (values: object) => {
+  function signUp (values: object) {
     console.log('sign up');
     // N: register function for users
     userRegister(values)
       .then(data => {
-        const { token, message, user } = data;
-        localStorage.setItem('token', token);
-        const userLS = {
-          exp: Date.now() + (1000 * 60 * 60 * 24),
-          ...user
-        };
-        console.log('data new user:' + data);
-
-        userSetter(userLS);
+        const { user, token } = data;
+        userSetter(user, token);
       })
-      .catch(err => err
-      );
-  };
+      .catch(err => console.error(err));
+  }
 
   return (
     <form onSubmit={handleSubmit(signUp)} className="form">
@@ -65,6 +57,17 @@ function SignUp () {
         type="password"
         name='password' placeholder="Contraseña..."
         scheme={validationScheme.password} />
+
+      {
+        // N: check if is company and if is add more inputs
+        !isCompany &&
+        <InputValidate
+          classNameLabel="form__label"
+          className="input-reset form__input"
+          type="text"
+          name='city' placeholder="Ciudad..."
+          scheme={validationScheme.name} />
+      }
 
       {
         // N: check if is company and if is add more inputs

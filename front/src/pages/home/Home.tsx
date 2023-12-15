@@ -5,7 +5,7 @@ import './home.scss';
 import { AppContext } from '../../context/AppProvider';
 
 function Home () {
-  const { token }: any = useContext(AppContext);
+  const { user }: any = useContext(AppContext);
 
   const scrolling = (e : any) => {
     e.preventDefault();
@@ -17,7 +17,7 @@ function Home () {
     });
   };
 
-  const heroStyle = token ? { minHeight: 'calc(100vh - 109px - 72px)' } : {};
+  const heroStyle = user ? { minHeight: 'calc(100vh - 109px - 72px)' } : {};
 
   return (
     <>
@@ -28,14 +28,14 @@ function Home () {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde accusamus nihil perferendis fugit eum cupiditate id vel voluptates. Impedit doloribus possimus error commodi quisquam maxime iste iusto distinctio nesciunt!
           </p>
 
-          { !token &&
+          { !user &&
             <a onClick={scrolling} className='btn hero__btn' href='#user-place'>SCROLL DOWN</a>
           }
 
         </div>
       </section>
 
-      { !token &&
+      { !user &&
         <section id='user-place' className='user-place'>
           <div className='container user-place__container'>
             <div className='user-place__box'>

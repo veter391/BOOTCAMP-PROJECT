@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import crypto from 'node:crypto';
 
 import DB from '../../db/configDB.js';
@@ -9,8 +10,7 @@ import { CreateUserSchema } from '../../schemas/userSchema.js';
 
 async function registerUser (req, res, next) {
   const { success, error, data } = CreateUserSchema.safeParse(req.body);
-
-  console.log(error);
+  console.log(error, data);
 
   if (!success) {
     const errors = errorMap(error);
@@ -23,7 +23,7 @@ async function registerUser (req, res, next) {
 
   // Como hemos validado bien, ZOD me devuelve un data
   // console.log(data);
-  const { name, last_name, email, password } = data;
+  const { first_name, last_name, email, password, city } = data;
 
   // vamos a encriptar la contraseña
   const salt = 10;
@@ -34,7 +34,30 @@ async function registerUser (req, res, next) {
 
   // Añadir a la BBDD el usuario nuevo
   try {
-    await DB.sendQuery(DB.query.createUser, [name, last_name, email, hashedPassword]);
+    const response = await DB.sendQuery(DB.query.createUser, [first_name, last_name, email, hashedPassword, city]);
+    console.log(response);
+
+    //* If user exists in DB generate the tocken for user
+    const infoToUser = { id: response.insertId };
+
+    const token = jwt.sign(infoToUser, process.env.JWT_SECRET, { expiresIn: '15 day' });
+
+    infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
+
+    if (token !== undefined) {
+      res.send({
+        ok: true,
+        message: 'User is logged!',
+        error: null,
+        token,
+        user: infoToUser
+      });
+    } else {
+      res.status(400).send({
+        ok: false,
+        message: 'Wrong login'
+      });
+    }
   } catch (error) {
     return next(new Error(error.message));
   }
@@ -51,12 +74,12 @@ async function registerUser (req, res, next) {
 
   // await sendEmail(registerEmail);
 
-  res.send({
-    ok: true,
-    error: null,
-    data: null,
-    message: 'Usuario registrado correctamente.'
-  });
+  // res.send({
+  //   ok: true,
+  //   error: null,
+  //   data: null,
+  //   message: 'Usuario registrado correctamente.'
+  // });
 }
 
 export { registerUser };

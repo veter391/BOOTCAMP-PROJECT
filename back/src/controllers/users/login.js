@@ -32,6 +32,7 @@ async function logIn (req, res, next) {
 
     // Compare passwords
     const isValidPassword = await bcrypt.compare(realPassword, user.password);
+    // const isValidPassword = true;
 
     if (!isValidPassword) {
       return next(new HttpError(400, 'Something wrong password is fail'));
@@ -49,10 +50,10 @@ async function logIn (req, res, next) {
         message: 'User is logged!',
         error: null,
         token,
-        user
+        user: infoToUser
       });
     } else {
-      res.send({
+      res.status(400).send({
         ok: false,
         message: 'Wrong login'
       });

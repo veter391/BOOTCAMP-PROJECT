@@ -19,12 +19,14 @@ function AppProvider ({ children }) {
   // Oscar--> create state of user and send it via context to all the app
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')));
 
-  function userSetter (user) {
-    localStorage.setItem('user', JSON.stringify(user));
-    setUser(user);
+  function userSetter (user, token) {
+    const userLS = { ...user, token };
+    localStorage.setItem('user', JSON.stringify(userLS));
+    setUser(userLS);
   }
   function userLogOut () {
     setUser(null);
+    localStorage.removeItem('user');
   }
 
   return (

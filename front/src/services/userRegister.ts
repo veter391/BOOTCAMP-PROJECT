@@ -10,8 +10,10 @@ async function userRegister (obj: object) {
       body: JSON.stringify(obj)
     });
     return await resp.json();
-  } catch (error : any) {
-    console.error(error.message);
+  } catch (error : unknown) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
   }
 }
 

@@ -7,34 +7,22 @@ import { useContext, useState } from 'react';
 
 function LogIn () {
   // get variavles from context
-  const { handleSubmit, setToken, userSetter} : any = useContext(AppContext);
+  const { handleSubmit, userSetter } : any = useContext(AppContext);
   const [logInError, setLogInError] = useState();
 
   const logIn = (values : object) => {
     // N: login user
     userLogIn(values)
       .then(data => {
-        const { token, message, user, error } = data;
-        console.log(message);
-        console.log(data);
-        if (token) {
-          localStorage.setItem('token', token);
-          const userLS = {
-            exp: Date.now() + (1000 * 60 * 60 * 24),
-            ...user
-          };
-          userSetter(userLS);
-        } else {
-          setLogInError(error);
-          console.log('Wrong mail or password');
-        }
+        const { user, token } = data;
+        userSetter(user, token);
       })
-      .catch(err => console.log(err));
+      .catch(err => setLogInError(err));
   };
 
   return (
-    <form onSubmit={handleSubmit(logIn)} className='form colored-error'>
-      {logInError && <p className='colored-error error' style={{ fontSize: '12px' }}>Usuario o contraseña incorrectos</p>}
+    <form onSubmit={handleSubmit(logIn)} className='form' style={{ position: 'relative' }}>
+      {logInError && <p className='colored-error error' style={{ fontSize: '14px', position: 'absolute', left: '27%', top: '0' }}>* Usuario o contraseña incorrectos *</p>}
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'

@@ -6,7 +6,7 @@ import { AppContext } from '../../context/AppProvider';
 function Header () {
   const [burgerActive, setBurgerActive] = useState(false);
 
-  const { token }: any = useContext(AppContext);
+  const { user }: any = useContext(AppContext);
 
   return (
     <header className='header'>
@@ -20,7 +20,7 @@ function Header () {
           <span className='burger__line'></span>
         </button>
 
-        {token && <HeaderNavigation burgerActive={burgerActive} />}
+        {user && <HeaderNavigation burgerActive={burgerActive} />}
       </div>
     </header>
   );
