@@ -1,7 +1,6 @@
 async function userRegister (obj: object) {
   const baseUrl = 'http://localhost:8080/users/register';
 
-  console.log(obj)
   try {
     const resp = await fetch(baseUrl, {
       method: 'POST',

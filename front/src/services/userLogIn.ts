@@ -13,6 +13,7 @@ async function userLogIn (obj : object) {
     return await resp.json();
   } catch (error : any) {
     console.error(error.message);
+    return error;
   }
 }
 

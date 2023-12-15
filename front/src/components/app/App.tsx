@@ -12,6 +12,7 @@ import Account from '../../pages/account/Account';
 import Discover from '../../pages/discover/Discover';
 import Chat from '../../pages/chat/Chat';
 import AppProvider from '../../context/AppProvider';
+import PrivateRoute from '../PrivateRoute';
 
 function App () {
   return (
@@ -24,9 +25,21 @@ function App () {
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/about' element={<About />} />
-            <Route path='/account' element={<Account />} />
-            <Route path='/discover' element={<Discover/>} />
-            <Route path='/chat' element={<Chat />} />
+            <Route path='/account' element={
+            <PrivateRoute>
+              <Account />
+            </PrivateRoute>
+            } />
+            <Route path='/discover' element={
+            <PrivateRoute>
+              <Discover/>
+            </PrivateRoute>
+            } />
+            <Route path='/chat' element={
+            <PrivateRoute>
+              <Chat />
+            </PrivateRoute>
+            } />
             <Route path='*' element={<ErrorPage />} />
           </Routes>
         </main>

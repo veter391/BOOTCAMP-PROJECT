@@ -3,26 +3,38 @@ import validationScheme from '../../helpers/validationScheme';
 import { InputValidate } from '../inputValidate/InputValidate';
 import userLogIn from '../../services/userLogIn';
 import { AppContext } from '../../context/AppProvider';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 function LogIn () {
   // get variavles from context
-  const { handleSubmit, setToken} : any = useContext(AppContext);
+  const { handleSubmit, setToken, userSetter} : any = useContext(AppContext);
+  const [logInError, setLogInError] = useState();
 
   const logIn = (values : object) => {
     // N: login user
     userLogIn(values)
       .then(data => {
-        const { token, message } = data;
+        const { token, message, user, error } = data;
         console.log(message);
-        localStorage.setItem('token', token);
-        // setToken(token);
+        console.log(data);
+        if (token) {
+          localStorage.setItem('token', token);
+          const userLS = {
+            exp: Date.now() + (1000 * 60 * 60 * 24),
+            ...user
+          };
+          userSetter(userLS);
+        } else {
+          setLogInError(error);
+          console.log('Wrong mail or password');
+        }
       })
       .catch(err => console.log(err));
   };
 
   return (
-    <form onSubmit={handleSubmit(logIn)} className='form'>
+    <form onSubmit={handleSubmit(logIn)} className='form colored-error'>
+      {logInError && <p className='colored-error error' style={{ fontSize: '12px' }}>Usuario o contraseña incorrectos</p>}
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'
