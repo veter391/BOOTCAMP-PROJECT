@@ -29,9 +29,9 @@ const searchEventsByDate = async (req, res) => {
 
 const searchEventsByLocation = async (req, res) => {
   try {
-    const { eventLocation } = req.params;
+    const { city } = req.body;
 
-    const events = await DB.sendQuery(DB.query.searchEventsByLocation, [eventLocation]);
+    const events = await DB.sendQuery(DB.query.searchEventsByLocation, [city]);
 
     res.status(200).json(events);
   } catch (error) {

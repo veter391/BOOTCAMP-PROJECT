@@ -4,13 +4,14 @@ const CreateUserSchema = z.object({
   first_name: z.string().min(1),
   last_name: z.string().min(1),
   email: z.string().email(),
-  password: z.string().min(3).max(8),
   city: z.string(),
-  avatar: z.string().optional(), 
+  avatar: z.string().optional(),
+  password: z.string().min(3).max(8)
+
 });
 
 const GetUserByIdSchema = z.object({
-  id: z.string(),
+  id: z.string()
 });
 
 const GetAllUsersSchema = z.array(
@@ -20,8 +21,8 @@ const GetAllUsersSchema = z.array(
     last_name: z.string().min(1),
     email: z.string().email(),
     password: z.string().min(3).max(8),
-    city: z.string(), 
-    avatar: z.string().optional(), 
+    city: z.string(),
+    avatar: z.string().optional()
   })
 );
 
@@ -31,12 +32,12 @@ const UpdateUserSchema = z.object({
   last_name: z.string().min(1).optional(),
   email: z.string().email().optional(),
   password: z.string().min(3).max(8).optional(),
-  city: z.string().optional(), 
-  avatar: z.string().optional(), 
+  city: z.string().optional(),
+  avatar: z.string().optional()
 });
 
 const DeleteUserSchema = z.object({
-  id: z.string(),
+  id: z.string()
 });
 
 const userSchemas = {
@@ -44,7 +45,7 @@ const userSchemas = {
   GetUserByIdSchema,
   GetAllUsersSchema,
   UpdateUserSchema,
-  DeleteUserSchema,
+  DeleteUserSchema
 };
 
 export default userSchemas;

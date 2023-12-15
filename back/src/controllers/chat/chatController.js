@@ -24,8 +24,7 @@ const getAllChats = async (req, res) => {
 
 const getChatById = async (req, res) => {
   try {
-    const { room_id } = req.body;
-
+    const { room_id } = req.params;
     const result = await DB.sendQuery(DB.query.getChatById, [room_id]);
     res.status(200).json(result);
   } catch (error) {

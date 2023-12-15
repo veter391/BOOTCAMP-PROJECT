@@ -6,12 +6,13 @@ const CreateOrganizationSchema = z.object({
   password: z.string().min(3).max(8),
   description: z.string(),
   city: z.string(),
-  avatar: z.string().optional(), 
-  cif: z.string().length(9), 
+  address: z.string(),
+  cif: z.string().length(9),
+  avatar: z.string().optional()
 });
 
 const GetOrganizationByIdSchema = z.object({
-  id: z.string(),
+  id: z.string()
 });
 
 const GetAllOrganizationsSchema = z.array(
@@ -22,8 +23,8 @@ const GetAllOrganizationsSchema = z.array(
     password: z.string().min(3).max(8),
     description: z.string(),
     city: z.string(),
-    avatar: z.string().optional(), 
-    cif: z.string().length(9),
+    avatar: z.string().optional(),
+    cif: z.string().length(9)
   })
 );
 
@@ -34,12 +35,12 @@ const UpdateOrganizationSchema = z.object({
   password: z.string().min(3).max(8).optional(),
   description: z.string().optional(),
   city: z.string(),
-  avatar: z.string().optional(), 
-  cif: z.string().length(9).optional(),
+  avatar: z.string().optional(),
+  cif: z.string().length(9).optional()
 });
 
 const DeleteOrganizationSchema = z.object({
-  id: z.string(),
+  id: z.string()
 });
 
 const organizationSchemas = {
@@ -47,7 +48,7 @@ const organizationSchemas = {
   GetOrganizationByIdSchema,
   GetAllOrganizationsSchema,
   UpdateOrganizationSchema,
-  DeleteOrganizationSchema,
+  DeleteOrganizationSchema
 };
 
 export default organizationSchemas;

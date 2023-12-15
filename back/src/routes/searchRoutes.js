@@ -7,7 +7,7 @@ const searchRouter = express.Router();
 searchRouter.get('/events/byName/:eventName', searchController.searchEventsByName);
 // searchRouter.get('/events/byType/:eventType', searchController.searchEventsByType);
 searchRouter.get('/events/byDate/:eventDate', searchController.searchEventsByDate);
-searchRouter.get('/events/byLocation/:eventLocation', searchController.searchEventsByLocation);
+searchRouter.get('/events/city', searchController.searchEventsByLocation);
 
 // USER SEARCH
 searchRouter.get('/users/byName/:userName', searchController.searchUserByName);

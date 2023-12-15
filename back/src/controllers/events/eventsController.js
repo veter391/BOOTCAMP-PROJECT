@@ -9,23 +9,23 @@ const {
 const createEvent = async (req, res) => {
   try {
     const {
-      user_id,
-      organization_id,
       name,
       description,
       date,
+      foto,
       city,
-      address
+      address,
+      user_id
     } = CreateEventSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.createEvent, [
-      user_id,
-      organization_id,
       name,
       description,
       date,
+      foto,
       city,
-      address
+      address,
+      user_id
     ]);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });

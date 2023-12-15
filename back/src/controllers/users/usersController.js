@@ -14,6 +14,7 @@ const createUser = async (req, res) => {
       last_name,
       email,
       city,
+      avatar,
       password
     } = CreateUserSchema.parse(req.body);
 
@@ -23,8 +24,9 @@ const createUser = async (req, res) => {
         first_name,
         last_name,
         email,
-        password,
-        city
+        city,
+        avatar,
+        password
       ]
     );
     console.log(typeof usertype);

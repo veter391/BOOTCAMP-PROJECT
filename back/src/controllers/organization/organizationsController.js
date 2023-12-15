@@ -15,7 +15,8 @@ const createOrganization = async (req, res) => {
       description,
       city,
       address,
-      cif
+      cif,
+      avatar
     } = CreateOrganizationSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(
@@ -27,7 +28,8 @@ const createOrganization = async (req, res) => {
         description,
         city,
         address,
-        cif
+        cif,
+        avatar
       ]
     );
 

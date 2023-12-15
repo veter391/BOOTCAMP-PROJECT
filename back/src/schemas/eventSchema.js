@@ -1,13 +1,13 @@
 import { z } from 'zod';
 
 const CreateEventSchema = z.object({
-  user_id: z.string(),
-  organization_id: z.string(),
   name: z.string(),
   description: z.string(),
   date: z.string(),
+  foto: z.string().optional(),
   city: z.string(),
-  address: z.string()
+  address: z.string(),
+  user_id: z.number()
 });
 
 const GetEventByIdSchema = z.object({
@@ -31,12 +31,10 @@ const GetAllEventsSchema = z.array(
 );
 
 const UpdateEventSchema = z.object({
-  id: z.string(),
-  user_id: z.string().optional(),
-  organization_id: z.string().optional(),
   name: z.string().optional(),
   description: z.string().optional(),
   date: z.string().optional(),
+  foto: z.string().optional(),
   city: z.string().optional(),
   address: z.string().optional(),
   is_finished: z.boolean().optional()

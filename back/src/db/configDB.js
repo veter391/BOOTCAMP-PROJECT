@@ -3,17 +3,17 @@ import mysql from 'mysql2/promise';
 class DB {
   static query = {
     // User queries
-    createUser: 'INSERT INTO users (first_name, last_name, email, password, city) VALUES (?, ?, ?, ?, ?)',
+    createUser: 'INSERT INTO users (first_name, last_name, email, password, city, avatar) VALUES (?, ?, ?, ?, ?, ?)',
     getUserById: 'SELECT * FROM users WHERE id = ?',
     getAllUsers: 'SELECT * FROM users',
-    updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), city = IFNULL(?, city), password = IFNULL(?, password), avatar = IFNULL(?, avatar), last_update = NOW(), is_active = true WHERE id = ?',
+    updateUser: 'UPDATE users SET first_name = IFNULL(?, first_name), last_name = IFNULL(?, last_name), email = IFNULL(?, email), password = IFNULL(?, password), city = IFNULL(?, city), avatar = IFNULL(?, avatar), last_update = NOW(), is_active = true WHERE id = ?',
     deleteUser: 'DELETE FROM users WHERE id = ?',
 
     // Organization queries
-    createOrganization: 'INSERT INTO organization (name, email, password, description, city, address, cif) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    createOrganization: 'INSERT INTO organization (name, email, password, description, city, address, cif, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
     getOrganizationById: 'SELECT * FROM organization WHERE id = ?',
     getAllOrganizations: 'SELECT * FROM organization',
-    updateOrganization: 'UPDATE organization SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), address = IFNULL(?, address), avatar = IFNULL(?, avatar), cif = IFNULL(?, cif), last_update = NOW() WHERE id = ?',
+    updateOrganization: 'UPDATE organization SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), address = IFNULL(?, address),  cif = IFNULL(?, cif), avatar = IFNULL(?, avatar), last_update = NOW() WHERE id = ?',
     deleteOrganization: 'DELETE FROM organization WHERE id = ?',
 
     // Publications queries (SE PUEDE IMPLEMENTAR MAS ADELANTE)
@@ -31,7 +31,7 @@ class DB {
     deleteComment: 'DELETE FROM comments WHERE id = ?',
 
     // J: Events queries
-    createEvent: 'INSERT INTO events (user_id, organization_id, name, description, date, city, address) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    createEvent: 'INSERT INTO events (name, description, date, foto, city, address, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)',
     getAllEvents: 'SELECT * FROM events',
     getEventById: 'SELECT * FROM events WHERE id = ?',
     updateEvent: 'UPDATE events SET name = IFNULL(?, name), description = IFNULL(?, description), date = IFNULL(?, date), city = IFNULL(?, city), address = IFNULL(?, address), is_finished = IFNULL(?, is_finished), last_update = NOW() WHERE id = ?',
