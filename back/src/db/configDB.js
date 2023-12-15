@@ -68,6 +68,7 @@ class DB {
     deleteReaction: 'DELETE FROM reactions WHERE id = ? AND user_id = ?',
 
     // J: Queries para CHAT
+    getAllChats: 'SELECT * FROM chats',
     createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
     getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
     // getChatUsers: 'SELECT * FROM users, chats',

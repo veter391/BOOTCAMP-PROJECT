@@ -2,10 +2,10 @@ import DB from '../../db/configDB.js';
 
 const createChat = async (req, res) => {
   try {
-    const { room, userId1, userId2 } = req.body;
+    const { room_id, sender_id, receiver_id } = req.body;
 
     // insertar chat en la bbdd
-    const result = await DB.sendQuery(DB.query.createChat, [room, userId1, userId2]);
+    const result = await DB.sendQuery(DB.query.createChat, [room_id, sender_id, receiver_id]);
 
     res.status(200).json(result);
   } catch (error) {
@@ -13,9 +13,9 @@ const createChat = async (req, res) => {
   }
 };
 
-const getChat = async (req, res) => {
+const getAllChats = async (req, res) => {
   try {
-    const result = await DB.sendQuery(DB.query.getChatUsers);
+    const result = await DB.sendQuery(DB.query.getAllChats);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -46,7 +46,7 @@ const deleteChat = async (req, res) => {
 
 export default {
   createChat,
-  getChat,
+  getAllChats,
   getChatById,
   deleteChat
 };

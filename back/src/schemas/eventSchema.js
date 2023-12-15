@@ -7,8 +7,7 @@ const CreateEventSchema = z.object({
   description: z.string(),
   date: z.string(),
   city: z.string(),
-  address: z.string(),
-  is_finished: z.boolean()
+  address: z.string()
 });
 
 const GetEventByIdSchema = z.object({
