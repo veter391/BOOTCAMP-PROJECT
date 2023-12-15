@@ -1,8 +1,9 @@
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { Session, Inbox } from '@talkjs/react';
 import Talk from 'talkjs';
 import './chat.scss';
 import useChat, { SessionUserType } from '../../hooks/useChat';
+import { AppContext } from '../../context/AppProvider';
 
 type SessionType = {
   room: string | number;
@@ -13,8 +14,9 @@ type SessionType = {
 
 function Chat () {
   // N: users id
+  const { user } = useContext(AppContext);
   // ! N: useChat( currentUserID, userForConversation!)
-  const { loading, chatTemplate } = useChat(1, 2);
+  const { loading, chatTemplate } = useChat(+user.id, 1);
   const { roomID, meData, otherUser } = chatTemplate;
 
   return (

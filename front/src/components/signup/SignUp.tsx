@@ -58,16 +58,12 @@ function SignUp () {
         name='password' placeholder="Contraseña..."
         scheme={validationScheme.password} />
 
-      {
-        // N: check if is company and if is add more inputs
-        !isCompany &&
         <InputValidate
           classNameLabel="form__label"
           className="input-reset form__input"
           type="text"
           name='city' placeholder="Ciudad..."
           scheme={validationScheme.name} />
-      }
 
       {
         // N: check if is company and if is add more inputs

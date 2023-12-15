@@ -5,9 +5,9 @@ import './home.scss';
 import { AppContext } from '../../context/AppProvider';
 
 function Home () {
-  const { user }: any = useContext(AppContext);
+  const { user } = useContext(AppContext);
 
-  const scrolling = (e : any) => {
+  const scrolling = (e) => {
     e.preventDefault();
     const id = e.target.getAttribute('href');
 
@@ -39,7 +39,6 @@ function Home () {
         <section id='user-place' className='user-place'>
           <div className='container user-place__container'>
             <div className='user-place__box'>
-            {/* {(token && <IsLogedMessage />) || <FormBox />} */}
             <FormBox />
             </div>
           </div>
@@ -62,12 +61,6 @@ function FormBox () {
         <button onClick={() => setLogin(!login)} className='user-place__btn-change btn-reset'>{(login && 'Registarme') || 'Iniciar sesión'}</button>
       </div>
     </>
-  );
-}
-
-function IsLogedMessage () {
-  return (
-    <h2>You are loged {':)'}</h2>
   );
 }
 

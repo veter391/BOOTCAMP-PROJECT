@@ -19,12 +19,9 @@ const createUser = async (req, res) => {
         last_name,
         email,
         city,
-
         password
       ]
     );
-    console.log(typeof usertype);
-
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {
     res.status(400).json({ error: error.message });

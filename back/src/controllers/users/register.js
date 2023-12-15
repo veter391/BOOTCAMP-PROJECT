@@ -4,13 +4,17 @@ import crypto from 'node:crypto';
 
 import DB from '../../db/configDB.js';
 import { errorMap } from '../../helpers/errorMap.js';
-// import { CreateUserSchema } from '../../models/user.model.js';
 import { CreateUserSchema } from '../../schemas/userSchema.js';
+import { CreateOrganizationSchema } from '../../schemas/organizationSchema.js';
 // import { sendEmail } from '../../helpers/sendEmail.js';
 
 async function registerUser (req, res, next) {
-  const { success, error, data } = CreateUserSchema.safeParse(req.body);
-  console.log(error, data);
+  // N: chack if object has cif and return true or false
+  const isCompany = Object.hasOwn(req.body, 'cif');
+  // return company or user valid data
+  const { success, error, data } = isCompany ? CreateOrganizationSchema.safeParse(req.body) : CreateUserSchema.safeParse(req.body);
+
+  console.log(success, error, data);
 
   if (!success) {
     const errors = errorMap(error);
@@ -21,20 +25,29 @@ async function registerUser (req, res, next) {
     });
   }
 
-  // Como hemos validado bien, ZOD me devuelve un data
-  // console.log(data);
-  const { first_name, last_name, email, password, city } = data;
+  // valid data from zod
+  const { first_name, last_name, email, password, city, companyName, companyAddress, cif } = data;
 
-  // vamos a encriptar la contraseña
+  // hashing password
   const salt = 10;
   const hashedPassword = bcrypt.hashSync(password, salt);
 
-  // generamos un confirmation code
+  // generate confirmation code
   // const confirmationCode = crypto.randomUUID();
-
-  // Añadir a la BBDD el usuario nuevo
+  // Add new user/org to BD
   try {
-    const response = await DB.sendQuery(DB.query.createUser, [first_name, last_name, email, hashedPassword, city]);
+    // N: define query for user
+    const userQuery = !isCompany
+      ? DB.query.createUser
+      : DB.query.createOrganization;
+
+    // N: define user sending data
+    const userType = !isCompany
+      ? [first_name, last_name, email, hashedPassword, city]
+      : [companyName, email, hashedPassword, city, companyAddress, cif];
+
+    // N: send query to BD
+    const response = await DB.sendQuery(userQuery, userType);
     console.log(response);
 
     //* If user exists in DB generate the tocken for user
@@ -44,7 +57,8 @@ async function registerUser (req, res, next) {
 
     infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
 
-    if (token !== undefined) {
+    console.log(token);
+    if (token) {
       res.send({
         ok: true,
         message: 'User is logged!',

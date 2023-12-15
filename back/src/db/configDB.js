@@ -10,7 +10,7 @@ class DB {
     deleteUser: 'DELETE FROM users WHERE id = ?',
 
     // Organization queries
-    createOrganization: 'INSERT INTO organization (name, email, password, city, address, cif) VALUES (?, ?, ?, ?, ?, ?)',
+    createOrganization: 'INSERT INTO organizations (name, email, password, city, address, cif) VALUES (?, ?, ?, ?, ?, ?)',
     getOrganizationById: 'SELECT * FROM organization WHERE id = ?',
     getAllOrganizations: 'SELECT * FROM organization',
     updateOrganization: 'UPDATE organization SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), address = IFNULL(?, address),  cif = IFNULL(?, cif), avatar = IFNULL(?, avatar), last_update = NOW() WHERE id = ?',
