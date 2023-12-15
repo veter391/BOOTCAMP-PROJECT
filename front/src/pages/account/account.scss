@@ -3,7 +3,7 @@
 .maincontainer {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  column-gap: 20px;
-  row-gap: 50px;
+}
+.user {
+  margin-right: rem(30);
 }

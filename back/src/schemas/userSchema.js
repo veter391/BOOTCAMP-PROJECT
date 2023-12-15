@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
 const CreateUserSchema = z.object({
-  first_name: z.string().min(1),
+  name: z.string().min(1),
   last_name: z.string().min(1),
   email: z.string().email(),
-  password: z.string().min(8).max(20),
-  last_update: z.string(),
-  usertype: z.string()
+  password: z.string().min(8).max(20)
+  // last_update: z.string(),
+  // usertype: z.string()
 });
 
 const GetUserByIdSchema = z.object({
@@ -40,12 +40,10 @@ const DeleteUserSchema = z.object({
 });
 
 // Exportando el objeto de los esquemas
-const userSchemas = {
+export {
   CreateUserSchema,
   GetUserByIdSchema,
   GetAllUsersSchema,
   UpdateUserSchema,
   DeleteUserSchema
 };
-
-export default userSchemas;

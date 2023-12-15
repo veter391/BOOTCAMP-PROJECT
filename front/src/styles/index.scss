@@ -342,3 +342,8 @@ picture {
 .ytp-pause-overlay {
   display: none;
 }
+
+.is-invalid + textarea {
+  border-color: #DF3600;
+  box-shadow: 0 0 10px #DF3600;
+}

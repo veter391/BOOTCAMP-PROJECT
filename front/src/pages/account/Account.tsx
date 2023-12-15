@@ -11,7 +11,6 @@ function Account () {
           <User />
           <EventFeed />
         </div>
-        <button>ADD EVENT +</button>
       </div>
     </section>
   );

@@ -19,29 +19,7 @@ function Discover () {
           <a className='discover__selector' href="">events</a>
           <a className='discover__selector' href="">users/orgs</a>
             {/* todo all list is a component and also every item is a component!!!  */}
-          <ul>
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
-          </ul>
+          <EventFeed />
         </div>
       </div>
     </section>

@@ -1,15 +1,16 @@
 .creators{
-  display: flex;
-  margin-top: 25px;
-  gap: 50px;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-gap: 40px;
+  margin: 0 auto;
+  width: 100%;
   .card {
     padding: 20px 10px;
-    outline: 1px solid white;
-    background-color: rgb(10, 82, 50, 0.3);
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 15px var(--primary);
+    background-color: var(--active);
     border-radius: 5px;
-    width: 250px;
+    max-width: 100%;
     min-height: 275px;
     & .creatorImg{
       margin: auto;
@@ -17,7 +18,7 @@
       width: 85px;
       border-radius: 50%;
     }
-    & .socialLinks{      
+    & .socialLinks{
       height: 30px;
       width: 30px;
       border-radius: 50%;
@@ -26,6 +27,10 @@
       text-align: center;
       margin-top: 15px;
       margin-bottom: 30px;
+    }
+    transition: box-shadow .3s ease-in-out;
+    &:hover {
+    box-shadow: 7px 7px 15px var(--primary);
     }
   }
 }

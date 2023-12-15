@@ -1,7 +1,7 @@
 import './signup.scss';
 
 import { useState, useContext } from 'react';
-import InputValidate from '../inputValidate/InputValidate';
+import { InputValidate } from '../inputValidate/InputValidate';
 import validationScheme from '../../helpers/validationScheme';
 import userRegister from '../../services/userRegister';
 import { AppContext } from '../../context/AppProvider';

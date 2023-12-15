@@ -1,6 +1,6 @@
 import './login.scss';
 import validationScheme from '../../helpers/validationScheme';
-import InputValidate from '../inputValidate/InputValidate';
+import { InputValidate } from '../inputValidate/InputValidate';
 import userLogIn from '../../services/userLogIn';
 import { AppContext } from '../../context/AppProvider';
 import { useContext } from 'react';

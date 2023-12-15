@@ -1,13 +1,5 @@
 import DB from '../../db/configDB.js';
-import userSchemas from '../../schemas/userSchema.js';
-
-const {
-  CreateUserSchema,
-  GetUserByIdSchema,
-  GetAllUsersSchema,
-  UpdateUserSchema,
-  DeleteUserSchema
-} = userSchemas;
+import { CreateUserSchema, GetUserByIdSchema, GetAllUsersSchema, UpdateUserSchema, DeleteUserSchema } from '../../schemas/userSchema.js';
 
 // CREATE USER
 const createUser = async (req, res) => {

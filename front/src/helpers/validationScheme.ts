@@ -96,6 +96,51 @@ const validationScheme = {
       value: /^(?![_.])[A-z][a-zA-Z0-9._]+[0-9](?<![_.])$/i,
       message: 'El CIF no és válido'
     }
+  },
+  eventTitle: {
+    required: '*Campo obligatorio.',
+    maxLength: {
+      value: 30,
+      message: 'Debe contener un máximo de 30 caracteres.'
+    },
+    minLength: {
+      value: 5,
+      message: 'Debe contener un mínimo de 5 caracteres.'
+    }
+    // pattern: {
+    //   value: /^(?![_.])[A-z][a-zA-Z0-9._]+[0-9](?<![_.])$/i,
+    //   message: 'El CIF no és válido'
+    // }
+  },
+  eventLocation: {
+    required: '*Campo obligatorio.',
+    maxLength: {
+      value: 15,
+      message: 'Debe contener un máximo de 15 caracteres.'
+    },
+    minLength: {
+      value: 3,
+      message: 'Debe contener un mínimo de 3 caracteres.'
+    }
+    // pattern: {
+    //   value: /^(?![_.])[A-z][a-zA-Z0-9._]+[0-9](?<![_.])$/i,
+    //   message: 'El CIF no és válido'
+    // }
+  },
+  eventDescr: {
+    required: '*Campo obligatorio.',
+    maxLength: {
+      value: 500,
+      message: 'Debe contener un máximo de 300 caracteres.'
+    },
+    minLength: {
+      value: 10,
+      message: 'Debe contener un mínimo de 10 caracteres.'
+    }
+    // pattern: {
+    //   value: /^(?![_.])[A-z][a-zA-Z0-9._]+[0-9](?<![_.])$/i,
+    //   message: 'El CIF no és válido'
+    // }
   }
 };
 

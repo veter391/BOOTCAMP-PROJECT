@@ -1,59 +1,62 @@
-// import bcrypt from 'bcrypt';
-// import crypto from 'node:crypto'
+import bcrypt from 'bcrypt';
+import crypto from 'node:crypto';
 
-// import { sendQuery } from '../../db/connectDB.js';
-// import { zodErrorMap } from '../../helpers/zodErrorMap.js';
-// import { User } from '../../schemas/User.js';
-// import { query } from '../../db/queries.js';
+import DB from '../../db/configDB.js';
+import { errorMap } from '../../helpers/errorMap.js';
+// import { CreateUserSchema } from '../../models/user.model.js';
+import { CreateUserSchema } from '../../schemas/userSchema.js';
 // import { sendEmail } from '../../helpers/sendEmail.js';
 
-// async function registerUser (req, res, next) {
-//   const { success, error, data } = User.safeParse(req.body);
+async function registerUser (req, res, next) {
+  const { success, error, data } = CreateUserSchema.safeParse(req.body);
 
-//   if (!success) {
-//     const errors = zodErrorMap(error);
-//     return res.send({
-//       ok: false,
-//       data: null,
-//       error: errors
-//     });
-//   }
+  console.log(error);
 
-//   // Como hemos validado bien, ZOD me devuelve un data
-//   const { username, email, password } = data;
+  if (!success) {
+    const errors = errorMap(error);
+    return res.send({
+      ok: false,
+      data: null,
+      error: errors
+    });
+  }
 
-//   // vamos a encriptar la contraseña
-//   const salt = 10;
-//   const hashedPassword = bcrypt.hashSync(password, salt);
+  // Como hemos validado bien, ZOD me devuelve un data
+  // console.log(data);
+  const { name, last_name, email, password } = data;
 
-//   // generamos un confirmation code
-//   const confirmationCode = crypto.randomUUID();
+  // vamos a encriptar la contraseña
+  const salt = 10;
+  const hashedPassword = bcrypt.hashSync(password, salt);
 
-//   // Añadir a la BBDD el usuario nuevo
-//   try {
-//     await sendQuery(query.addUser, [username, email, hashedPassword, confirmationCode]);
-//   } catch (error) {
-//     return next(new Error(error.message));
-//   }
+  // generamos un confirmation code
+  // const confirmationCode = crypto.randomUUID();
 
-//   const registerEmail = {
-//     to: email,
-//     subject: '¡Bienvenid@! Activa tu cuenta',
-//     content: `
-//       <h1>Hola ${username}, ¡Bienvenid@ a la app de El Prat!</h1>
-//       <h2>Confirma tu cuenta haciendo click en el siguiente enlace</h2>
-//       <a href="http://localhost:5000/users/confirm/${confirmationCode}">Confirmar cuenta</a>
-//     `
-//   };
+  // Añadir a la BBDD el usuario nuevo
+  try {
+    await DB.sendQuery(DB.query.createUser, [name, last_name, email, hashedPassword]);
+  } catch (error) {
+    return next(new Error(error.message));
+  }
 
-//   await sendEmail(registerEmail);
+  // const registerEmail = {
+  //   to: email,
+  //   subject: '¡Bienvenid@! Activa tu cuenta',
+  //   content: `
+  //     <h1>Hola ${username}, ¡Bienvenid@ a la app de El Prat!</h1>
+  //     <h2>Confirma tu cuenta haciendo click en el siguiente enlace</h2>
+  //     <a href="http://localhost:5000/users/confirm/${confirmationCode}">Confirmar cuenta</a>
+  //   `
+  // };
 
-//   res.send({
-//     ok: true,
-//     error: null,
-//     data: null,
-//     message: 'Usuario registrado correctamente.'
-//   });
-// }
+  // await sendEmail(registerEmail);
 
-// export { registerUser };
+  res.send({
+    ok: true,
+    error: null,
+    data: null,
+    message: 'Usuario registrado correctamente.'
+  });
+}
+
+export { registerUser };

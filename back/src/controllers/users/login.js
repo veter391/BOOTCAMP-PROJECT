@@ -1,4 +1,4 @@
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import DB from '../../db/configDB.js';
 import { HttpError } from '../../models/HttpError.js';
@@ -31,8 +31,7 @@ async function logIn (req, res, next) {
     }
 
     // Compare passwords
-    // const isValidPassword = await bcrypt.compare(realPassword, user.pass);
-    const isValidPassword = await realPassword === user.password;
+    const isValidPassword = await bcrypt.compare(realPassword, user.password);
 
     if (!isValidPassword) {
       return next(new HttpError(400, 'Something wrong password is fail'));
