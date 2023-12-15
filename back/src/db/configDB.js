@@ -11,10 +11,10 @@ class DB {
 
     // Organization queries
     createOrganization: 'INSERT INTO organizations (name, email, password, city, address, cif) VALUES (?, ?, ?, ?, ?, ?)',
-    getOrganizationById: 'SELECT * FROM organization WHERE id = ?',
-    getAllOrganizations: 'SELECT * FROM organization',
-    updateOrganization: 'UPDATE organization SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), address = IFNULL(?, address),  cif = IFNULL(?, cif), avatar = IFNULL(?, avatar), last_update = NOW() WHERE id = ?',
-    deleteOrganization: 'DELETE FROM organization WHERE id = ?',
+    getOrganizationById: 'SELECT * FROM organizations WHERE id = ?',
+    getAllOrganizations: 'SELECT * FROM organizations',
+    updateOrganization: 'UPDATE organizations SET name = IFNULL(?, name), email = IFNULL(?, email), password = IFNULL(?, password), description = IFNULL(?, description), city = IFNULL(?, city), address = IFNULL(?, address),  cif = IFNULL(?, cif), avatar = IFNULL(?, avatar), last_update = NOW() WHERE id = ?',
+    deleteOrganization: 'DELETE FROM organizations WHERE id = ?',
 
     // Publications queries (SE PUEDE IMPLEMENTAR MAS ADELANTE)
     createPost: 'INSERT INTO posts (user_id, post_content, post_media, post_date) VALUES (?, ?, ?, NOW())',
@@ -45,8 +45,8 @@ class DB {
     searchUserByName: 'SELECT * FROM users WHERE first_name LIKE ? OR last_name LIKE ?',
     searchUserByCity: 'SELECT * FROM users WHERE city = ?',
     // Search organization by
-    searchOrganizationByName: 'SELECT * FROM organization WHERE name LIKE ? OR last_name LIKE ?',
-    searchOrganizationByCity: 'SELECT * FROM organization WHERE city = ?',
+    searchOrganizationByName: 'SELECT * FROM organizations WHERE name LIKE ? OR last_name LIKE ?',
+    searchOrganizationByCity: 'SELECT * FROM organizations WHERE city = ?',
 
     // J: Follow queries
     followUser: 'INSERT INTO followers_users (user_id, follower_id) VALUES (?, ?)',
