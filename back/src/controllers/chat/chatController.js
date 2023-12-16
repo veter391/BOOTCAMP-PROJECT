@@ -23,7 +23,6 @@ const getAllChats = async (req, res) => {
 };
 
 const getChat = async (req, res) => {
-  console.log(req.body)
   try {
     const result = await DB.sendQuery(DB.query.getChatUsers);
     res.status(200).json(result);
