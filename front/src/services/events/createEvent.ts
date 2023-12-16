@@ -1,5 +1,7 @@
+import { _url } from '../configVariables';
+
 async function createEvent (obj: object) {
-  const baseUrl = 'http://localhost:8080/events/create/';
+  const baseUrl = `${_url}/events/create/`;
 
   try {
     console.log(obj);

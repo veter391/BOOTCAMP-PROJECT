@@ -6,7 +6,6 @@ import { _url } from '../../services/configVariables';
 function EventFeed () {
   const [events, setEvents] = useState([]);
   const [eventsClon, setEventsClon] = useState([]);
-  const [location, setlocation] = useState([]);
 
   useEffect(() => {
     async function getEvents () {
@@ -26,28 +25,22 @@ function EventFeed () {
     getEvents();
   }, []);
 
-  function findByName (location: string = '', list: object[], substr: string): object[] {
+  function findByName (list: object[], substr: string): object[] {
     // delete symbols and repeated spaces from substring
     const validSubstring = substr.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
     // validate and return filtered by name list
-    return list?.filter((item) => item.title.toLowerCase().includes(validSubstring) || item.name.toLowerCase().includes(validSubstring) && item.address.toLowerCase().includes(location));
+    return list?.filter((item) => item.name.toLowerCase().includes(validSubstring) || item.address.toLowerCase().includes(validSubstring) || item.city.toLowerCase().includes(validSubstring));
   }
 
   return (
     <div className='feed'>
       <div className="feed__search-box">
         <input
-          onChange={e => setEventsClon(findByName(location ,events, e.target.value))}
+          onChange={e => setEventsClon(findByName(events, e.target.value))}
           className='feed__input input-reset form__input'
           type="text"
           name="events"
           placeholder='Buscar Evento' />
-        <input
-          onChange={e => setlocation(e.target.value)}
-          className='feed__input input-reset form__input'
-          type="text"
-          name="eventsLocation"
-          placeholder='Buscar localización' />
         <button className='btn-reset form__btn btn'>buscar</button>
       </div>
 

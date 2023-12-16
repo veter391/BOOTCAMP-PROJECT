@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { _url } from '../services/configVariables';
 
 type idType = string | number;
 
@@ -20,7 +21,7 @@ export default function useChat (meID: idType, otherID: idType) {
 
   useEffect(() => {
     async function createRoom (userid1: idType, userid2: idType) {
-      await fetch('http://localhost:5000/chat', {
+      await fetch(`${_url}/chat`, {
         method: 'POST',
         headers: {
           // 'Accept': 'application/json',
@@ -34,12 +35,11 @@ export default function useChat (meID: idType, otherID: idType) {
       });
       console.log('CREATED NEW CHAT => ;)');
 
-      return;
-      // return getUsers();
+      return getUsers();
     }
 
     async function getUsers () {
-      await fetch('http://localhost:5000/chat', {
+      await fetch(`${_url}/chat`, {
         method: 'GET',
         // body: JSON.stringify({name: 'Alex'}),
         headers: {
@@ -48,25 +48,21 @@ export default function useChat (meID: idType, otherID: idType) {
       })
         .then(response => response.json())
         .then(data => {
-          if (!data) return;
+          if (!data) throw new Error('data not found');
 
           const patern = (data) => (data.sender_id === meID && data.receiver_id === otherID) || (data.receiver_id === meID && data.sender_id === otherID);
 
           const findChat = data.find(user => patern(user));
 
-          console.log(findChat); //! -------
-
           // N: create chat if room not exists and continue.)
-          if (findChat === undefined) {
+          if (findChat === undefined && data.length >= 2) {
             createRoom(meID, otherID);
-            console.log('creating=>', meID, otherID);
-            return;
+            // return;
           } else {
             console.log('CHAT EXIST =>');
             // N: filter data and return two users
             const newData = data.filter(user => patern(user));
 
-            console.log(newData, data); //! -------
             // N: check if two users exists
             if (newData.length !== 2) {
               console.error('error somesing is wrong one of id unexist require [el1, el2] returned data: ' + newData);
@@ -87,28 +83,15 @@ export default function useChat (meID: idType, otherID: idType) {
             // modify user object and return simple user objects
             const myObject = newData.map((user: SessionUserType) => {
               return {
-                id: user.joing_id,
-                otherId: user.joing_id === meID ? user.receiver_id : user.sender_id,
-                name: user.user_name || user.org_name,
-                email: user.email || user.org_email,
-                photoUrl: user.avatar || user.org_avatar || './img/user.png',
+                id: user.id,
+                otherId: user.id === meID ? user.receiver_id : user.sender_id,
+                name: user.first_name,
+                email: user.email,
+                photoUrl: user.avatar || './img/user.png',
                 welcomeMessage: `Hi from ${user.first_name}!`,
                 role: 'default'
               };
             });
-
-// "joing_id": 11,
-// "sender_id": 1,
-// "receiver_id": 11,
-// "user_name": "user",
-// "user_email": "user@gmaiol.com",
-// "user_city": "igualada",
-// "user_avatar": null,
-// "org_name": null,
-// "org_email": null,
-// "org_city": null,
-// "org_avatar": null,
-
 
             // N: add all changes to object and return it
             return {
@@ -121,7 +104,7 @@ export default function useChat (meID: idType, otherID: idType) {
           }
         })
         .then(data => {
-          if (!data) return;
+          if (!data) throw new Error('data not found');
 
           const { usersList, chats } = data;
           const { room } = chats;

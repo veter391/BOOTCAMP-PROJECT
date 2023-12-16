@@ -70,18 +70,7 @@ class DB {
     // J: Queries para CHAT
     getAllChats: 'SELECT * FROM chats',
     createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
-    getChatUsers: `
-      SELECT joing_id, sender_id, receiver_id,
-      first_name AS user_name, u.email AS user_email, u.city AS user_city, u.avatar AS user_avatar,
-      name AS org_name, o.email AS org_email, o.city AS org_city, o.avatar AS org_avatar,
-      c.created_at  FROM  chats c, joined j
-      LEFT JOIN
-      users u ON u.id = j.user_id
-      LEFT JOIN
-      organizations o ON o.id = j.org_id
-      WHERE j.joing_id = c.sender_id
-      OR j.joing_id = c.receiver_id
-    `,
+    getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
     getChatById: 'SELECT * FROM chats WHERE room_id = ?',
     deleteChat: 'DELETE FROM chats WHERE room_id = ?',
 

@@ -5,7 +5,7 @@
   margin: 0 auto;
   width: 100%;
   .card {
-    padding: 20px 10px;
+    padding: 22px;
     border: 1px solid var(--primary);
     box-shadow: 0 0 15px var(--primary);
     background-color: var(--active);
@@ -13,7 +13,8 @@
     max-width: 100%;
     min-height: 275px;
     & .creatorImg{
-      margin: auto;
+      margin: 0 auto;
+      margin-bottom: 20px;
       height: 85px;
       width: 85px;
       border-radius: 50%;
@@ -25,8 +26,7 @@
     }
     & h2{
       text-align: center;
-      margin-top: 15px;
-      margin-bottom: 30px;
+      margin-bottom: 16px;
     }
     transition: box-shadow .3s ease-in-out;
     &:hover {
@@ -39,7 +39,6 @@
   gap: 10px;
   align-items:center;
   font-size: small;
-  margin-left: 15px;
   & :first-child{
     margin-bottom: 5px;
   }
@@ -47,4 +46,10 @@
     position: relative;
     top: 4px;
   }
+}
+
+.creatorDescr {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  text-align: center;
 }
