@@ -15,7 +15,7 @@ type SessionType = {
 function Chat () {
   // N: users id
   const { user } = useContext(AppContext);
-  console.log(user.id);
+
   // ! N: useChat( currentUserID, userForConversation!)
   const { loading, chatTemplate } = useChat(user.id, 1);
   const { roomID, meData, otherUser } = chatTemplate;

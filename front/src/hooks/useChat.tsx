@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { _url } from '../services/configVariables';
 
 type idType = string | number;
 
@@ -21,7 +20,7 @@ export default function useChat (meID: idType, otherID: idType) {
 
   useEffect(() => {
     async function createRoom (userid1: idType, userid2: idType) {
-      await fetch(`${_url}/chat`, {
+      await fetch('http://localhost:5000/chat', {
         method: 'POST',
         headers: {
           // 'Accept': 'application/json',
@@ -39,7 +38,7 @@ export default function useChat (meID: idType, otherID: idType) {
     }
 
     async function getUsers () {
-      await fetch(`${_url}/chat`, {
+      await fetch('http://localhost:5000/chat', {
         method: 'GET',
         // body: JSON.stringify({name: 'Alex'}),
         headers: {
@@ -50,55 +49,63 @@ export default function useChat (meID: idType, otherID: idType) {
         .then(data => {
           if (!data) return;
 
+          const patern = (data) => (data.sender_id === meID && data.receiver_id === otherID) || (data.receiver_id === meID && data.sender_id === otherID);
+
+          const findChat = data.find(user => patern(user));
+
+          console.log(findChat); //! -------
+
           // N: create chat if room not exists and continue.)
-          if (!data.find(user => user.id === meID) && !data.find(user => user.id === otherID)) {
+          if (findChat === undefined) {
             createRoom(meID, otherID);
+            console.log('creating=>', meID, otherID);
             return;
           } else {
             console.log('CHAT EXIST =>');
-          }
+            // N: filter data and return two users
+            const newData = data.filter(user => patern(user));
 
-          // N: filter data and return two users
-          const newData = data.filter(user => user.id === meID || user.id === otherID);
+            console.log(newData, data); //! -------
+            // N: check if two users exists
+            if (newData.length !== 2) {
+              console.error('error somesing is wrong one of id unexist require [el1, el2] returned data: ' + newData);
+              return {
+                usersList: [meID, otherID],
+                chats: {
+                  room: 'error',
+                  users: [meID, otherID]
+                }
+              };
+            }
 
-          // N: check if two users exists
-          if (newData.length !== 2) {
-            console.error('error somesing is wrong one of id unexist require [el1, el2] returned data: ' + newData);
+            // check if is the same room
+            const meRoom = newData[0].room_id;
+            const otherRoom = newData[1].room_id;
+            const roomID = meRoom === otherRoom ? meRoom : '';
+
+            // modify user object and return simple user objects
+            const myObject = newData.map((user: SessionUserType) => {
+              return {
+                id: user.id,
+                otherId: user.id === meID ? user.receiver_id : user.sender_id,
+                name: user.first_name,
+                email: user.email,
+                photoUrl: user.avatar || './img/user.png',
+                welcomeMessage: `Hi from ${user.first_name}!`,
+                role: 'default'
+              };
+            });
+
+            // N: add all changes to object and return it
             return {
-              usersList: [meID, otherID],
+              usersList: myObject,
               chats: {
-                room: 'error',
+                room: roomID,
                 users: [meID, otherID]
               }
             };
           }
 
-          // check if is the same room
-          const meRoom = newData[0].room_id;
-          const otherRoom = newData[1].room_id;
-          const roomID = meRoom === otherRoom ? meRoom : '';
-
-          // modify user object and return simple user objects
-          const myObject = newData.map((user: SessionUserType) => {
-            return {
-              id: user.id,
-              otherId: user.id === meID ? user.receiver_id : user.sender_id,
-              name: user.first_name,
-              email: user.email,
-              photoUrl: user.avatar || './img/user.png',
-              welcomeMessage: `Hi from ${user.first_name}!`,
-              role: 'default'
-            };
-          });
-
-          // N: add all changes to object and return it
-          return {
-            usersList: myObject,
-            chats: {
-              room: roomID,
-              users: [meID, otherID]
-            }
-          };
         })
         .then(data => {
           if (!data) return;
