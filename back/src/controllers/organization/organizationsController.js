@@ -8,6 +8,7 @@ const {
 
 const createOrganization = async (req, res) => {
   try {
+    const { id } = req.params;
     const {
       name,
       email,
@@ -29,7 +30,8 @@ const createOrganization = async (req, res) => {
         city,
         address,
         cif,
-        avatar
+        avatar,
+        id
       ]
     );
 

@@ -12,6 +12,16 @@
   }
 }
 
+.avatar-image{
+  border-radius: 50%;
+  margin: auto;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(80%); 
+  }
+}
+
 .event__form-descr {
   min-height: 300px;
 }

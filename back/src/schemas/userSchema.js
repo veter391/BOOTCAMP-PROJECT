@@ -25,7 +25,7 @@ const GetAllUsersSchema = z.array(
 );
 
 const UpdateUserSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   first_name: z.string().min(1).optional(),
   last_name: z.string().min(1).optional(),
   email: z.string().email().optional(),
