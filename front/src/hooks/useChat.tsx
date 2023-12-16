@@ -28,9 +28,9 @@ export default function useChat (meID: idType, otherID: idType) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          room: uuidv4(),
-          userId1: userid1,
-          userId2: userid2
+          room_id: uuidv4(),
+          sender_id: userid1,
+          receiver_id: userid2
         })
       });
       console.log('CREATED NEW CHAT => ;)');
