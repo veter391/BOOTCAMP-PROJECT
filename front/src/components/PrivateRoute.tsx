@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { AppContext } from '../context/AppProvider';
 import { Navigate } from 'react-router-dom';
 
-function PrivateRoute ({ children }: {children : object}) {
+function PrivateRoute ({ children }: any) {
   const { user } = useContext(AppContext);
   const isUserExpired = user?.exp < Date.now();
 
