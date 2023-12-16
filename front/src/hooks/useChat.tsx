@@ -34,7 +34,8 @@ export default function useChat (meID: idType, otherID: idType) {
       });
       console.log('CREATED NEW CHAT => ;)');
 
-      return getUsers();
+      return;
+      // return getUsers();
     }
 
     async function getUsers () {
@@ -86,15 +87,28 @@ export default function useChat (meID: idType, otherID: idType) {
             // modify user object and return simple user objects
             const myObject = newData.map((user: SessionUserType) => {
               return {
-                id: user.id,
-                otherId: user.id === meID ? user.receiver_id : user.sender_id,
-                name: user.first_name,
-                email: user.email,
-                photoUrl: user.avatar || './img/user.png',
+                id: user.joing_id,
+                otherId: user.joing_id === meID ? user.receiver_id : user.sender_id,
+                name: user.user_name || user.org_name,
+                email: user.email || user.org_email,
+                photoUrl: user.avatar || user.org_avatar || './img/user.png',
                 welcomeMessage: `Hi from ${user.first_name}!`,
                 role: 'default'
               };
             });
+
+// "joing_id": 11,
+// "sender_id": 1,
+// "receiver_id": 11,
+// "user_name": "user",
+// "user_email": "user@gmaiol.com",
+// "user_city": "igualada",
+// "user_avatar": null,
+// "org_name": null,
+// "org_email": null,
+// "org_city": null,
+// "org_avatar": null,
+
 
             // N: add all changes to object and return it
             return {
@@ -105,7 +119,6 @@ export default function useChat (meID: idType, otherID: idType) {
               }
             };
           }
-
         })
         .then(data => {
           if (!data) return;
