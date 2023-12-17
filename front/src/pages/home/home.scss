@@ -21,7 +21,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-top: rem(180);
+    padding-top: rem(140);
     padding-bottom: rem(30);
   }
 
@@ -75,8 +75,9 @@
     margin: 0 auto;
     margin-bottom: rem(60);
     text-align: center;
-    font-size: rem(68);
+    font-size: rem(58);
     font-weight: 600;
+    line-height: rem(8);
   }
 
   &__descr {
@@ -86,6 +87,7 @@
     margin-bottom: auto;
     line-height: 2rem;
     text-align: center;
+    font-size: rem(18);
   }
 }
 
@@ -132,5 +134,35 @@
     }
   }
 }
+
+@media (max-width:500px){
+  .hero{
+    &__container {
+      padding-top: rem(140);
+      padding-bottom: rem(30);
+    }
+    &__title {
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+      margin-bottom: rem(60);
+      text-align: center;
+      font-size: rem(40);
+      font-weight: 600;
+      line-height: rem(12);
+    }
+  
+    &__descr {
+      max-width: 700px;
+      margin: 0 auto;
+      padding-bottom: rem(30);
+      margin-bottom: auto;
+      line-height: 2rem;
+      text-align: center;
+      font-size: rem(18);
+    }
+  }
+}
+
 
 

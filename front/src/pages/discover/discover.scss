@@ -12,9 +12,10 @@
     flex-wrap: wrap;
   }
   &__feed {
-    outline: 1px solid white;
-    width: 450px;
+    width: 60vw;
     margin: auto;
+    display: flex;
+    flex-direction: column;
 
     & ul {
       padding-inline-start: 0px;
@@ -39,6 +40,11 @@
       color: rgb(var(--hover));
       border-color: rgb(var(--hover));
     }
+  }
+  &__selectors {
+    align-self: center;
+    margin-bottom: rem(30);
+    margin-top: rem(5);
   }
 }
 .filterContainer{

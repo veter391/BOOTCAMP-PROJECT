@@ -2,7 +2,7 @@
 
 .header {
   position: relative;
-  padding: rem(30) 0;
+  padding: rem(22) 0;
   border-bottom:1px solid var(--active);
   color: var(--light-theme);
   font-weight: 600;
@@ -194,6 +194,10 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
     min-width: $nav-min-width;
     overflow-y: auto;
   }
+  // .noUserNav{
+  //   visibility: visible;
+  //   transform: none;
+  // }
 
   .nav__list {
     margin: 0;
@@ -206,6 +210,8 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
     align-items: flex-start;
     justify-content: flex-start;
   }
+  // .noUserList{
+  // }
 
   .nav__item:not(:last-child) {
     margin: 0;

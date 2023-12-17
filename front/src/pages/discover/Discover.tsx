@@ -16,8 +16,10 @@ function Discover () {
           </ul>
         </div>
         <div className='discover__feed'>
-          <a className='discover__selector' href="">events</a>
-          <a className='discover__selector' href="">users/orgs</a>
+          <div className='discover__selectors'>
+            <a className='discover__selector' href="">events</a>
+            <a className='discover__selector' href="">users/orgs</a>
+          </div>
             {/* todo all list is a component and also every item is a component!!!  */}
           <EventFeed />
         </div>

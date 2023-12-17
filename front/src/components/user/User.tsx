@@ -11,7 +11,7 @@ function User () {
     <div className='user'>
       <img src="https://picsum.photos/100/100" alt="avatar" />
       <h2>Username</h2>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam assumenda repudiandae, consequuntur velit laborum debitis saepe consequatur natus eligendi error.</p>
+      <p>Location</p>
       {!newEvent && <button onClick={() => setNewEvent(true)} className='btn-reset form__btn btn'>ADD EVENT +</button>}
       {newEvent && <UserEvent />}
     </div>
@@ -30,7 +30,7 @@ function UserEvent () {
     <form onSubmit={handleSubmit(createEvent)} className='form'>
       <InputValidate
         classNameLabel='form__label'
-        className='input-reset form__input'
+        className='input-reset form__input eventInput'
         type='text'
         name='title'
         placeholder='Titulo...'
@@ -38,7 +38,7 @@ function UserEvent () {
 
       <InputValidate
         classNameLabel='form__label'
-        className='input-reset form__input'
+        className='input-reset form__input eventInput'
         type='text'
         name='location'
         placeholder='Location...'
@@ -46,11 +46,11 @@ function UserEvent () {
 
       <AreaValidate
         classNameLabel='form__label form__label-last'
-        className='input-reset form__input event__form-descr'
+        className='input-reset form__input event__form-descr eventInput'
         type='text'
         name='textarea' placeholder='Description...'
         scheme={validationScheme.eventDescr} />
-      <button className='btn-reset form__btn btn' type='submit'>Crear evento</button>
+      <button className='btn-reset form__btn btn btn__createEvent' type='submit'>Crear evento</button>
     </form>
   );
 }

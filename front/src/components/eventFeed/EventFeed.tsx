@@ -48,7 +48,7 @@ function EventFeed () {
         {
           eventsClon.map((item) => {
             return (
-              <EventCard key={item.id} title={item.title} date={'12:00'} location={item.address} description={item.description} foto={''} name={item.name} />
+              <EventCard key={item.id} title={item.name} date={'12:00'} location={item.address} description={item.description} foto={''} name={item.name} />
             );
           })
         }

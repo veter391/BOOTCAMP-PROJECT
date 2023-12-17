@@ -1,5 +1,5 @@
 import './header.scss';
-import { NavLink } from 'react-router-dom';
+import { useLocation, NavLink } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppProvider';
 
@@ -7,7 +7,7 @@ function Header () {
   const [burgerActive, setBurgerActive] = useState(false);
 
   const { user }: any = useContext(AppContext);
-
+  let location = useLocation();
   return (
     <header className='header'>
       <div className="container header__container">
@@ -21,6 +21,7 @@ function Header () {
         </button>
 
         {user && <HeaderNavigation burgerActive={burgerActive} />}
+        {location.pathname === '/about' && !user && <AboutNoUser burgerActive={burgerActive}/>}
       </div>
     </header>
   );
@@ -48,6 +49,17 @@ function HeaderNavigation ({ burgerActive }) {
 
         <li className='nav__item'>
           <NavLink className='nav__link' to="/discover">Discover</NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+}
+function AboutNoUser ({ burgerActive }) {
+  return (
+    <nav className={`header__nav nav noUserNav ${burgerActive && 'nav--visible'}`} data-nav>
+      <ul className='nav__list list-reset noUserList'>
+      <li className='nav__item'>
+          <NavLink className='nav__link' to="/">Home</NavLink>
         </li>
       </ul>
     </nav>

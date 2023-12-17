@@ -7,3 +7,48 @@
 .user {
   margin-right: rem(30);
 }
+@media (max-width: 1024px){
+  .maincontainer {
+    display: flex;
+    flex-direction: column;
+    & .user{
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      width: 200%;
+      & img{
+        position: relative;
+        right: 25px;
+      }
+      & .btn{
+        position: relative;
+        bottom: 50px;
+        left: 165px;
+        margin-top: 0px;
+        margin-right: 20vw;
+        &__createEvent{
+          position: inherit;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  .eventInput{
+    width: 75vw;
+    position: relative;
+  }
+}
+
+@media (max-width: 500px){
+  .maincontainer {
+    & .user{
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      width: 200%;
+      & img{
+        right: -18px;
+      }
+    }
+  }
+}
