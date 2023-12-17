@@ -1,5 +1,5 @@
 import './inputValidate.scss';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AppContext } from '../../context/AppProvider';
 
 type ValidInputType = {
@@ -9,9 +9,11 @@ type ValidInputType = {
   classNameLabel: string;
   name: string;
   scheme: object;
+  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  value: string
 }
 
-function InputValidate ({ type, placeholder, className, classNameLabel, name, scheme }: ValidInputType) {
+function InputValidate ({ type, placeholder, className, classNameLabel, name, scheme, value }: ValidInputType) {
   // get variavles from context
   const { handlers } : any = useContext(AppContext);
   const { errors, register } = handlers;

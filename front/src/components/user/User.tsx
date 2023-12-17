@@ -1,10 +1,21 @@
-import { useContext, useState, useRef, ChangeEvent } from 'react';
+import { useContext, useState, useRef, ChangeEvent, FormEvent  } from 'react';
 import './user.scss';
 import validationScheme from '../../helpers/validationScheme';
 import { InputValidate, AreaValidate } from '../inputValidate/InputValidate';
 import { AppContext } from '../../context/AppProvider';
 import uploadImageUser from '../../services/uploadImage/uploadImageUser.ts';
 import { useActionData } from 'react-router-dom';
+import createEvent from '../../services/events/createEvent.ts';
+
+
+interface FormData {
+  title: string;
+  date: string;
+  location: string;
+  address: string;
+  description: string;
+  user_id: number;
+}
 
 function User () {
   const { user }: any = useContext(AppContext);
@@ -70,36 +81,90 @@ function User () {
 }
 
 function UserEvent () {
-  const { handleSubmit }: any = useContext(AppContext);
+  const { handleSubmit, user }: any = useContext(AppContext);
+  const [formData, setFormData] = useState<FormData>({
+    title: '',
+    date: '',
+    location: '',
+    address: '',
+    description: '',
+    user_id: user.id
+  });
 
-  function createEvent () {
-    // ! create fetch!!!
-    console.log('event');
-  }
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+
+    const fieldValue = type === 'text' || type === 'date' ? value : e.target.value;
+
+    setFormData((data) => ({
+      ...data,
+      [name]: fieldValue
+    }));
+  };
+
+  const handleSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      //envía datos del formulario
+      const response = await createEvent(formData); 
+      console.log(formData);
+      console.log('Respuesta del servidor:', response);
+    } catch (error) {
+      console.error('Error al crear el evento:', error);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(createEvent)} className='form'>
+    <form onSubmit={handleSubmitForm} className='form'>
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'
         type='text'
         name='title'
-        placeholder='Titulo...'
+        placeholder='Title...'
+        value={formData.title}
+        onChange={handleChange}
         scheme={validationScheme.eventTitle} />
+
+      <InputValidate
+        classNameLabel='form__label'
+        className='input-reset form__input'
+        type='date'
+        name='date'
+        placeholder='Date...'
+        value={formData.date}
+        onChange={handleChange}
+        scheme={validationScheme.eventTitle}
+        />
 
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'
         type='text'
         name='location'
-        placeholder='Location...'
+        placeholder='City...'
+        value={formData.location}
+        onChange={handleChange}
+        scheme={validationScheme.eventLocation} />
+
+      <InputValidate
+        classNameLabel='form__label'
+        className='input-reset form__input'
+        type='text'
+        name='address'
+        placeholder='Address...'
+        value={formData.address}
+        onChange={handleChange}
         scheme={validationScheme.eventLocation} />
 
       <AreaValidate
         classNameLabel='form__label form__label-last'
         className='input-reset form__input event__form-descr'
         type='text'
-        name='textarea' placeholder='Description...'
+        name='textarea' 
+        placeholder='Description...'
+        value={formData.description}
+        onChange={handleChange}
         scheme={validationScheme.eventDescr} />
       <button className='btn-reset form__btn btn' type='submit'>Crear evento</button>
     </form>

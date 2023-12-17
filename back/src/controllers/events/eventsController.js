@@ -18,6 +18,9 @@ const createEvent = async (req, res) => {
       user_id
     } = CreateEventSchema.parse(req.body);
 
+    const data = req.body;
+    console.log(data);
+
     const dbInfo = await DB.sendQuery(DB.query.createEvent, [
       name,
       description,
