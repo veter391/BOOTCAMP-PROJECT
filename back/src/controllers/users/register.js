@@ -26,7 +26,7 @@ async function registerUser (req, res, next) {
   }
 
   // valid data from zod
-  const { first_name, last_name, email, password, city, companyName, companyAddress, cif } = data;
+  const { first_name, last_name, org_name, email, password, description, city, address, avatar, cif, type } = data;
 
   // hashing password
   const salt = 10;
@@ -36,18 +36,8 @@ async function registerUser (req, res, next) {
   // const confirmationCode = crypto.randomUUID();
   // Add new user/org to BD
   try {
-    // N: define query for user
-    const userQuery = !isCompany
-      ? DB.query.createUser
-      : DB.query.createOrganization;
-
-    // N: define user sending data
-    const userType = !isCompany
-      ? [first_name, last_name, email, hashedPassword, city]
-      : [companyName, email, hashedPassword, city, companyAddress, cif];
-
     // N: send query to BD
-    const response = await DB.sendQuery(userQuery, userType);
+    const response = await DB.sendQuery(DB.query.createUser, [first_name, last_name, org_name, email, hashedPassword, description, city, address, avatar, cif, type]);
     console.log(response);
 
     //* If user exists in DB generate the tocken for user

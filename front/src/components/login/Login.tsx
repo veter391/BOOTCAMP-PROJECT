@@ -15,14 +15,16 @@ function LogIn () {
     userLogIn(values)
       .then(data => {
         const { user, token } = data;
+        if (!user) throw new Error('Useario no existe tienes que registrarte!');
         userSetter(user, token);
+        console.log('login');
       })
-      .catch(err => setLogInError(err));
+      .catch(err => setLogInError(err.message));
   };
 
   return (
     <form onSubmit={handleSubmit(logIn)} className='form' style={{ position: 'relative' }}>
-      {logInError && <p className='colored-error error' style={{ fontSize: '14px', position: 'absolute', left: '27%', top: '0' }}>* Usuario o contraseña incorrectos *</p>}
+      {logInError && <p className='colored-error error' style={{ fontSize: '14px', position: 'absolute', left: '0', top: '0', width: '100%', textAlign: 'center' }}>* {logInError} *</p>}
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'

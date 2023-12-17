@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, SetStateAction } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { _url } from '../services/configVariables';
 
@@ -7,7 +7,7 @@ type idType = string | number;
 type SessionUserType = {
   id: string | number,
   first_name: string,
-  name: string,
+  name: string | string,
   email: string,
   photoUrl: string,
   welcomeMessage: string,
@@ -15,13 +15,36 @@ type SessionUserType = {
   avatar: string
 }
 
+const templateType : {
+  roomID: string | number | any,
+  meData: string | number | any,
+  otherUser: string | number | any
+} = {
+  roomID: '',
+  meData: '',
+  otherUser: ''
+};
+
 export default function useChat (meID: idType, otherID: idType) {
-  const [chatTemplate, setChatTemplate] = useState('');
+  const [chatTemplate, setChatTemplate] = useState(templateType);
   const [loading, setLoading] = useState(true);
+
+  function error (err: unknown) {
+    // quit loader if chat exist
+    setLoading(false);
+    console.log(err);
+    const errorObj : any = {
+      roomID: 'error',
+      meData: 'error',
+      otherUser: 'error'
+    };
+
+    setChatTemplate((errorObj));
+  }
 
   useEffect(() => {
     async function createRoom (userid1: idType, userid2: idType) {
-      await fetch(`${_url}/chat`, {
+      return await fetch(`${_url}/chat`, {
         method: 'POST',
         headers: {
           // 'Accept': 'application/json',
@@ -33,9 +56,6 @@ export default function useChat (meID: idType, otherID: idType) {
           receiver_id: userid2
         })
       });
-      console.log('CREATED NEW CHAT => ;)');
-
-      return getUsers();
     }
 
     async function getUsers () {
@@ -55,9 +75,18 @@ export default function useChat (meID: idType, otherID: idType) {
           const findChat = data.find(user => patern(user));
 
           // N: create chat if room not exists and continue.)
-          if (findChat === undefined && data.length >= 2) {
-            createRoom(meID, otherID);
-            // return;
+          if (findChat === undefined) {
+            createRoom(meID, otherID)
+              .then(response => response.json())
+              .then((data) => {
+                if (!data) {
+                  console.log('CREATED NEW CHAT => ;)');
+                  getUsers();
+                } else {
+                  throw new Error('Something is wrong, the user may no longer exist in the database.');
+                }
+              })
+              .catch(err => error(err));
           } else {
             console.log('CHAT EXIST =>');
             // N: filter data and return two users
@@ -65,14 +94,7 @@ export default function useChat (meID: idType, otherID: idType) {
 
             // N: check if two users exists
             if (newData.length !== 2) {
-              console.error('error somesing is wrong one of id unexist require [el1, el2] returned data: ' + newData);
-              return {
-                usersList: [meID, otherID],
-                chats: {
-                  room: 'error',
-                  users: [meID, otherID]
-                }
-              };
+              throw new Error('somesing is wrong one of id unexist require [el1, el2] returned data: ' + newData);
             }
 
             // check if is the same room
@@ -85,7 +107,7 @@ export default function useChat (meID: idType, otherID: idType) {
               return {
                 id: user.id,
                 otherId: user.id === meID ? user.receiver_id : user.sender_id,
-                name: user.first_name,
+                name: user.first_name || user.org_name,
                 email: user.email,
                 photoUrl: user.avatar || './img/user.png',
                 welcomeMessage: `Hi from ${user.first_name}!`,
@@ -119,7 +141,7 @@ export default function useChat (meID: idType, otherID: idType) {
           // quit loader if chat exist
           setLoading(false);
         })
-        .catch(err => console.log(err));
+        .catch(err => error(err));
     }
     getUsers();
   }, []);

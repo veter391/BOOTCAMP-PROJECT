@@ -9,24 +9,27 @@ import { AppContext } from '../../context/AppProvider';
 function SignUp () {
   // get variavles from context
   const { handleSubmit, userSetter } : any = useContext(AppContext);
+  const [signUpError, setSignUpError] = useState();
 
   // company checkbox
   const [isCompany, setIsCompany] = useState(false);
 
   // funciton to run where submit form
   function signUp (values: object) {
-    console.log('sign up');
     // N: register function for users
-    userRegister(values)
+    userRegister({ ...values, state: (isCompany && 'org') || 'user' })
       .then(data => {
         const { user, token } = data;
+        if (!user) throw new Error('Usuario ya existe!');
         userSetter(user, token);
+        console.log('sign up');
       })
-      .catch(err => console.error(err));
+      .catch(err => setSignUpError(err.message));
   }
 
   return (
-    <form onSubmit={handleSubmit(signUp)} className="form">
+    <form onSubmit={handleSubmit(signUp)} className="form" style={{ position: 'relative' }}>
+      {signUpError && <p className='colored-error error' style={{ fontSize: '14px', position: 'absolute', left: '0', top: '0', width: '100%', textAlign: 'center' }}>* {signUpError} *</p>}
       {!isCompany && <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
@@ -90,14 +93,14 @@ function CompanyForm () {
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name='companyName' placeholder="Nombre..."
+        name='org_name' placeholder="Nombre..."
         scheme={validationScheme.companyName} />
 
       <InputValidate
         classNameLabel="form__label"
         className="input-reset form__input"
         type="text"
-        name='companyAddress' placeholder="Dirección..."
+        name='address' placeholder="Dirección..."
         scheme={validationScheme.companyAddress} />
 
       <InputValidate

@@ -16,9 +16,9 @@ function Chat () {
   // N: users id
   const { user } = useContext(AppContext);
 
-  // ! N: useChat( currentUserID, userForConversation!)
-  const { loading, chatTemplate } = useChat(user.id, 1);
-  const { roomID, meData, otherUser }: { roomID: any, meData: any, otherUser: any } = chatTemplate;
+  const { loading, chatTemplate } = useChat(user.id, 60);
+
+  const { roomID, meData, otherUser } = chatTemplate;
 
   return (
     <section className='chat'>
