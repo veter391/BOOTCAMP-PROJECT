@@ -31,7 +31,7 @@ const UpdateUserSchema = z.object({
   email: z.string().email().optional(),
   password: z.string().min(3).max(8).optional(),
   city: z.string().optional(),
-  avatar: z.string().optional()
+  avatar: z.object().optional()
 });
 
 const DeleteUserSchema = z.object({

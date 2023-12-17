@@ -11,7 +11,7 @@ const createUser = async (req, res) => {
       city,
       password
     } = CreateUserSchema.parse(req.body);
-
+    
     const dbInfo = await DB.sendQuery(
       DB.query.createUser,
       [
@@ -56,19 +56,28 @@ const getUserById = async (req, res) => {
 // UPDATE USER{id}
 const updateUser = async (req, res) => {
   try {
+    console.log('Función updateUser llamada');
     const { id } = req.params;
+
+    console.log('Datos del body:', req.body);
+    console.log('Parámetro ID:', id);
 
     const {
       first_name,
       last_name,
       email,
       city,
-      password,
-      avatar
+      password
     } = UpdateUserSchema.parse(req.body);
 
-    const recibo = req.body;
-    console.log(recibo);
+    let avatar = '';
+
+    if (req.file) {
+      avatar = req.file.filename;
+    }
+
+    console.log(receivedAvatar);
+    console.log('Datos recibidos en la solicitud:', recibo);
 
     const dbInfo = await DB.sendQuery(DB.query.updateUser, [
       first_name,

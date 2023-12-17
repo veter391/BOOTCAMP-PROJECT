@@ -1,23 +1,23 @@
 import { _url } from '../configVariables.ts';
 
-async function uploadImageUser(id: number, file: File, token: string) {
-  const baseUrl = `${_url}/users/${id}`;
-
+async function uploadImageUser(userId : number, file : File, token : string) {
   try {
-    const formData = new FormData();
-    formData.append('avatar', file);
+    const avatar = new FormData();
+    avatar.append('avatar', file);
+    avatar.append('userId', String(userId));
 
-    const resp = await fetch(baseUrl, {
+    const response = await fetch(`${_url}/users/${userId}`, {
       method: 'PUT',
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`
       },
-      body: formData,
+      body: avatar,
     });
 
-    return await resp.json();
-  } catch (err: unknown) {
-    throw new Error('Error al subir la imagen');
+    const data = await response.json();
+    console.log('Imagen subida exitosamente:', data);
+  } catch (err) {
+    console.error('Error al subir la imagen:', err);
   }
 }
 

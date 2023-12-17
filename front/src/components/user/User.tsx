@@ -3,7 +3,7 @@ import './user.scss';
 import validationScheme from '../../helpers/validationScheme';
 import { InputValidate, AreaValidate } from '../inputValidate/InputValidate';
 import { AppContext } from '../../context/AppProvider';
-import uploadImageUser from '../../services/uploadImage/uploadImageUser';
+import uploadImageUser from '../../services/uploadImage/uploadImageUser.ts';
 import { useActionData } from 'react-router-dom';
 
 function User () {
