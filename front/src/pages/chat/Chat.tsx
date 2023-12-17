@@ -4,6 +4,7 @@ import Talk from 'talkjs';
 import './chat.scss';
 import useChat, { SessionUserType } from '../../hooks/useChat';
 import { AppContext } from '../../context/AppProvider';
+import Spinner from '../../components/spinner/Spinner';
 
 type SessionType = {
   room: string | number;
@@ -13,10 +14,11 @@ type SessionType = {
 }
 
 function Chat () {
-  // N: users id
-  const { user } = useContext(AppContext);
+  // N: users id's
+  const { user, interlocutor } = useContext(AppContext);
 
-  const { loading, chatTemplate } = useChat(user.id, 60);
+  // get loading state and chat data
+  const { loading, chatTemplate } = useChat(user.id, interlocutor);
 
   const { roomID, meData, otherUser } = chatTemplate;
 
@@ -24,6 +26,7 @@ function Chat () {
     <section className='chat'>
       <div className="container chat__container">
         <h2 className='subtitle chat__title'>Chat</h2>
+        {loading && <Spinner />}
         {/* N: login chat and set chat params */}
         {!loading && chatTemplate && <ChatSession room={roomID} me={meData} otherUser={otherUser} />}
 

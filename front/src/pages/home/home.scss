@@ -1,10 +1,10 @@
 @import '../../styles/tools/pxconvert';
 
-@keyframes blinkworld {
-  0%{filter: drop-shadow(5px 5px 30px rgb(0, 114, 63));}
-  50%{filter: drop-shadow(10px 10px 50px rgb(0, 114, 63));}
-  100%{filter: drop-shadow(5px 5px 30px rgb(0, 114, 63));}
-}
+// @keyframes blinkworld {
+//   0%{filter: drop-shadow(5px 5px 30px rgb(0, 114, 63));}
+//   50%{filter: drop-shadow(10px 10px 50px rgb(0, 114, 63));}
+//   100%{filter: drop-shadow(5px 5px 30px rgb(0, 114, 63));}
+// }
 .hero {
   display: grid;
   grid-template-rows: 1fr;
@@ -14,7 +14,8 @@
   background-size: auto auto ;
   background-repeat: no-repeat;
   background-position: top 30px center;
-  animation: blinkworld 2.5s ease-in infinite;
+  filter: drop-shadow(5px 5px 30px rgb(0, 114, 63));
+  // animation: blinkworld 2.5s ease-in infinite;
   // display: flex;
   // align-items: center;
   &__container {

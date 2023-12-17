@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useForm, UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
 
 export type handlersType = {
@@ -15,6 +15,7 @@ function AppProvider ({ children } : any) {
   const handlers: handlersType = { register, errors };
   // Oscar--> create state of user and send it via context to all the app
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')) || '');
+  const [interlocutor, setInterlocutor] = useState();
 
   function userSetter (user: object, token: string) {
     // N: check if user and token exist and then add data to localStorage if not user = null
@@ -28,7 +29,7 @@ function AppProvider ({ children } : any) {
   }
 
   return (
-    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut }}>
+    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor }}>
       { children }
     </Provider>
   );

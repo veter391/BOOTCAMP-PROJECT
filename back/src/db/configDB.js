@@ -32,7 +32,7 @@ class DB {
 
     // J: Events queries
     createEvent: 'INSERT INTO events (name, description, date, city, address, user_id) VALUES (?, ?, ?, ?, ?, ?)',
-    getAllEvents: 'SELECT * FROM events',
+    getAllEvents: 'SELECT e.id, user_id, title, e.description, e.city, e.address, first_name, last_name, org_name, avatar, date, type, is_finished FROM events e, users u WHERE u.id = e.user_id',
     getEventById: 'SELECT * FROM events WHERE id = ?',
     updateEvent: 'UPDATE events SET name = IFNULL(?, name), description = IFNULL(?, description), date = IFNULL(?, date), city = IFNULL(?, city), address = IFNULL(?, address), is_finished = IFNULL(?, is_finished), last_update = NOW() WHERE id = ?',
     deleteEvent: 'DELETE FROM events WHERE id = ?',
@@ -70,8 +70,9 @@ class DB {
     // J: Queries para CHAT
     getAllChats: 'SELECT * FROM chats',
     createChat: 'INSERT INTO chats (room_id, sender_id, receiver_id) VALUES (?, ?, ?)',
-    getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
-    getChatById: 'SELECT * FROM chats WHERE room_id = ?',
+    // getChatUsers: 'SELECT * FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
+    getChatUsers: 'SELECT id, room_id, first_name, org_name, sender_id, receiver_id, email, avatar FROM users, chats WHERE users.id = chats.sender_id OR users.id = chats.receiver_id',
+    getChatById: 'SELECT id, first_name, org_name, sender_id, receiver_id, email, avatar FROM chats c, users u WHERE c.room_id = ? AND (c.sender_id = u.id OR c.receiver_id = u.id)',
     deleteChat: 'DELETE FROM chats WHERE room_id = ?',
 
     // N: check user info

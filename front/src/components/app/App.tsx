@@ -14,9 +14,50 @@ import Chat from '../../pages/chat/Chat';
 import AppProvider from '../../context/AppProvider';
 import PrivateRoute from '../PrivateRoute';
 
+// !!! dont toch it !!!
+import { useEffect, useRef, useState } from 'react';
+import GLOBE from 'vanta/dist/vanta.globe.min';
+
 function App () {
+  // !!! dont toch it !!!
+  // const [vantaEffect, setVantaEffect] = useState(null);
+  const canvasRef = useRef(null);
+  // !!! dont toch it !!!
+  // useEffect(() => {
+  //   if (!vantaEffect) {
+  //     setVantaEffect(GLOBE({
+  //       el: canvasRef.current,
+  //       mouseControls: false,
+  //       touchControls: false,
+  //       gyroControls: false,
+  //       minHeight: 200.00,
+  //       minWidth: 200.00,
+  //       scale: 0.5,
+  //       scaleMobile: 0.5,
+  //       size: 1,
+  //       color: 0x009d57,
+  //       color2: 0x1a1a1a00,
+  //       backgroundColor: 0x1a1a1a00
+  //       // mouseControls: true,
+  //       // touchControls: true,
+  //       // gyroControls: false,
+  //       // minHeight: 200.00,
+  //       // minWidth: 200.00,
+  //       // scale: 1.00,
+  //       // scaleMobile: 1.00,
+  //       // color: 0x1a1a1a,
+  //       // color: 0x009d57,
+  //       // showLines: false
+  //     }));
+  //   }
+  //   return () => {
+  //     if (vantaEffect) vantaEffect.destroy();
+  //   };
+  // }, [vantaEffect]);
+
   return (
-    <div className='wrapper'>
+    <div ref={canvasRef} className='wrapper'>
+      {/* <div ref={canvasRef} className='canvas'></div> */}
       <AppProvider>
         <Header />
 

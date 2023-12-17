@@ -4,8 +4,13 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: rem(15);
+  // padding: rem(15);
+  padding-right: rem(15);
+  padding-bottom: rem(15);
+  padding-top: rem(15);
+  margin-bottom: rem(30);
   border-radius: rem(10);
+  border-bottom: 1px solid var(--active);
 
   small {
     display: block;
@@ -16,19 +21,40 @@
     margin-right: rem(20);
   }
 
-  &__foto {
-    max-width: rem(120);
-    max-height: rem(120);
+  &__location {
+    margin-bottom: 7px;
   }
-  &__title, &__descr {
+
+  &__location, &__date {
+    font-style: italic;
+    font-size: .7rem;
+  }
+
+  &__foto {
+    max-width: rem(100);
+    max-height: rem(100);
+  }
+  &__title {
     margin-bottom: rem(15);
+  }
+
+  &__descr {
+    margin-bottom: rem(40);
   }
   &__name {
     text-wrap: nowrap;
   }
   &__foto {
-    margin: 0 auto;
+    max-width: 120px;
+    max-height: 120px;
+    margin: 0;
+    margin-left: auto;
     margin-bottom: rem(20);
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    &-org {
+      border-color: rgba(255, 149, 0);
+    }
   }
 
   &__btns {
@@ -39,16 +65,28 @@
   }
 
   &__btn {
+    display: flex;
+    align-items: center;
     max-width: rem(50);
     color: red;
     transition: color .3s ease-in-out;
     color: var(--light-theme);
 
-    &:hover {
+    &:hover, &.focus-visible {
       color: var(--primary);
+    }
+    &:active {
+      color: var(--focus);
     }
     &-star {
       margin-right: rem(15);
     }
+  }
+}
+
+.choused {
+  color: var(--focus);
+  &:active {
+    color: var(--hover);
   }
 }

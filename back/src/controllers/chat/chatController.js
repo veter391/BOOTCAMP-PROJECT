@@ -6,8 +6,9 @@ const createChat = async (req, res) => {
 
     // insertar chat en la bbdd
     const result = await DB.sendQuery(DB.query.createChat, [room_id, sender_id, receiver_id]);
+    const response = await DB.sendQuery(DB.query.getChatById, [room_id]);
 
-    res.status(200).json(result);
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

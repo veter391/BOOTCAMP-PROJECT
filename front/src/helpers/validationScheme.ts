@@ -130,8 +130,8 @@ const validationScheme = {
   eventDescr: {
     required: '*Campo obligatorio.',
     maxLength: {
-      value: 500,
-      message: 'Debe contener un máximo de 300 caracteres.'
+      value: 1000,
+      message: 'Debe contener un máximo de 1000 caracteres.'
     },
     minLength: {
       value: 10,

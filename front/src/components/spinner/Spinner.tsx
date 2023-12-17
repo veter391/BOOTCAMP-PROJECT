@@ -3,7 +3,7 @@ import spinnerImage from '../../assets/spinner.svg';
 
 export default function Spinner () {
   return (
-    <img style={{ width: '150px', margin: '0 auto' }}
+    <img className='spinner' style={{ width: '150px', margin: 'auto' }}
       src={spinnerImage}
       alt="spinner" />
   );

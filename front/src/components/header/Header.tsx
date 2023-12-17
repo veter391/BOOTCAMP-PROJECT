@@ -13,12 +13,14 @@ function Header () {
       <div className="container header__container">
         <h2 className='header__logo'>ConnectPeople</h2>
 
-        <button onClick={() => setBurgerActive(!burgerActive)}
-          className={`burger ${burgerActive && 'burger--active'}`}
-          aria-label={(burgerActive && 'Close menu') || 'Open menu'}
-          aria-expanded={burgerActive} data-burger>
-          <span className='burger__line'></span>
-        </button>
+        {user &&
+          <button onClick={() => setBurgerActive(!burgerActive)}
+            className={`burger ${burgerActive && 'burger--active'}`}
+            aria-label={(burgerActive && 'Close menu') || 'Open menu'}
+            aria-expanded={burgerActive} data-burger>
+            <span className='burger__line'></span>
+          </button>
+        }
 
         {user && <HeaderNavigation burgerActive={burgerActive} />}
       </div>

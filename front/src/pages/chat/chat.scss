@@ -1,7 +1,10 @@
 @import '../../styles/tools/pxconvert';
 
 .chat{
+  height: 100%;
   &__container {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     padding: rem(25);

@@ -140,7 +140,8 @@ picture {
   overflow: hidden;
   /* if you use position: sticky on the site - remove this setting */
   // overflow: ;
-  background-color: var(--dark-theme);
+  // background-color: var(--dark-theme);
+  background-color: transparent
 }
 
 .container {
@@ -347,3 +348,13 @@ picture {
   border-color: #DF3600;
   box-shadow: 0 0 10px #DF3600;
 }
+
+// .canvas {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100vh;
+//   display: block;
+//   z-index: -1;
+// }
