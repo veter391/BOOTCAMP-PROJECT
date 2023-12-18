@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState, useRef } from 'react';
+import { FormEvent, useEffect,useContext, useState, useRef } from 'react';
 import './user.scss';
 import validationScheme from '../../helpers/validationScheme';
 import { InputValidate, AreaValidate } from '../inputValidate/InputValidate';
@@ -71,6 +71,7 @@ function User () {
         className='avatar-image'
       />
       <h2>Username</h2>
+      {/* //description */}
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam assumenda repudiandae, consequuntur velit laborum debitis saepe consequatur natus eligendi error.</p>
       {newEvent && <UserEvent />}
       <button onClick={() => setNewEvent(!newEvent)} className='btn-reset form__btn btn'>{(!newEvent && 'AÑADIR EVENTO +') || 'CERRAR'}</button>
