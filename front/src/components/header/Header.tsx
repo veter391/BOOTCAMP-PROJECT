@@ -49,7 +49,7 @@ function HeaderNavigation ({ burgerActive, userLogOut }) {
         </li>
 
         <li className='nav__item'>
-          <a className='nav__link' onClick={userLogOut}>Cerrar sesión</a>
+          <a className='nav__link nav-log-out' onClick={userLogOut}>Cerrar sesión</a>
         </li>
 
       </ul>

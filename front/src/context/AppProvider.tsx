@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { useForm, UseFormRegister, FieldValues, FieldErrors } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export type handlersType = {
   register: UseFormRegister<FieldValues>,
@@ -22,9 +23,13 @@ function AppProvider ({ children } : any) {
     localStorage.setItem('user', JSON.stringify(userLS));
     setUser(userLS);
   }
+
+  const navigate = useNavigate();
+
   function userLogOut () {
     setUser(null);
     localStorage.removeItem('user');
+    navigate('/');
   }
 
   return (
