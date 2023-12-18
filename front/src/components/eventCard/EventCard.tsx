@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import followsAndReactions from '../../services/sendFollowsAndReactions';
 
 type EventCardType = {
-  key: number;
+  userId: number;
   title: string;
   date: string;
   location: string;
@@ -13,23 +13,32 @@ type EventCardType = {
   avatar: string;
   name: string;
   type: string;
-  user: number | string;
-  reactions: () => [];
-  followers: () => [];
+  eventUser: number | string;
+  eventID: number;
+  reactions: number[];
+  followers: number[];
+  // setFollowers: () => void;
+  // setReactions: () => void;
 }
 
-function EventCard({ id, followers, reactions, setFollowers, setReactions, title, date, type = 'user', user = '', location, description, avatar, name }: EventCardType) {
+type buttonChatProps = {
+  reactions: [];
+  followers: [];
+  eventUser: number | string;
+}
+
+function EventCard ({ eventID, userId, getFollows, getReactions, setFollows, setReactions, title, date, type = 'user', eventUser = '', location, description, avatar, name }: EventCardType) {
   const [follow, setFollow] = useState(false);
   const [reaction, setReaction] = useState(false);
 
   function newReaction () {
     setReaction(!reaction);
-    setReactions((old: number[]) => [...old, id]);
+    setReactions((old) => [...old, eventID]);
   }
 
   function newFollow () {
     setFollow(!follow);
-    setFollowers((old: number[]) => [...old, id]);
+    setFollows((old) => [...old, userId]);
   }
 
   return (
@@ -61,7 +70,7 @@ function EventCard({ id, followers, reactions, setFollowers, setReactions, title
             </svg>
           </button>
 
-          {follow && <ButtonGoChat reactions={reactions} followers={followers} user={user} />}
+          {follow && <ButtonGoChat reactions={getReactions} followers={getFollows} eventUser={userId} />}
         </div>
       </div>
 
@@ -73,22 +82,30 @@ function EventCard({ id, followers, reactions, setFollowers, setReactions, title
   );
 }
 
-function ButtonGoChat ({ user, reactions, followers }) {
-  const { setInterlocutor } = useContext(AppContext);
+function ButtonGoChat ({ eventUser, reactions, followers }: buttonChatProps) {
+  const { user, setInterlocutor } = useContext(AppContext);
   const navigate = useNavigate();
-
+  // N: go tu chat function
   const goToChat = () => {
-    setInterlocutor(user);
+    // set event user
+    setInterlocutor(eventUser);
     navigate('/chat');
+
+    let reactionValues = '';
+    let followerValues = '';
+
+    reactions.forEach(item => { reactionValues += `(${user.id},${item}) `; });
+    followers.forEach(item => { followerValues += `(${item},${user.id}) `; });
+    // send reactions and follows to db
     followsAndReactions(
       {
-        reactions: reactions,
-        followers: followers
+        reactions: reactionValues.trimEnd().split(' ').join(','),
+        followers: followerValues.trimEnd().split(' ').join(',')
       }
     );
   };
 
-  return(
+  return (
     <button onClick={goToChat} className='event-card__btn btn-reset'>
       <svg style={{ fill: 'currentColor' }} height="30" width="30" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 60 60" xmlSpace="preserve">

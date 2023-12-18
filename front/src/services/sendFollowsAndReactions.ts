@@ -1,7 +1,7 @@
 import { _url } from './configVariables';
 
 async function followsAndReactions (obj: object) {
-  const baseUrl = `${_url}/followsAndReactions`;
+  const baseUrl = `${_url}/follow/reaction`;
 
   try {
     const resp = await fetch(baseUrl, {

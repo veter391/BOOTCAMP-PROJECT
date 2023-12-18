@@ -20,6 +20,26 @@ const follow = async (req, res) => {
   }
 };
 
+// N: add users and reactions
+const setFollowsAndReaction = async (req, res) => {
+  try {
+    const { reactions, followers } = req.body;
+    // console.log(req.body);
+
+    if (reactions.length > 0) {
+      const dbReactionInfo = await DB.sendQuery(`INSERT INTO reactions(user_id, event_id) VALUES ${reactions}`);
+    }
+
+    if (followers.length > 0) {
+      const dbFollowsInfo = await DB.sendQuery(`INSERT INTO followers(user_id, follower_id) VALUES ${followers}`);
+    }
+
+    res.status(200).json({ message: 'Follows and Reactions was sended!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 // dejar de seguir a un usuario
 const unfollowUser = async (req, res) => {
   try {
@@ -65,5 +85,6 @@ export default {
   follow,
   unfollowUser,
   getFollowers,
-  getFollowingUser
+  getFollowingUser,
+  setFollowsAndReaction
 };

@@ -17,7 +17,7 @@ function Home () {
     });
   };
 
-  const heroStyle = user ? { minHeight: 'calc(100vh - 109px - 72px)' } : {};
+  const heroStyle = user ? { minHeight: 'calc(100vh - 109px - 72px)' } : { minHeight: 'calc(100vh - 109px)' };
 
   return (
     <>

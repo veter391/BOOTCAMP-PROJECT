@@ -1,6 +1,9 @@
 @import '../../styles/tools/_pxconvert.scss';
 
 .header {
+  display: flex;
+  align-items: center;
+  min-height: 109px;
   position: relative;
   padding: rem(22) 0;
   border-bottom:1px solid var(--active);
@@ -8,6 +11,7 @@
   font-weight: 600;
 
   &__container {
+    width: 100%;
     display: flex;
     align-items: center;
   }
