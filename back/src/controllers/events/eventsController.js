@@ -9,7 +9,7 @@ const {
 const createEvent = async (req, res) => {
   try {
     const {
-      name,
+      title,
       description,
       date,
       foto,
@@ -19,7 +19,7 @@ const createEvent = async (req, res) => {
     } = CreateEventSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.createEvent, [
-      name,
+      title,
       description,
       date,
       foto,

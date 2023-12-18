@@ -35,7 +35,9 @@ app.use(express.text());
 // app.use(UploadedFile())
 
 // ::: N: alloweed to share data between front&back
-const corsOptions = {}; // N: justone path { origin: 'http://exemple.com' }
+const corsOptions = {
+
+}; // N: justone path { origin: 'http://exemple.com' }
 app.use(cors(corsOptions));
 // :::
 

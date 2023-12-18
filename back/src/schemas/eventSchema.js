@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
 const CreateEventSchema = z.object({
-  name: z.string(),
+  title: z.string(),
   description: z.string(),
   date: z.string(),
   foto: z.string().optional(),
-  city: z.string(),
+  location: z.string(),
   address: z.string(),
   user_id: z.number()
 });
@@ -19,7 +19,7 @@ const GetAllEventsSchema = z.array(
     id: z.string(),
     user_id: z.string(),
     organization_id: z.string(),
-    name: z.string(),
+    title: z.string(),
     description: z.string(),
     date: z.string(),
     city: z.string(),
@@ -31,11 +31,11 @@ const GetAllEventsSchema = z.array(
 );
 
 const UpdateEventSchema = z.object({
-  name: z.string().optional(),
+  title: z.string().optional(),
   description: z.string().optional(),
   date: z.string().optional(),
   foto: z.string().optional(),
-  city: z.string().optional(),
+  location: z.string(),
   address: z.string().optional(),
   is_finished: z.boolean().optional()
 });
