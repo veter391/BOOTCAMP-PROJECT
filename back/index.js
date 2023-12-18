@@ -16,7 +16,7 @@ import chatRouter from './src/routes/chatRoutes.js';
 import errorHandler from './src/controllers/errors/errorHandler.js';
 
 dotenv.config({ path: '../.env' });
-
+const app = express();
 const PORT = +process.env.PORT || 5000;
 // colors to diferent messages
 const error = chalk.bold.red;
@@ -24,20 +24,35 @@ const ok = chalk.bold.green;
 const warning = chalk.hex('#FFA500'); // orange
 const serverInit = chalk.bold.bgRed;
 
-const app = express();
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
 
 app.use(morgan('dev'));
 // N: permit to use json and text for requests
 app.use(express.json());
 app.use(express.text());
+app.use(upload.single('avatar'));
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // N: if you want to upload file to server!
 // app.use(UploadedFile())
 
 // ::: N: alloweed to share data between front&back
 const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+};
 
-}; // N: justone path { origin: 'http://exemple.com' }
 app.use(cors(corsOptions));
 // :::
 
