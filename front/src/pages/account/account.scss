@@ -14,6 +14,18 @@
   & .btns{
     display: flex;
   }
+  & .btn{
+    margin-top: 0px;
+
+    &__createEvent{
+      position: inherit;
+      margin-right: 0;
+    }
+    &__closeEvent{
+      position: inherit;
+      margin-left: 0;
+    }
+  }
 }
 @media (max-width: 1024px){
   .maincontainer {
@@ -25,10 +37,7 @@
       flex-direction: column;
       margin-right: 0px;
       & .btn{
-        position: relative;
-        bottom: 50px;
-        left: 250px;
-        margin-top: 0px;
+        
         &__createEvent{
           position: inherit;
           margin-right: 0;
@@ -52,8 +61,8 @@
     }
   }
   .eventInput{
-    width: 75vw;
-    position: relative;
+    max-width: 66vw;
+    position: inherit;
   }
 }
 
@@ -63,14 +72,12 @@
       align-self: center;
       display: flex;
       flex-direction: column;
-      // width: 200%;
       margin-right: 0;
       & .btn{
         position: relative;
         bottom: 50px;
         left: 165px;
         margin-top: 0px;
-        // margin-right: 30vw;
         &__createEvent{
           position: inherit;
           margin-right: 0;
@@ -83,15 +90,11 @@
       .form{
         display: flex;
         flex-direction: column;
-        & label{
-          align-self: center;
-          width: 75vw;
-        }
       }
     }
   }
   .eventInput{
-    width: 100%;
-    align-self: center;
+    max-width: 66vw;
+    position: inherit;
   }
 }
