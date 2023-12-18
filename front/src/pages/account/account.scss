@@ -1,11 +1,19 @@
 @import '../../styles/tools/pxconvert';
-
+.container{
+  &__account{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
 .maincontainer {
   display: flex;
   justify-content: space-between;
 }
 .user {
   margin-right: rem(30);
+  & .btns{
+    display: flex;
+  }
 }
 @media (max-width: 1024px){
   .maincontainer {
@@ -15,20 +23,30 @@
       align-self: center;
       display: flex;
       flex-direction: column;
-      width: 200%;
-      & img{
-        position: relative;
-        right: 25px;
-      }
+      margin-right: 0px;
       & .btn{
         position: relative;
         bottom: 50px;
-        left: 165px;
+        left: 250px;
         margin-top: 0px;
-        margin-right: 20vw;
         &__createEvent{
           position: inherit;
           margin-right: 0;
+        }
+        &__closeEvent{
+          position: inherit;
+          margin-left: 0;
+        }
+      }
+      & .divMedia{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        & h2{
+          margin-top: 0px;
+        }
+        & button{
+          padding: 12px 18px;
         }
       }
     }
@@ -45,10 +63,35 @@
       align-self: center;
       display: flex;
       flex-direction: column;
-      width: 200%;
-      & img{
-        right: -18px;
+      // width: 200%;
+      margin-right: 0;
+      & .btn{
+        position: relative;
+        bottom: 50px;
+        left: 165px;
+        margin-top: 0px;
+        // margin-right: 30vw;
+        &__createEvent{
+          position: inherit;
+          margin-right: 0;
+        }
+        &__closeEvent{
+          position: inherit;
+          margin-left: 0;
+        }
+      }
+      .form{
+        display: flex;
+        flex-direction: column;
+        & label{
+          align-self: center;
+          width: 75vw;
+        }
       }
     }
+  }
+  .eventInput{
+    width: 100%;
+    align-self: center;
   }
 }

@@ -6,8 +6,9 @@ import { AppContext } from '../../context/AppProvider';
 function Header () {
   const [burgerActive, setBurgerActive] = useState(false);
 
-  const { user }: any = useContext(AppContext);
-  let location = useLocation();
+  const { user, userLogOut }: any = useContext(AppContext);
+  const location = useLocation();
+
   return (
     <header className='header'>
       <div className="container header__container">
@@ -20,14 +21,14 @@ function Header () {
           <span className='burger__line'></span>
         </button>
 
-        {user && <HeaderNavigation burgerActive={burgerActive} />}
+        {user && <HeaderNavigation burgerActive={burgerActive} userLogOut={userLogOut}/>}
         {location.pathname === '/about' && !user && <AboutNoUser burgerActive={burgerActive}/>}
       </div>
     </header>
   );
 }
 
-function HeaderNavigation ({ burgerActive }) {
+function HeaderNavigation ({ burgerActive, userLogOut }) {
   return (
     <nav className={`header__nav nav ${burgerActive && 'nav--visible'}`} data-nav>
       <ul className='nav__list list-reset'>
@@ -36,11 +37,7 @@ function HeaderNavigation ({ burgerActive }) {
         </li>
 
         <li className='nav__item'>
-          <NavLink className='nav__link' to="/account">Account</NavLink>
-        </li>
-
-        <li className='nav__item'>
-          <NavLink className='nav__link' to="/profile">Profile</NavLink>
+          <NavLink className='nav__link' to="/account">Perfil</NavLink>
         </li>
 
         <li className='nav__item'>
@@ -48,8 +45,13 @@ function HeaderNavigation ({ burgerActive }) {
         </li>
 
         <li className='nav__item'>
-          <NavLink className='nav__link' to="/discover">Discover</NavLink>
+          <NavLink className='nav__link' to="/discover">Explorar</NavLink>
         </li>
+
+        <li className='nav__item'>
+          <a className='nav__link' onClick={userLogOut}>Cerrar sesión</a>
+        </li>
+
       </ul>
     </nav>
   );

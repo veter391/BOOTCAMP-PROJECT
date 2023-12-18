@@ -10,24 +10,36 @@ function User () {
   return (
     <div className='user'>
       <img src="https://picsum.photos/100/100" alt="avatar" />
-      <h2>Username</h2>
-      <p>Location</p>
-      {!newEvent && <button onClick={() => setNewEvent(true)} className='btn-reset form__btn btn'>ADD EVENT +</button>}
-      {newEvent && <UserEvent />}
+      <div className='divMedia'>
+        <div>
+          <h2>Usuario Prueba</h2>
+          <p>Cerdanyola del Valles</p>
+        </div>
+        {!newEvent && <button onClick={() => setNewEvent(true)} className='btn-reset form__btn btn btn__createEvent'>Crear evento</button>}
+      </div>
+      {newEvent && <UserEvent setNewEvent={setNewEvent}/>}
     </div>
   );
 }
 
-function UserEvent () {
+function UserEvent ({ setNewEvent } :any) {
   const { handleSubmit }: any = useContext(AppContext);
 
-  function createEvent () {
+  const handleEventClose = () => {
+    window.scrollTo(0, 0);
+    setNewEvent(false);
+  };
+
+  const createEvent = (values : object) => {
+    console.log(values);
+
     // ! create fetch!!!
     console.log('event');
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(createEvent)} className='form'>
+      <h2 className='subtitle'>Nuevo evento</h2>
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input eventInput'
@@ -40,17 +52,28 @@ function UserEvent () {
         classNameLabel='form__label'
         className='input-reset form__input eventInput'
         type='text'
+        name='address'
+        placeholder='Dirección...'
+        scheme={validationScheme.eventAddress} />
+
+      <InputValidate
+        classNameLabel='form__label'
+        className='input-reset form__input eventInput'
+        type='text'
         name='location'
-        placeholder='Location...'
+        placeholder='Ciudad...'
         scheme={validationScheme.eventLocation} />
 
       <AreaValidate
         classNameLabel='form__label form__label-last'
         className='input-reset form__input event__form-descr eventInput'
         type='text'
-        name='textarea' placeholder='Description...'
+        name='textarea' placeholder='Descripción...'
         scheme={validationScheme.eventDescr} />
-      <button className='btn-reset form__btn btn btn__createEvent' type='submit'>Crear evento</button>
+      <div className='btns'>
+        <button className='btn-reset form__btn btn btn__closeEvent' onClick={handleEventClose} type='submit'>Cerrar</button>
+        <button className='btn-reset form__btn btn btn__createEvent' type='submit'>Crear evento</button>
+      </div>
     </form>
   );
 }

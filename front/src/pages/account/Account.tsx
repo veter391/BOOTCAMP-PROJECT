@@ -5,8 +5,8 @@ import './account.scss';
 function Account () {
   return (
     <section className="account">
-      <div className="container">
-        <h2 className='subtitle'>Account</h2>
+      <div className="container container__account">
+        <h2 className='subtitle'>Perfil</h2>
         <div className='maincontainer'>
           <User />
           <EventFeed />

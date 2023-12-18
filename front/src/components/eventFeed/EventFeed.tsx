@@ -41,7 +41,7 @@ function EventFeed () {
           type="text"
           name="events"
           placeholder='Buscar Evento' />
-        <button className='btn-reset form__btn btn'>buscar</button>
+        <button className='btn-reset form__btn btn'>Buscar</button>
       </div>
 
       <ul className='list-reset feed__list'>

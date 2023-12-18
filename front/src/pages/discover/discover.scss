@@ -28,8 +28,8 @@
     transition-timing-function: ease-in-out;
     transition-duration: .3s;
 
-    &:first-child {
-      margin-right: rem(30);
+    &:first-child, &:nth-child(2) {
+      margin-right: rem(40);
     }
 
     &.active {
