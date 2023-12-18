@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'node:crypto';
+import nodemailer from '../../helpers/nodemailer.js';
 
 import DB from '../../db/configDB.js';
 import { errorMap } from '../../helpers/errorMap.js';
@@ -73,9 +74,16 @@ async function registerUser (req, res, next) {
           infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
 
           // generate confirmation code
-          // const confirmationCode = crypto.randomUUID();
+          const confirmationCode = crypto.randomUUID();
 
-          // await emailService.sendConfirmationEmail(email, data.email, confirmationCode);
+      
+      const emailData = {
+        to: email,
+        confirmationCode,
+        usuario: `${first_name} ${last_name}`
+      };
+
+      emailService.sendConfirmationEmail(emailData);
 
           console.log(token);
           if (token) {

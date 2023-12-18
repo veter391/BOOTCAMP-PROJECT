@@ -1,39 +1,42 @@
 import nodemailer from 'nodemailer';
+import crypto from 'node:crypto';
 
-class EmailService {
-  constructor() {
-    this.transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAILUSER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
+const email = {
+  user: process.env.EMAILUSER,
+  pass: process.env.EMAIL_PASS,
+};
+
+// Configurar el transporte SMTP para mail.com
+let transporter = nodemailer.createTransport({
+  host: 'smtp.mail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: email.user,
+    pass: email.pass
   }
+});
 
-  async sendConfirmationEmail(userEmail, username, confirmationCode) {
-    const registerEmail = {
-      from: process.env.EMAILUSER, // Cambia esto por tu dirección de correo electrónico
-      to: userEmail,
-      subject: '¡Bienvenid@! Activa tu cuenta',
-      text: `Hola ${username}, ¡Bienvenid@ a la app de El Prat! Confirma tu cuenta haciendo clic en el siguiente enlace: http://localhost:5000/users/confirm/${confirmationCode}`,
-      html: `
-        <h1>Hola ${username}, ¡Bienvenid@ a la app de El Prat!</h1>
-        <h2>Confirma tu cuenta haciendo clic en el siguiente enlace</h2>
-        <a href="http://localhost:5000/users/confirm/${confirmationCode}">Confirmar cuenta</a>
-      `,
-      headers: {
-        'My-Custom-Header': 'IMPORTANT Confirmation Email:'
-      },
-    };
+function sendConfirmationEmail({ userEmail, confirmationCode, userName }) {
+  let mailOptions = {
+    from: email.user,
+    to: userEmail,
+    subject: 'Confirmación de registro',
+    html: 
+          `<p>Hola ${userName},
+          </p><p>Tu código de confirmación es: 
+          <strong>${confirmationCode}</strong>
+          </p><p>Gracias</p>`
+  };
 
-    try {
-      await this.transporter.sendMail(registerEmail);
-    } catch (error) {
-      throw new Error('Error al enviar el correo de confirmación');
+  // Enviar el correo electrónico
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Correo de confirmación enviado: ' + info.response);
     }
-  }
+  });
 }
 
-const emailService = new EmailService();
-export default emailService;
+export default { sendConfirmationEmail };
