@@ -40,6 +40,26 @@
       border-color: rgb(var(--hover));
     }
   }
+  &__selection {
+    margin-bottom: rem(30);
+  }
+  &__radio {
+    display: none;
+    &-label {
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+      &.active {
+        color: var(--primary);
+        border-color: var(--primary);
+      }
+    }
+  }
+}
+.discover__selection {
+
 }
 .filterContainer{
   background-color: white;

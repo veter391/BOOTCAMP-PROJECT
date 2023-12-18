@@ -2,11 +2,11 @@ import EventFeed from '../../components/eventFeed/EventFeed';
 import User from '../../components/user/User';
 import './account.scss';
 
-function Account () {
+function Profile () {
   return (
     <section className="account">
       <div className="container">
-        <h2 className='subtitle'>Account</h2>
+        <h2 className='subtitle'>Profile</h2>
         <div className='maincontainer'>
           <User />
           <EventFeed />
@@ -16,4 +16,4 @@ function Account () {
   );
 }
 
-export default Account;
+export default Profile;

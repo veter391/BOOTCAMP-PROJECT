@@ -36,9 +36,9 @@ function HeaderNavigation ({ burgerActive }) {
           <NavLink className='nav__link' to="/">Home</NavLink>
         </li>
 
-        <li className='nav__item'>
+        {/* <li className='nav__item'>
           <NavLink className='nav__link' to="/account">Account</NavLink>
-        </li>
+        </li> */}
 
         <li className='nav__item'>
           <NavLink className='nav__link' to="/profile">Profile</NavLink>

@@ -22,7 +22,7 @@ type eventDataType = {
   is_finished: boolean
 }
 
-function EventFeed () {
+function EventFeed ({ type = '' } : {type : string}) {
   const [events, setEvents] = useState<eventDataType[]>([]);
   const [eventsClon, setEventsClon] = useState<eventDataType[]>([]);
 
@@ -58,6 +58,14 @@ function EventFeed () {
 
     getEvents();
   }, []);
+
+  useEffect(() => {
+    if (type) {
+      setEventsClon(events.filter((item: eventDataType) => item.type === type));
+    } else {
+      setEventsClon(events);
+    }
+  }, [type]);
 
   function findByName (list: eventDataType[], substr: string): object[] {
     // delete symbols and repeated spaces from substring

@@ -1,26 +1,31 @@
 import './discover.scss';
-import EventFeed, { EventCard } from '../../components/eventFeed/EventFeed';
+import EventFeed from '../../components/eventFeed/EventFeed';
+import { useState } from 'react';
 
 function Discover () {
+  const [filterType, setFilterType] = useState('');
+  function changeType (e : any) {
+    setFilterType(e.target.dataset.type);
+  }
   return (
     <section className='discover'>
       <div className="container discover__container">
-        <div>
-          <input type='text' className='searchBar' placeholder='Search...'></input>
-          <ul className='filterContainer list-reset'>
-            <Filter title={'Filter 1'} />
-            <Filter title={'Filter 2'} />
-            <Filter title={'Filter 3'} />
-            <Filter title={'Filter 4'} />
-            <button>Apply changes</button>
-          </ul>
-        </div>
-        <div className='discover__feed'>
-          <a className='discover__selector' href="">events</a>
-          <a className='discover__selector' href="">users/orgs</a>
-            {/* todo all list is a component and also every item is a component!!!  */}
-          <EventFeed />
-        </div>
+        <form className='discover__selection'>
+          <label className={`discover__radio-label ${!filterType && 'active'}`}>
+            Todos
+            <input className='discover__radio' onChange={changeType} type="radio" data-type='' name="type" value="" checked={!filterType}/>
+          </label>
+          <label className={`discover__radio-label ${filterType === 'org' && 'active'}`}>
+            Organizacion
+            <input className='discover__radio' onChange={changeType} type="radio" data-type='org' name="type" value="org" checked={filterType === 'org'} />
+          </label>
+          <label className={`discover__radio-label ${filterType === 'user' && 'active'}`}>
+            Usuarios
+            <input className='discover__radio' onChange={changeType} type="radio" data-type='user' name="type" value="user" checked={filterType === 'user'} />
+          </label>
+        </form>
+          {/* todo all list is a component and also every item is a component!!!  */}
+        <EventFeed type={filterType} />
       </div>
     </section>
   );

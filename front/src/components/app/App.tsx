@@ -8,7 +8,7 @@ import Footer from '../footer/Footer';
 import Home from '../../pages/home/Home';
 import About from '../../pages/about/About';
 import ErrorPage from '../../pages/error/ErrorPage';
-import Account from '../../pages/account/Account';
+import Profile from '../../pages/account/Profile';
 import Discover from '../../pages/discover/Discover';
 import Chat from '../../pages/chat/Chat';
 import AppProvider from '../../context/AppProvider';
@@ -66,9 +66,9 @@ function App () {
           <Routes>
             <Route path='/' element={<Home />}/>
             <Route path='/about' element={<About />} />
-            <Route path='/account' element={
+            <Route path='/profile' element={
             <PrivateRoute>
-              <Account />
+              <Profile />
             </PrivateRoute>
             } />
             <Route path='/discover' element={

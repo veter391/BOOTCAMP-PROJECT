@@ -4,6 +4,8 @@
   overflow: hidden;
   width: 100%;
   max-width: 100%;
+  background-color: var(--dark-theme);
+  border-radius: 0.5rem;
   &__search-box {
     display: flex;
     width: 100%;
