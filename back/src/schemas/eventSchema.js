@@ -4,8 +4,7 @@ const CreateEventSchema = z.object({
   title: z.string(),
   description: z.string(),
   date: z.string(),
-  foto: z.string().optional(),
-  location: z.string(),
+  city: z.string(),
   address: z.string(),
   user_id: z.number()
 });

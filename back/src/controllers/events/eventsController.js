@@ -17,16 +17,17 @@ const createEvent = async (req, res) => {
       address,
       user_id
     } = CreateEventSchema.parse(req.body);
-
+    // title, description, date, city, address, user_id
     const dbInfo = await DB.sendQuery(DB.query.createEvent, [
       title,
       description,
       date,
-      foto,
       city,
       address,
       user_id
     ]);
+
+    console.log(dbInfo)
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {
@@ -58,10 +59,10 @@ const getEventById = async (req, res) => {
 const updateEvent = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, date, city, address, is_finished } = UpdateEventSchema.parse(req.body);
+    const { title, description, date, city, address, is_finished } = UpdateEventSchema.parse(req.body);
 
     const dbInfo = await DB.sendQuery(DB.query.updateEvent, [
-      name,
+      title,
       description,
       date,
       city,

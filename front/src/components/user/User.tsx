@@ -44,7 +44,7 @@ function User () {
         
         if (userId !== undefined && userId !== null && userToken) {
           const response = await uploadImageUser(userId, file, userToken);
-          console.log('Imagen subida exitosamente:', response);
+          console.log('Imagen subida exitosamente');
         } else {
           console.error('ID de usuario o token no válidos');
         }
@@ -65,7 +65,7 @@ function User () {
         hidden
       />
       <img 
-        src="https://picsum.photos/100/100" 
+        src={avatar} 
         alt="avatar" 
         onClick={handleAvatarClick}
         className='avatar-image'
@@ -81,33 +81,30 @@ function User () {
 function UserEvent() {
   const { handleSubmit, user }: any = useContext(AppContext);
 
-  async function createNewEvent(values: FormData) {
-    try {
-      // Envía datos del formulario
-      const response = await createEvent(values);
-      console.log('Valores del formulario:', values);
-      console.log('Respuesta del servidor:', response);
-    } catch (error) {
-      console.error('Error al crear el evento:', error);
-    }
-  }
+  // async function createNewEvent(values: FormData) {
+  //   try {
+  //     const obj = {
+  //       ...values,
+  //       user_id: user.id
+  //     }
+  //     // Envía datos del formulario
+  //     const response = await createEvent(obj);
+  //     console.log('Valores del formulario:', obj);
+  //     console.log('Respuesta del servidor:', response);
+  //   } catch (error) {
+  //     console.error('Error al crear el evento:', error);
+  //   }
+  // }
 
-  function onSubmitForm(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const values: FormData = {
-      title: formData.get('title') as string,
-      date: formData.get('date') as string,
-      location: formData.get('location') as string,
-      address: formData.get('address') as string,
-      description: formData.get('textarea') as string,
-      user_id: user.id
-    };
-    createNewEvent(values);
+  function onSubmitForm(obj: object) {
+  
+    createEvent({...obj, user_id: user.id})
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
   }
 
   return (
-    <form onSubmit={(e) => onSubmitForm(e)}  className='form'>
+    <form onSubmit={handleSubmit(onSubmitForm)}  className='form'>
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'
@@ -129,7 +126,7 @@ function UserEvent() {
         classNameLabel='form__label'
         className='input-reset form__input'
         type='text'
-        name='location'
+        name='city'
         placeholder='City...'
         scheme={validationScheme.eventLocation} />
 
@@ -145,7 +142,7 @@ function UserEvent() {
         classNameLabel='form__label form__label-last'
         className='input-reset form__input event__form-descr'
         type='text'
-        name='textarea' 
+        name='description' 
         placeholder='Description...'
         scheme={validationScheme.eventDescr} />
       <button className='btn-reset form__btn btn' type='submit'>Crear evento</button>

@@ -25,13 +25,11 @@ const GetAllUsersSchema = z.array(
 );
 
 const UpdateUserSchema = z.object({
-  id: z.string(),
   first_name: z.string().min(1).optional(),
   last_name: z.string().min(1).optional(),
   email: z.string().email().optional(),
   password: z.string().min(3).max(8).optional(),
   city: z.string().optional(),
-  avatar: z.string().optional()
 });
 
 const DeleteUserSchema = z.object({

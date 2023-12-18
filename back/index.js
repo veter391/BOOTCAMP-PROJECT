@@ -4,6 +4,9 @@ import chalk from 'chalk';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
 // import { UploadedFile } from 'express-fileupload';
 import userRouter from './src/routes/usersRoutes.js';
 import postRouter from './src/routes/postsRoutes.js';
@@ -23,6 +26,16 @@ const error = chalk.bold.red;
 const ok = chalk.bold.green;
 const warning = chalk.hex('#FFA500'); // orange
 const serverInit = chalk.bold.bgRed;
+
+// ::: N: alloweed to share data between front&back
+// const corsOptions = {
+//   origin: 'http://localhost:5173',
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+// };
+
+app.use(cors());
+// :::
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -45,16 +58,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // N: if you want to upload file to server!
 // app.use(UploadedFile())
-
-// ::: N: alloweed to share data between front&back
-const corsOptions = {
-  origin: 'http://localhost:5173',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-// :::
 
 // Jose: Router to user routes
 app.use('/users', userRouter);
