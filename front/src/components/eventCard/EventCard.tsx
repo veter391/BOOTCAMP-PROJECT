@@ -59,8 +59,8 @@ function EventCard ({ title, date, type = 'user', user = '', location, descripti
   );
 }
 
-function ButtonGoChat({ user } : {user: number | string}) {
-  const { interlocutor, setInterlocutor } = useContext(AppContext);
+function ButtonGoChat ({ user } : {user: number | string}) {
+  const { setInterlocutor }:any = useContext(AppContext);
   const navigate = useNavigate();
 
   const goToChat = () => {
@@ -68,8 +68,8 @@ function ButtonGoChat({ user } : {user: number | string}) {
     navigate('/chat');
   };
 
-  return(
-    <button onClick={goToChat} className='event-card__btn btn-reset'>
+  return (
+    <button title='goTo' onClick={goToChat} className='event-card__btn btn-reset'>
       <svg style={{ fill: 'currentColor' }} height="30" width="30" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 60 60" xmlSpace="preserve">
         <g>

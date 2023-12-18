@@ -28,7 +28,7 @@ function Header () {
   );
 }
 
-function HeaderNavigation ({ burgerActive }) {
+function HeaderNavigation ({ burgerActive }:any) {
   return (
     <nav className={`header__nav nav ${burgerActive && 'nav--visible'}`} data-nav>
       <ul className='nav__list list-reset'>

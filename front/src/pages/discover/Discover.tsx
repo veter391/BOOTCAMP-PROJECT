@@ -1,5 +1,5 @@
 import './discover.scss';
-import EventFeed, { EventCard } from '../../components/eventFeed/EventFeed';
+import EventFeed from '../../components/eventFeed/EventFeed';
 
 function Discover () {
   return (

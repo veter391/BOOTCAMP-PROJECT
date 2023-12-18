@@ -15,12 +15,12 @@ type SessionType = {
 
 function Chat () {
   // N: users id's
-  const { user, interlocutor } = useContext(AppContext);
+  const { user, interlocutor }:any = useContext(AppContext);
 
   // get loading state and chat data
   const { loading, chatTemplate } = useChat(user.id, interlocutor);
 
-  const { roomID, meData, otherUser } = chatTemplate;
+  const { roomID, meData, otherUser }:any = chatTemplate;
 
   return (
     <section className='chat'>
