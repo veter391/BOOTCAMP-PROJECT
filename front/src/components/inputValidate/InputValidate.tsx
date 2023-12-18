@@ -9,11 +9,9 @@ type ValidInputType = {
   classNameLabel: string;
   name: string;
   scheme: object;
-  onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  value: string
 }
 
-function InputValidate ({ type, placeholder, className, classNameLabel, name, scheme, value }: ValidInputType) {
+function InputValidate ({ type, placeholder, className, classNameLabel, name, scheme }: ValidInputType) {
   // get variavles from context
   const { handlers } : any = useContext(AppContext);
   const { errors, register } = handlers;

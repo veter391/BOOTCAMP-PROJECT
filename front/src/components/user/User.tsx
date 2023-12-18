@@ -80,50 +80,26 @@ function User () {
   );
 }
 
-function UserEvent () {
-  const { handleSubmit, user }: any = useContext(AppContext);
-  const [formData, setFormData] = useState<FormData>({
-    title: '',
-    date: '',
-    location: '',
-    address: '',
-    description: '',
-    user_id: user.id
+function UserEvent (values : object) {
+  try {
+    //envía datos del formulario
+    const response = await createEvent(values); 
+    console.log(values);
+    console.log('Respuesta del servidor:', response);
+  } catch (error) {
+    console.error('Error al crear el evento:', error);
+  }
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-
-    const fieldValue = type === 'text' || type === 'date' ? value : e.target.value;
-
-    setFormData((data) => ({
-      ...data,
-      [name]: fieldValue
-    }));
-  };
-
-  const handleSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      //envía datos del formulario
-      const response = await createEvent(formData); 
-      console.log(formData);
-      console.log('Respuesta del servidor:', response);
-    } catch (error) {
-      console.error('Error al crear el evento:', error);
-    }
-  };
 
   return (
-    <form onSubmit={handleSubmitForm} className='form'>
+    <form onSubmit={handleSubmit(UserEvent)} className='form'>
       <InputValidate
         classNameLabel='form__label'
         className='input-reset form__input'
         type='text'
         name='title'
         placeholder='Title...'
-        value={formData.title}
-        onChange={handleChange}
         scheme={validationScheme.eventTitle} />
 
       <InputValidate
@@ -132,8 +108,6 @@ function UserEvent () {
         type='date'
         name='date'
         placeholder='Date...'
-        value={formData.date}
-        onChange={handleChange}
         scheme={validationScheme.eventTitle}
         />
 
@@ -143,8 +117,6 @@ function UserEvent () {
         type='text'
         name='location'
         placeholder='City...'
-        value={formData.location}
-        onChange={handleChange}
         scheme={validationScheme.eventLocation} />
 
       <InputValidate
@@ -153,8 +125,6 @@ function UserEvent () {
         type='text'
         name='address'
         placeholder='Address...'
-        value={formData.address}
-        onChange={handleChange}
         scheme={validationScheme.eventLocation} />
 
       <AreaValidate
@@ -163,8 +133,6 @@ function UserEvent () {
         type='text'
         name='textarea' 
         placeholder='Description...'
-        value={formData.description}
-        onChange={handleChange}
         scheme={validationScheme.eventDescr} />
       <button className='btn-reset form__btn btn' type='submit'>Crear evento</button>
     </form>
