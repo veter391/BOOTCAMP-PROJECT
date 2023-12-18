@@ -1,9 +1,100 @@
 @import '../../styles/tools/pxconvert';
-
+.container{
+  &__account{
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
 .maincontainer {
   display: flex;
   justify-content: space-between;
 }
 .user {
   margin-right: rem(30);
+  & .btns{
+    display: flex;
+  }
+  & .btn{
+    margin-top: 0px;
+
+    &__createEvent{
+      position: inherit;
+      margin-right: 0;
+    }
+    &__closeEvent{
+      position: inherit;
+      margin-left: 0;
+    }
+  }
+}
+@media (max-width: 1024px){
+  .maincontainer {
+    display: flex;
+    flex-direction: column;
+    & .user{
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      margin-right: 0px;
+      & .btn{
+        
+        &__createEvent{
+          position: inherit;
+          margin-right: 0;
+        }
+        &__closeEvent{
+          position: inherit;
+          margin-left: 0;
+        }
+      }
+      & .divMedia{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 30px;
+        & h2{
+          margin-top: 0px;
+        }
+        & button{
+          padding: 12px 18px;
+        }
+      }
+    }
+  }
+  .eventInput{
+    max-width: 66vw;
+    position: inherit;
+  }
+}
+
+@media (max-width: 500px){
+  .maincontainer {
+    & .user{
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      margin-right: 0;
+      & .btn{
+        position: relative;
+        bottom: 50px;
+        left: 165px;
+        margin-top: 0px;
+        &__createEvent{
+          position: inherit;
+          margin-right: 0;
+        }
+        &__closeEvent{
+          position: inherit;
+          margin-left: 0;
+        }
+      }
+      .form{
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  .eventInput{
+    max-width: 66vw;
+    position: inherit;
+  }
 }

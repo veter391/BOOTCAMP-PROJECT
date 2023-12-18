@@ -16,7 +16,7 @@ import PrivateRoute from '../PrivateRoute';
 
 // !!! dont toch it !!!
 import { useEffect, useRef, useState } from 'react';
-import GLOBE from 'vanta/dist/vanta.globe.min';
+// import GLOBE from 'vanta/dist/vanta.globe.min';
 
 function App () {
   // !!! dont toch it !!!
@@ -27,7 +27,7 @@ function App () {
   //   if (!vantaEffect) {
   //     setVantaEffect(GLOBE({
   //       el: canvasRef.current,
-  //       mouseControls: false,
+  //       mouseControls: true,
   //       touchControls: false,
   //       gyroControls: false,
   //       minHeight: 200.00,

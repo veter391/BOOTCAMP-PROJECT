@@ -1,8 +1,19 @@
 import './discover.scss';
-import EventFeed from '../../components/eventFeed/EventFeed';
-import { useState } from 'react';
+import EventFeed, { eventDataType } from '../../components/eventFeed/EventFeed';
+import { useEffect, useState } from 'react';
+import getEvents from '../../services/events/getAllevents';
 
 function Discover () {
+  const [events, setEvents] = useState<eventDataType[]>([]);
+
+  useEffect(() => {
+    getEvents()
+      .then(data => {
+        setEvents(data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   const [filterType, setFilterType] = useState('');
   function changeType (e : any) {
     setFilterType(e.target.dataset.type);
@@ -25,7 +36,7 @@ function Discover () {
           </label>
         </form>
           {/* todo all list is a component and also every item is a component!!!  */}
-        <EventFeed type={filterType} />
+        <EventFeed events={events} type={filterType} />
       </div>
     </section>
   );

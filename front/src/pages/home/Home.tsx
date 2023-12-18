@@ -23,9 +23,9 @@ function Home () {
     <>
       <section className='hero' style={heroStyle}>
         <div className='container hero__container'>
-          <h1 className='hero__title'>Connect People Workbench that will Work</h1>
-          <p className='hero__descr' >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis unde accusamus nihil perferendis fugit eum cupiditate id vel voluptates. Impedit doloribus possimus error commodi quisquam maxime iste iusto distinctio nesciunt!
+          <h1 className='hero__title'>Connect People</h1>
+          <h1 className='hero__title'>Make a change</h1>
+          <p className='hero__descr' >En Connect People, creamos puentes de solidaridad, conectando personas dispuestas a ayudar con aquellas que más la necesitan, dando forma a un mundo donde cada conexión es una oportunidad para marcar la diferencia.
           </p>
 
           { !user &&

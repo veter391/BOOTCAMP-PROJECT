@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import EventCard from '../eventCard/EventCard';
 import './eventFeed.scss';
-import { _url } from '../../services/configVariables';
 
-type eventDataType = {
+export type eventDataType = {
   id: number,
   user: number,
   user_id: number,
@@ -22,42 +21,16 @@ type eventDataType = {
   is_finished: boolean
 }
 
-function EventFeed ({ type = '' } : {type : string}) {
-  const [events, setEvents] = useState<eventDataType[]>([]);
+function EventFeed ({ events, type = '' } : {events : eventDataType[], type : string}) {
   const [eventsClon, setEventsClon] = useState<eventDataType[]>([]);
+  const [follows, setFollows] = useState<[]>([]);
+  const [reactions, setReactions] = useState<[]>([]);
+
+  console.log(follows, reactions);
 
   useEffect(() => {
-    async function getEvents () {
-      await fetch(`${_url}/events`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then(response => response.json())
-        .then(data => {
-          return data.map((item: eventDataType) => ({
-            id: item.id,
-            user: item.user_id,
-            title: item.title,
-            description: item.description,
-            city: item.city,
-            address: item.address,
-            name: item.org_name || `${item.first_name} ${item.last_name}`,
-            avatar: item.avatar,
-            date: item.date,
-            type: item.type,
-            finished: item.is_finished
-          }));
-        })
-        .then(data => {
-          setEvents(data);
-          setEventsClon(data);
-        })
-        .catch(err => console.log(err));
-    }
-
-    getEvents();
-  }, []);
+    setEventsClon(events);
+  }, [events]);
 
   useEffect(() => {
     if (type) {
@@ -72,10 +45,10 @@ function EventFeed ({ type = '' } : {type : string}) {
     const validSubstring = substr.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
     // validate and return filtered by name list
     return list?.filter(item =>
-      item.title.toLowerCase().includes(validSubstring) ||
-      item.name.toLowerCase().includes(validSubstring) ||
-      item.address.toLowerCase().includes(validSubstring) ||
-      item.city.toLowerCase().includes(validSubstring));
+      (item.title.toLowerCase().includes(validSubstring) && (type ? item.type === type : true)) ||
+      (item.name.toLowerCase().includes(validSubstring) && (type ? item.type === type : true)) ||
+      (item.address.toLowerCase().includes(validSubstring) && (type ? item.type === type : true)) ||
+      (item.city.toLowerCase().includes(validSubstring) && (type ? item.type === type : true)));
   }
 
   return (
@@ -87,14 +60,14 @@ function EventFeed ({ type = '' } : {type : string}) {
           type="text"
           name="events"
           placeholder='Buscar Evento' />
-        <button className='btn-reset form__btn btn'>buscar</button>
+        <button className='btn-reset form__btn btn'>Buscar</button>
       </div>
 
       <ul className='list-reset feed__list'>
         {
           eventsClon.map((item: eventDataType) => {
             return (
-              <EventCard key={item.id} type={item.type} user={item.user} title={item.title} date={item.date} location={item.city + ' / ' + item.address} description={item.description} avatar={item.avatar} name={item.name} />
+              <EventCard followers={setFollows} reactions={setReactions} id={item.id} key={item.id} type={item.type} user={item.user} title={item.title} date={item.date} location={item.city + ' / ' + item.address} description={item.description} avatar={item.avatar} name={item.name} />
             );
           })
         }

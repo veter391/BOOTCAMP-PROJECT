@@ -12,9 +12,10 @@
     flex-wrap: wrap;
   }
   &__feed {
-    outline: 1px solid white;
-    width: 450px;
+    width: 60vw;
     margin: auto;
+    display: flex;
+    flex-direction: column;
 
     & ul {
       padding-inline-start: 0px;
@@ -27,8 +28,8 @@
     transition-timing-function: ease-in-out;
     transition-duration: .3s;
 
-    &:first-child {
-      margin-right: rem(30);
+    &:first-child, &:nth-child(2) {
+      margin-right: rem(40);
     }
 
     &.active {

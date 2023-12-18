@@ -115,7 +115,7 @@ const validationScheme = {
   eventLocation: {
     required: '*Campo obligatorio.',
     maxLength: {
-      value: 15,
+      value: 30,
       message: 'Debe contener un máximo de 15 caracteres.'
     },
     minLength: {
@@ -141,6 +141,21 @@ const validationScheme = {
     //   value: /^(?![_.])[A-z][a-zA-Z0-9._]+[0-9](?<![_.])$/i,
     //   message: 'El CIF no és válido'
     // }
+  },
+  eventAddress: {
+    required: '*Campo obligatorio.',
+    maxLength: {
+      value: 45,
+      message: 'Debe contener un máximo de 45 caracteres.'
+    },
+    minLength: {
+      value: 10,
+      message: 'Debe contener un mínimo de 10 caracteres.'
+    },
+    pattern: {
+      value: /^(?![_.])[A-Za-z0-9'.\-\s,]+(?<![_.])$/i,
+      message: 'Invalid company address'
+    }
   }
 };
 

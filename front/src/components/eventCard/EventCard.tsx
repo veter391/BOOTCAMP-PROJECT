@@ -2,8 +2,10 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppProvider';
 import './eventCard.scss';
 import { useNavigate } from 'react-router-dom';
+import followsAndReactions from '../../services/sendFollowsAndReactions';
 
 type EventCardType = {
+  key: number;
   title: string;
   date: string;
   location: string;
@@ -11,12 +13,24 @@ type EventCardType = {
   avatar: string;
   name: string;
   type: string;
-  user: number | string
+  user: number | string;
+  reactions: () => [];
+  followers: () => [];
 }
 
-function EventCard ({ title, date, type = 'user', user = '', location, description, avatar, name }: EventCardType) {
+function EventCard({ id, followers, reactions, setFollowers, setReactions, title, date, type = 'user', user = '', location, description, avatar, name }: EventCardType) {
   const [follow, setFollow] = useState(false);
   const [reaction, setReaction] = useState(false);
+
+  function newReaction () {
+    setReaction(!reaction);
+    setReactions((old: number[]) => [...old, id]);
+  }
+
+  function newFollow () {
+    setFollow(!follow);
+    setFollowers((old: number[]) => [...old, id]);
+  }
 
   return (
     <article className='event-card' style={{ display: 'flex' }}>
@@ -27,7 +41,7 @@ function EventCard ({ title, date, type = 'user', user = '', location, descripti
         <small className='event-card__date'>{new Date(date).toUTCString()}</small>
 
         <div className="event-card__btns">
-          <button onClick={() => setReaction(!reaction)} className={`event-card__btn event-card__btn-star btn-reset ${reaction && 'choused'}`}>
+          <button onClick={newReaction} className={`event-card__btn event-card__btn-star btn-reset ${reaction && 'choused'}`}>
             <svg height="30" width="30" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
               viewBox="0 0 47.94 47.94" xmlSpace="preserve">
               <path style={{ fill: 'currentColor' }} d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
@@ -39,7 +53,7 @@ function EventCard ({ title, date, type = 'user', user = '', location, descripti
             </svg>
           </button>
 
-          <button onClick={() => setFollow(!follow)} className={`event-card__btn event-card__btn-star btn-reset ${follow && 'choused'}`}>
+          <button onClick={newFollow} className={`event-card__btn event-card__btn-star btn-reset ${follow && 'choused'}`}>
             <svg style={{ fill: 'currentColor' }} height="30" width="30" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M9 3C9 4.65685 7.65685 6 6 6C4.34315 6 3 4.65685 3 3C3 1.34315 4.34315 0 6 0C7.65685 0 9 1.34315 9 3Z" />
               <path d="M0.61528 14.428C0.217975 14.1736 -0.0121527 13.721 0.0460496 13.2529C0.414158 10.292 2.93944 8 5.9999 8C9.06036 8 11.5856 10.2914 11.9537 13.2522C12.012 13.7203 11.7818 14.1729 11.3845 14.4273C9.83022 15.4225 7.98243 16 5.9999 16C4.01737 16 2.16959 15.4231 0.61528 14.428Z" />
@@ -47,7 +61,7 @@ function EventCard ({ title, date, type = 'user', user = '', location, descripti
             </svg>
           </button>
 
-          {follow && <ButtonGoChat user={user} />}
+          {follow && <ButtonGoChat reactions={reactions} followers={followers} user={user} />}
         </div>
       </div>
 
@@ -59,13 +73,19 @@ function EventCard ({ title, date, type = 'user', user = '', location, descripti
   );
 }
 
-function ButtonGoChat({ user } : {user: number | string}) {
-  const { interlocutor, setInterlocutor } = useContext(AppContext);
+function ButtonGoChat ({ user, reactions, followers }) {
+  const { setInterlocutor } = useContext(AppContext);
   const navigate = useNavigate();
 
   const goToChat = () => {
     setInterlocutor(user);
     navigate('/chat');
+    followsAndReactions(
+      {
+        reactions: reactions,
+        followers: followers
+      }
+    );
   };
 
   return(
