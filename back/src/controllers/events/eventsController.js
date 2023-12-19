@@ -27,7 +27,7 @@ const createEvent = async (req, res) => {
       user_id
     ]);
 
-    console.log(dbInfo)
+    console.log(dbInfo);
 
     res.status(201).json({ ...req.body, id: dbInfo.insertId });
   } catch (error) {

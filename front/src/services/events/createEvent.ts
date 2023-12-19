@@ -4,13 +4,12 @@ async function createEvent (obj: object) {
   const baseUrl = `${_url}/events/create/`;
 
   try {
-
     const resp = await fetch(baseUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: 
+      body:
         JSON.stringify(obj)
     });
 
