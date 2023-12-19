@@ -7,6 +7,18 @@ export type handlersType = {
   errors: FieldErrors<FieldValues>,
 }
 
+type userData = {
+  id: number;
+  name: string;
+  avatar: string;
+  location: string;
+  description: string;
+}
+
+type userLSData = {
+  user: userData;
+  token: string;
+}
 // export AppContext => create context
 const AppContext = createContext({});
 const Provider = AppContext.Provider;
@@ -18,7 +30,8 @@ function AppProvider ({ children } : any) {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')) || '');
   const [interlocutor, setInterlocutor] = useState();
 
-  function userSetter (user: object, token: string) {
+  function userSetter (data :userLSData) {
+    const { user, token } : {user: userData, token: string} = data;
     // N: check if user and token exist and then add data to localStorage if not user = null
     const userLS = token && user ? { ...user, token } : null;
     localStorage.setItem('user', JSON.stringify(userLS));
