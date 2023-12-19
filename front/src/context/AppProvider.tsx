@@ -17,8 +17,10 @@ function AppProvider ({ children } : any) {
   // Oscar--> create state of user and send it via context to all the app
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user')) || '');
   const [interlocutor, setInterlocutor] = useState();
-  const [getFollows, setFollows] = useState(JSON.parse(localStorage.getItem('user')).user.follows);
-  const [getReactions, setReactions] = useState(JSON.parse(localStorage.getItem('user')).user.reactions);
+  const [getFollows, setFollows] = useState();
+  const [getReactions, setReactions] = useState();
+  // const [getFollows, setFollows] = useState(JSON.parse(localStorage.getItem('user')).user.follows);
+  // const [getReactions, setReactions] = useState(JSON.parse(localStorage.getItem('user')).user.reactions);
 
   function userSetter (data) {
     const { user, token } = data;
