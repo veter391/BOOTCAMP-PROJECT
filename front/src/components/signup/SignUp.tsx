@@ -20,6 +20,7 @@ function SignUp () {
     userRegister({ ...values, state: (isCompany && 'org') || 'user' })
       .then(data => {
         const { user, token } = data;
+
         if (!user) throw new Error('Usuario ya existe!');
         userSetter(user, token);
         console.log('sign up');

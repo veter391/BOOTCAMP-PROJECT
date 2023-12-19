@@ -4,20 +4,11 @@ import { AppContext } from '../../context/AppProvider';
 import uploadImageUser from '../../services/uploads/uploadsImageUser';
 import CreateEventModal from '../createEventModal/CreateEventModal';
 
-interface FormData {
-  title: string;
-  date: string;
-  location: string;
-  address: string;
-  description: string;
-  user_id: number;
-}
-
 function User () {
   const { user }: any = useContext(AppContext);
   const [avatar, setAvatar] = useState<string>('https://picsum.photos/100/100');
   const fileInputRef = useRef<HTMLInputElement>(null);
-
+  console.log(user);
   const handleAvatarClick = (): void => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -71,8 +62,8 @@ function User () {
       />
       <div className='divMedia'>
         <div>
-          <h2>Usuario Prueba</h2>
-          <p>Cerdanyola del Valles</p>
+          <h2>{!user.name && 'Username'}</h2>
+          <p>{!user.city && 'Location'}</p>
         </div>
         <CreateEventModal />
       </div>
