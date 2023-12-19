@@ -14,10 +14,10 @@ function CreateEventModal () {
   };
 
   function onSubmitForm (obj: object) {
-    console.log(obj);
     createEvent({ ...obj, user_id: user.id })
       .then(data => console.log(data))
       .catch(err => console.error(err));
+    setModal(!modal);
   }
 
   return (
