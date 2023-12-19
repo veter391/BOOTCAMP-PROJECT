@@ -36,7 +36,7 @@ function EventFeed ({ events, type = '' } : {events : eventDataType[], type : st
     }
   }, [type]);
 
-  function findByName (list: eventDataType[], substr: string): object[] {
+  function findByName (list: eventDataType[], substr: string): eventDataType[] {
     // delete symbols and repeated spaces from substring
     const validSubstring = substr.toLowerCase().replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
     // validate and return filtered by name list

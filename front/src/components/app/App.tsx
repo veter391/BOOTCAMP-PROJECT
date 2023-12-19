@@ -15,13 +15,13 @@ import AppProvider from '../../context/AppProvider';
 import PrivateRoute from '../PrivateRoute';
 
 // !!! dont toch it !!!
-import { useEffect, useRef, useState } from 'react';
+// import { useEffect, useRef, useState } from 'react';
 // import GLOBE from 'vanta/dist/vanta.globe.min';
 
 function App () {
   // !!! dont toch it !!!
   // const [vantaEffect, setVantaEffect] = useState(null);
-  const canvasRef = useRef(null);
+  // const canvasRef = useRef(null);
   // !!! dont toch it !!!
   // useEffect(() => {
   //   if (!vantaEffect) {
@@ -56,7 +56,7 @@ function App () {
   // }, [vantaEffect]);
 
   return (
-    <div ref={canvasRef} className='wrapper'>
+    <div className='wrapper'>
       {/* <div ref={canvasRef} className='canvas'></div> */}
       <AppProvider>
         <Header />
@@ -84,7 +84,6 @@ function App () {
             <Route path='*' element={<ErrorPage />} />
           </Routes>
         </main>
-
         <Footer />
       </AppProvider>
     </div>

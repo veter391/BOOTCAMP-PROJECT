@@ -5,21 +5,37 @@ import { _url } from '../services/configVariables';
 type idType = string | number;
 
 type SessionUserType = {
-  id: string | number,
-  first_name: string,
-  name: string | string,
-  email: string,
-  photoUrl: string,
-  welcomeMessage: string,
-  role: string,
-  avatar: string
+  id: string;
+  first_name: string;
+  org_name:string;
+  name: string | string;
+  email: string;
+  photoUrl: string;
+  welcomeMessage: string;
+  role: string;
+  avatar: string;
+  sender_id:number;
+  receiver_id:number;
+  room_id: string;
 }
 
-const templateType : {
-  roomID: string | number | any,
-  meData: string | number | any,
-  otherUser: string | number | any
-} = {
+type FilteredUser = {
+  id: string;
+  otherId: number;
+  name: string | undefined;
+  email: string;
+  photoUrl: string;
+  welcomeMessage: string;
+  role: string;
+}
+
+type TemplateType = {
+  roomID: string;
+  meData: FilteredUser | string;
+  otherUser: FilteredUser | string;
+}
+
+const templateType: TemplateType = {
   roomID: '',
   meData: '',
   otherUser: ''
@@ -31,7 +47,7 @@ export default function useChat (meID: idType, otherID: idType) {
 
   function error (err: unknown) {
     console.log(err);
-    const errorObj : any = {
+    const errorObj: TemplateType = {
       roomID: 'error',
       meData: 'error',
       otherUser: 'error'
@@ -49,7 +65,7 @@ export default function useChat (meID: idType, otherID: idType) {
     }
 
     // modify user object and return simple user objects
-    const myObject = data.map((user: SessionUserType) => {
+    const myObject = data.map((user: SessionUserType): FilteredUser => {
       return {
         id: user.id,
         otherId: user.id === meID ? user.receiver_id : user.sender_id,
@@ -122,8 +138,8 @@ export default function useChat (meID: idType, otherID: idType) {
         }
       })
         .then(response => response.json())
-        .then(data => {
-          const patern = (data) => (data.sender_id === meID && data.receiver_id === otherID) || (data.receiver_id === meID && data.sender_id === otherID);
+        .then((data: SessionUserType[]) => {
+          const patern = (data: SessionUserType) => (data.sender_id === meID && data.receiver_id === otherID) || (data.receiver_id === meID && data.sender_id === otherID);
 
           const findChat = data.find(user => patern(user));
 

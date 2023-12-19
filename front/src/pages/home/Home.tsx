@@ -5,9 +5,9 @@ import './home.scss';
 import { AppContext } from '../../context/AppProvider';
 
 function Home () {
-  const { user } = useContext(AppContext);
+  const { user }:any = useContext(AppContext);
 
-  const scrolling = (e) => {
+  const scrolling = (e:any) => {
     e.preventDefault();
     const id = e.target.getAttribute('href');
 

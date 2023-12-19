@@ -1,15 +1,8 @@
-import { useState } from 'react';
-
 function Error () {
-  const [error, setError] = useState({
-    status: 404,
-    message: "Path doesn't exist"
-  });
-
   return (
     <>
-      <h2>Error <span className="colored-error">{error.status}</span></h2>
-      <h3>{error.message}</h3>
+      <h2>Error <span className="colored-error">404</span></h2>
+      <h3>Path doesn't exist</h3>
     </>
   );
 }
