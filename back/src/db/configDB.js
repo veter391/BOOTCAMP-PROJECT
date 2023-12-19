@@ -51,7 +51,7 @@ class DB {
     // J: Follow queries
     followUser: 'INSERT INTO followers_users (user_id, follower_id) VALUES (?, ?)',
     unfollowUser: 'DELETE FROM followers_users WHERE follower_id = ? AND user_id = ?',
-    getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
+    // getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
     getFollowingUser: 'SELECT * FROM followers_users WHERE follower_id = ?',
     getUserFollowsByID: 'SELECT * FROM followers_users WHERE user_id = ? AND follower_id = ?',
 
@@ -76,7 +76,9 @@ class DB {
     deleteChat: 'DELETE FROM chats WHERE room_id = ?',
 
     // N: check user info
-    checkEmail: 'SELECT * FROM users WHERE email = ?'
+    checkEmail: 'SELECT * FROM users WHERE email = ?',
+    getFollowers: 'SELECT user_id FROM followers WHERE follower_id = ?',
+    getReactions: 'SELECT event_id FROM reactions WHERE user_id = ?'
   };
 
   // N: fuvction return the object with all info about connection

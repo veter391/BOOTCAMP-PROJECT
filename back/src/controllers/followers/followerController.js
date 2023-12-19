@@ -24,7 +24,7 @@ const follow = async (req, res) => {
 const setFollowsAndReaction = async (req, res) => {
   try {
     const { reactions, followers } = req.body;
-    // console.log(req.body);
+    console.log(req.body);
 
     if (reactions.length > 0) {
       const dbReactionInfo = await DB.sendQuery(`INSERT INTO reactions(user_id, event_id) VALUES ${reactions}`);

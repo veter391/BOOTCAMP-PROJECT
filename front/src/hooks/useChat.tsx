@@ -15,7 +15,6 @@ type SessionUserType = {
   avatar: string
 }
 
-
 const templateType : {
   roomID: string | number | any,
   meData: string | number | any,

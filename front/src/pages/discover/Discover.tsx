@@ -24,15 +24,15 @@ function Discover () {
         <form className='discover__selection'>
           <label className={`discover__radio-label ${!filterType && 'active'}`}>
             Todos
-            <input className='discover__radio' onChange={changeType} type="radio" data-type='' name="type" value="" checked={!filterType}/>
+            <input className='discover__radio visually-hidden' onChange={changeType} type="radio" data-type='' name="type" value="" checked={!filterType}/>
           </label>
           <label className={`discover__radio-label ${filterType === 'org' && 'active'}`}>
             Organizacion
-            <input className='discover__radio' onChange={changeType} type="radio" data-type='org' name="type" value="org" checked={filterType === 'org'} />
+            <input className='discover__radio visually-hidden' onChange={changeType} type="radio" data-type='org' name="type" value="org" checked={filterType === 'org'} />
           </label>
           <label className={`discover__radio-label ${filterType === 'user' && 'active'}`}>
             Usuarios
-            <input className='discover__radio' onChange={changeType} type="radio" data-type='user' name="type" value="user" checked={filterType === 'user'} />
+            <input className='discover__radio visually-hidden' onChange={changeType} type="radio" data-type='user' name="type" value="user" checked={filterType === 'user'} />
           </label>
         </form>
           {/* todo all list is a component and also every item is a component!!!  */}

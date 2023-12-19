@@ -45,12 +45,18 @@
     margin-bottom: rem(30);
   }
   &__radio {
-    display: none;
     &-label {
       font-weight: 500;
       border-bottom: 1px solid transparent;
       &:not(:last-child) {
         margin-right: 20px;
+      }
+      cursor: pointer;
+      transition-property: color, border;
+      transition-timing-function: ease-in-out;
+      transition-duration: .3s;
+      &:hover {
+        color: var(--primary);
       }
       &.active {
         color: var(--primary);

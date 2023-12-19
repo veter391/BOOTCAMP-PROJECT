@@ -38,16 +38,22 @@ async function registerUser (req, res, next) {
   try {
     // N: send query to BD
     const response = await DB.sendQuery(DB.query.createUser, [first_name, last_name, org_name, email, hashedPassword, description, city, address, avatar, cif, type]);
-    console.log(response);
 
     //* If user exists in DB generate the tocken for user
-    const infoToUser = { id: response.insertId };
+    const infoToUser = {
+      id: response.insertId,
+      type: type,
+      avatar: avatar,
+      city: city,
+      name: org_name || `${first_name} ${last_name || ''}`,
+      follows: '',
+      reactions: ''
+    };
 
     const token = jwt.sign(infoToUser, process.env.JWT_SECRET, { expiresIn: '15 day' });
 
     infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
 
-    console.log(token);
     if (token) {
       res.send({
         ok: true,

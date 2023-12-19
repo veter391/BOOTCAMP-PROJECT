@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppProvider';
 import './eventCard.scss';
 import { useNavigate } from 'react-router-dom';
@@ -25,21 +25,26 @@ type buttonChatProps = {
   reactions: [];
   followers: [];
   eventUser: number | string;
+  user: object;
+  setInterlocutor: any;
 }
 
-function EventCard ({ eventID, userId, getFollows, getReactions, setFollows, setReactions, title, date, type = 'user', eventUser = '', location, description, avatar, name }: EventCardType) {
-  const [follow, setFollow] = useState(false);
-  const [reaction, setReaction] = useState(false);
+function EventCard ({ eventID, userId, title, date, type = 'user', location, description, avatar, name }: EventCardType) {
+  const { user, setInterlocutor, getFollows, setFollows, getReactions, setReactions } = useContext(AppContext);
+  const [follow, setFollow] = useState(getFollows.includes(userId));
+  const [reaction, setReaction] = useState(getReactions.includes(eventID));
 
   function newReaction () {
     setReaction(!reaction);
-    setReactions((old) => [...old, eventID]);
+    setReactions((old) => old.includes(eventID) ? old.filter((n: number) => n !== eventID) : [eventID, ...old]);
   }
 
   function newFollow () {
     setFollow(!follow);
-    setFollows((old) => [...old, userId]);
+    setFollows((old) => old.includes(userId) ? old.filter((n: number) => n !== userId) : [userId, ...old]);
   }
+
+  // console.log(getFollows, getReactions)
 
   return (
     <article className='event-card' style={{ display: 'flex' }}>
@@ -70,7 +75,7 @@ function EventCard ({ eventID, userId, getFollows, getReactions, setFollows, set
             </svg>
           </button>
 
-          {follow && <ButtonGoChat reactions={getReactions} followers={getFollows} eventUser={userId} />}
+          {follow && <ButtonGoChat user={user.user} setInterlocutor={setInterlocutor} reactions={getReactions} followers={getFollows} eventUser={userId} />}
         </div>
       </div>
 
@@ -82,27 +87,31 @@ function EventCard ({ eventID, userId, getFollows, getReactions, setFollows, set
   );
 }
 
-function ButtonGoChat ({ eventUser, reactions, followers }: buttonChatProps) {
-  const { user, setInterlocutor } = useContext(AppContext);
+function ButtonGoChat({ user, setInterlocutor, eventUser, reactions, followers }: buttonChatProps) {
   const navigate = useNavigate();
   // N: go tu chat function
   const goToChat = () => {
     // set event user
     setInterlocutor(eventUser);
-    navigate('/chat');
+    // navigate('/chat');
+    // console.log(reactions)
 
     let reactionValues = '';
     let followerValues = '';
+    // reactionsStack.forEach(item => reactions.filter(el => item === el));
+    // followsStack.forEach(item => reactions.filter(el => item === el));
 
+    // console.log(reactions)
     reactions.forEach(item => { reactionValues += `(${user.id},${item}) `; });
     followers.forEach(item => { followerValues += `(${item},${user.id}) `; });
+
     // send reactions and follows to db
-    followsAndReactions(
-      {
-        reactions: reactionValues.trimEnd().split(' ').join(','),
-        followers: followerValues.trimEnd().split(' ').join(',')
-      }
-    );
+    // followsAndReactions(
+    //   {
+    //     reactions: reactionValues.trimEnd().split(' ').join(','),
+    //     followers: followerValues.trimEnd().split(' ').join(',')
+    //   }
+    // );
   };
 
   return (

@@ -30,6 +30,11 @@ async function logIn (req, res, next) {
       return next(new HttpError(400, 'Something wrong email is fail'));
     }
 
+    const follows = await DB.sendQuery(DB.query.getFollowers, [user.id]);
+    const reactions = await DB.sendQuery(DB.query.getReactions, [user.id]);
+    // console.log(Object.values(JSON.parse(follows)), Object.values(JSON.parse(reactions)));
+    console.log(follows.map(e => e.user_id));
+
     // Compare passwords
     const isValidPassword = await bcrypt.compare(realPassword, user.password);
     // const isValidPassword = true;
@@ -38,7 +43,15 @@ async function logIn (req, res, next) {
       return next(new HttpError(400, 'Something wrong password is fail'));
     }
     //* If user exists in DB generate the tocken for user
-    const infoToUser = { id: user.id };
+    const infoToUser = {
+      id: user.id,
+      avatar: user.avatar,
+      city: user.city,
+      type: user.type,
+      name: user.org_name || `${user.first_name} ${user.last_name ? user.last_name : ''}`,
+      follows: follows.map(e => e.user_id),
+      reactions: reactions.map(e => e.event_id)
+    };
 
     const token = jwt.sign(infoToUser, process.env.JWT_SECRET, { expiresIn: '15 day' });
 

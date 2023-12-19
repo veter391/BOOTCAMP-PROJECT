@@ -14,9 +14,9 @@ function LogIn () {
     // N: login user
     userLogIn(values)
       .then(data => {
-        const { user, token } = data;
+        const { user } = data;
         if (!user) throw new Error('Useario no existe tienes que registrarte!');
-        userSetter(user, token);
+        userSetter(data);
         console.log('login');
       })
       .catch(err => setLogInError(err.message));

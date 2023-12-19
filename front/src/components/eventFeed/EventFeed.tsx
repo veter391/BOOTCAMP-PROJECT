@@ -23,8 +23,6 @@ export type eventDataType = {
 
 function EventFeed ({ events, type = '' } : {events : eventDataType[], type : string}) {
   const [eventsClon, setEventsClon] = useState<eventDataType[]>([]);
-  const [follows, setFollows] = useState<[]>([]);
-  const [reactions, setReactions] = useState<[]>([]);
 
   useEffect(() => {
     setEventsClon(events);
@@ -65,7 +63,7 @@ function EventFeed ({ events, type = '' } : {events : eventDataType[], type : st
         {
           eventsClon.map((item: eventDataType) => {
             return (
-              <EventCard getFollows={follows} getReactions={reactions} setFollows={setFollows} setReactions={setReactions} eventID={item.id} userId={item.user} key={item.id} type={item.type} user={item.user} title={item.title} date={item.date} location={item.city + ' / ' + item.address} description={item.description} avatar={item.avatar} name={item.name} />
+              <EventCard eventID={item.id} userId={item.user} key={item.id} type={item.type} title={item.title} date={item.date} location={item.city + ' / ' + item.address} description={item.description} avatar={item.avatar} name={item.name} />
             );
           })
         }
