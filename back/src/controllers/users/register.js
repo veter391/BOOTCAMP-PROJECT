@@ -1,12 +1,13 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'node:crypto';
+import nodemailer from '../../helpers/nodemailer.js';
 
 import DB from '../../db/configDB.js';
 import { errorMap } from '../../helpers/errorMap.js';
 import { CreateUserSchema } from '../../schemas/userSchema.js';
 import { CreateOrganizationSchema } from '../../schemas/organizationSchema.js';
-// import { sendEmail } from '../../helpers/sendEmail.js';
+import emailService from '../../helpers/nodemailer.js';
 
 async function registerUser (req, res, next) {
   // N: chack if object has cif and return true or false
@@ -26,18 +27,41 @@ async function registerUser (req, res, next) {
   }
 
   // valid data from zod
-  const { first_name, last_name, org_name, email, password, description, city, address, avatar, cif, type } = data;
+  const {
+    first_name,
+    last_name,
+    org_name,
+    email,
+    password,
+    description,
+    city,
+    address,
+    avatar,
+    cif,
+    type
+  } = data;
 
   // hashing password
   const salt = 10;
   const hashedPassword = bcrypt.hashSync(password, salt);
 
-  // generate confirmation code
-  // const confirmationCode = crypto.randomUUID();
   // Add new user/org to BD
   try {
     // N: send query to BD
-    const response = await DB.sendQuery(DB.query.createUser, [first_name, last_name, org_name, email, hashedPassword, description, city, address, avatar, cif, type]);
+    const response = await DB.sendQuery(DB.query.createUser, [
+      first_name,
+      last_name,
+      org_name,
+      email,
+      hashedPassword,
+      description,
+      city,
+      address,
+      avatar,
+      cif,
+      type
+    ]
+    );
 
     //* If user exists in DB generate the tocken for user
     const infoToUser = {
@@ -53,7 +77,18 @@ async function registerUser (req, res, next) {
     const token = jwt.sign(infoToUser, process.env.JWT_SECRET, { expiresIn: '15 day' });
 
     infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
+    // generate confirmation code
+    const confirmationCode = crypto.randomUUID();
 
+    const emailData = {
+      to: email,
+      confirmationCode,
+      usuario: `${first_name} ${last_name}`
+    };
+
+    emailService.sendConfirmationEmail(emailData);
+
+    console.log(token);
     if (token) {
       res.send({
         ok: true,

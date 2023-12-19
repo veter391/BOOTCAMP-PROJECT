@@ -2,7 +2,7 @@ const validationScheme = {
   email: {
     required: '*Campo obligatorio.',
     maxLength: {
-      value: 25,
+      value: 40,
       message: 'Debe contener un máximo de 25 caracteres.'
     },
     minLength: {
@@ -32,7 +32,7 @@ const validationScheme = {
       message: 'Debe contener un mínimo de 2 caracteres.'
     },
     pattern: {
-      value: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/i, // no se que hace este i
+      value: /^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._¨^]+(?<![_.])$/i, // no se que hace este i
       message: 'Invalid name'
     }
 

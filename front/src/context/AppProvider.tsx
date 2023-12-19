@@ -11,6 +11,20 @@ type AppProviderProps = {
   children: ReactNode
 }
 
+type userData = {
+  id: number;
+  name: string;
+  avatar: string;
+  location: string;
+  description: string;
+  follows: number[];
+  reactions: number[];
+}
+
+type userLSData = {
+  user: userData;
+  token: string;
+}
 // export AppContext => create context
 const AppContext = createContext({});
 const Provider = AppContext.Provider;
@@ -25,13 +39,13 @@ function AppProvider ({ children }: AppProviderProps) {
     return JSON.parse(userLS);
   });
   const [interlocutor, setInterlocutor] = useState();
-  const [getFollows, setFollows] = useState();
-  const [getReactions, setReactions] = useState();
+  const [getFollows, setFollows] = useState([]);
+  const [getReactions, setReactions] = useState([]);
   // const [getFollows, setFollows] = useState(JSON.parse(localStorage.getItem('user')).user.follows);
   // const [getReactions, setReactions] = useState(JSON.parse(localStorage.getItem('user')).user.reactions);
 
-  function userSetter (data) {
-    const { user, token } = data;
+  function userSetter (data: userLSData) {
+    const { user, token }: { user: userData, token: string } = data;
     // N: check if user and token exist and then add data to localStorage if not user = null
     console.log(data);
     const userLS = token && user ? data : null;
@@ -50,7 +64,7 @@ function AppProvider ({ children }: AppProviderProps) {
   }
 
   return (
-    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions}}>
+    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions }}>
       { children }
     </Provider>
   );

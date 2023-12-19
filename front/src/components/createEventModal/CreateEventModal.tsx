@@ -3,20 +3,22 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppProvider';
 import { AreaValidate, InputValidate } from '../inputValidate/InputValidate';
 import validationScheme from '../../helpers/validationScheme';
+import createEvent from '../../services/events/createEvent';
 
 function CreateEventModal () {
-  const { handleSubmit } :any = useContext(AppContext);
+  const { handleSubmit, user } :any = useContext(AppContext);
   const [modal, setModal] = useState(false);
 
   const handleToggle = () => {
     setModal(!modal);
   };
 
-  const createEvent = (values : object) => {
+  function onSubmitForm (obj: object) {
+    createEvent({ ...obj, user_id: user.id })
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
     setModal(!modal);
-    // ! create fetch!!!
-    console.log('event');
-  };
+  }
 
   return (
     <>
@@ -25,7 +27,7 @@ function CreateEventModal () {
       {modal && <div className='modal'>
         <div className='modal__overlay'></div>
         <div className='modal__content'>
-          <form onSubmit={handleSubmit(createEvent)} className='form'>
+          <form onSubmit={handleSubmit(onSubmitForm)} className='form'>
           <h2 className='subtitle'>Nuevo evento</h2>
           <InputValidate
             classNameLabel='form__label'
@@ -33,6 +35,13 @@ function CreateEventModal () {
             type='text'
             name='title'
             placeholder='Titulo...'
+            scheme={validationScheme.eventTitle} />
+          <InputValidate
+            classNameLabel='form__label'
+            className='input-reset form__input'
+            type='date'
+            name='date'
+            placeholder='Date...'
             scheme={validationScheme.eventTitle} />
           <InputValidate
             classNameLabel='form__label'
@@ -45,7 +54,7 @@ function CreateEventModal () {
             classNameLabel='form__label'
             className='input-reset form__input eventInput'
             type='text'
-            name='location'
+            name='city'
             placeholder='Ciudad...'
             scheme={validationScheme.eventLocation} />
           <AreaValidate

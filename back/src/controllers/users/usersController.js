@@ -63,9 +63,12 @@ const updateUser = async (req, res) => {
       last_name,
       email,
       city,
-      password,
-      avatar
+      password
     } = UpdateUserSchema.parse(req.body);
+
+    const dataFile = req.file;
+    const avatar = dataFile.filename;
+    console.log(avatar);
 
     const dbInfo = await DB.sendQuery(DB.query.updateUser, [
       first_name,
