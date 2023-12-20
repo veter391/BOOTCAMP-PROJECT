@@ -12,10 +12,10 @@ type creatorType = {
 function Creators () {
   return (
     <ul className='creators list-reset'>
-      <Creator className='card' name='Joan Vivó' text='Back BBDD' avatar='./img/JoanImg.jpg' linkedin='/joanvs8' github='/joanvs8'/>
-      <Creator className='card' name='Nazar Shypot' text='front git' avatar='./img/NazarImg.jpg' linkedin='/nazarshypot' github='/veter391'/>
-      <Creator className='card' name='Jose Tipaldi' text='Back node' avatar='./img/JoseImg.jpg' linkedin='/joseignaciotipaldi' github='/joseignaciotipaldiok'/>
-      <Creator className='card' name='Oscar Fortea' text='front react' avatar='./img/OscarImg.png' linkedin='/oscarfortea' github='/OscarFortea'/>
+      <Creator className='card' name='Joan Vivó' text='Back-end/BBDD' avatar='./img/JoanImg.jpg' linkedin='/joanvs8' github='/joanvs8'/>
+      <Creator className='card' name='Nazar Shypot' text='Full-Stack' avatar='./img/NazarImg.jpg' linkedin='/nazarshypot' github='/veter391'/>
+      <Creator className='card' name='Jose Tipaldi' text='Back-end' avatar='./img/JoseImg.jpg' linkedin='/joseignaciotipaldi' github='/joseignaciotipaldiok'/>
+      <Creator className='card' name='Oscar Fortea' text='Front-end' avatar='./img/OscarImg.png' linkedin='/oscarfortea' github='/OscarFortea'/>
     </ul>
   );
 }

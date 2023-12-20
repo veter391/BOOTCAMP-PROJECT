@@ -21,6 +21,7 @@ import GLOBE from 'vanta/dist/vanta.globe.min';
 function App () {
   // !!! dont toch it !!!
   const [vantaEffect, setVantaEffect] = useState(null);
+  // const [canvas, setCanvas] = useState(null);
   const canvasRef = useRef(null);
   // !!! dont toch it !!!
   useEffect(() => {
@@ -57,9 +58,13 @@ function App () {
     };
   }, [vantaEffect]);
 
+  // useEffect(() => {
+
+  //  }, [canvas])
+
   return (
     <div className='wrapper'>
-      <div ref={canvasRef} style={{ display: 'block' }} className='canvas'></div>
+      <div ref={canvasRef} className='canvas'></div>
       <AppProvider>
         <Header />
 
