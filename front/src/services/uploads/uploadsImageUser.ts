@@ -1,10 +1,10 @@
 import { _url } from '../configVariables.ts';
 
-async function uploadImageUser(userId : number, file : File, token : string) {
+async function uploadImageUser (userId : number, file : File, token : string) {
   try {
     const avatar = new FormData();
     avatar.append('avatar', file);
-    
+
     const response = await fetch(`${_url}/users/${userId}`, {
       method: 'PUT',
       headers: {
@@ -14,8 +14,8 @@ async function uploadImageUser(userId : number, file : File, token : string) {
     });
 
     const data = await response.json();
-    return data;
     console.log('Imagen subida exitosamente:', data);
+    return data;
   } catch (err) {
     console.error('Error al subir la imagen:', err);
   }

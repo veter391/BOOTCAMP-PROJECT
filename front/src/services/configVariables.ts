@@ -1,4 +1,4 @@
-const _url = 'http://localhost:5000';
+const _url = 'https://cnpeople.onrender.com';
 
 export {
   _url
