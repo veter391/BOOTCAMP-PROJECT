@@ -360,3 +360,13 @@ picture {
   display: block;
   z-index: -1;
 }
+
+@media(max-width : 900px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  body {
+    font-size: rem(15);
+  }
+}

@@ -17,6 +17,7 @@
     margin-right: 30px;
   }
   &__list {
+    overflow-x: hidden;
     max-height: calc(100vh - 109px - 72px - 219px);
     min-height: 400px;
     overflow-y: scroll;
@@ -28,4 +29,17 @@
 
 .event-card:last-child {
   margin-bottom: 0;
+}
+
+@media (max-width: 520px) {
+  .feed__search-box {
+    flex-direction: column;
+    .btn {
+      width: 100%;
+    }
+  }
+  .feed__input {
+    margin: 0;
+    margin-bottom: 20px;
+  }
 }

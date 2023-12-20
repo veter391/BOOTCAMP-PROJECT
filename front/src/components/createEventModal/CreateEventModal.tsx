@@ -14,8 +14,8 @@ function CreateEventModal () {
   };
 
   function onSubmitForm (obj: object) {
-    createEvent({ ...obj, user_id: user.id })
-      .then(data => console.log(data))
+    createEvent({ ...obj, user_id: user.user.id })
+      .then(() => console.log('Event was sended snx!'))
       .catch(err => console.error(err));
     setModal(!modal);
   }
