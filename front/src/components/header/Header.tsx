@@ -12,11 +12,11 @@ function Header () {
   return (
     <header className='header'>
       <div className="container header__container">
-        <div className="logo__text">
+        <NavLink to="/" className="logo__text">
           Connect
           <img className="logo" src="./img/connectPeople.png" alt="logo" />
           People
-        </div>
+        </NavLink>
         {user &&
           <button onClick={() => setBurgerActive(!burgerActive)}
             className={`burger ${burgerActive && 'burger--active'}`}

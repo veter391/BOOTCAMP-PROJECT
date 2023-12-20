@@ -92,6 +92,11 @@
   }
 }
 
+@media (max-width: 900px) {
+  .hero {
+    background-size: contain
+  }
+}
 
 .user-place {
   display: flex;
@@ -152,7 +157,7 @@
       font-weight: 600;
       line-height: rem(12);
     }
-  
+
     &__descr {
       max-width: 700px;
       margin: 0 auto;

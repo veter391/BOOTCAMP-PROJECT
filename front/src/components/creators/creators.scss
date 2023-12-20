@@ -46,6 +46,15 @@
     position: relative;
     top: 4px;
   }
+  & a {
+    transition: color .3s ease-in-out;
+    &:hover {
+      color: var(--primary);
+    }
+    &:active, &.focus-visible {
+      color: var(--focus);
+    }
+  }
 }
 
 .creatorDescr {

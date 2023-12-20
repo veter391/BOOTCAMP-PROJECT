@@ -247,7 +247,7 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
   &__text {
     margin-right: auto;
     user-select: none;
-    cursor: context-menu;
+    cursor: pointer;
     display: flex;
     align-items: center;
     font-size: 1.5rem;
