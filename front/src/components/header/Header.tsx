@@ -50,11 +50,11 @@ function HeaderNavigation ({ burgerActive, userLogOut } : {burgerActive: boolean
         </li>
 
         <li className='nav__item'>
-          <NavLink className='nav__link' to="/chat">Chat</NavLink>
+          <NavLink className='nav__link' to="/discover">Explorar</NavLink>
         </li>
 
         <li className='nav__item'>
-          <NavLink className='nav__link' to="/discover">Explorar</NavLink>
+          <NavLink className='nav__link' to="/chat">Chat</NavLink>
         </li>
 
         <li className='nav__item'>
