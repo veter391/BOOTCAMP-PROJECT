@@ -3,6 +3,7 @@ import { AppContext } from '../../context/AppProvider';
 import './eventCard.scss';
 import { useNavigate } from 'react-router-dom';
 import followsAndReactions from '../../services/sendFollowsAndReactions';
+import deleteFollowsAndReactions from '../../services/deleteFollowsAndReactions';
 
 type EventCardType = {
   userId: number;
@@ -22,29 +23,79 @@ type EventCardType = {
 }
 
 type buttonChatProps = {
-  reactions: [];
-  followers: [];
+  reactions: never[];
+  followers: never[];
   eventUser: number | string;
-  user: object;
+  user: {
+    id: number
+  };
   setInterlocutor: any;
 }
 
 function EventCard ({ eventID, userId, title, date, type = 'user', location, description, avatar, name }: EventCardType) {
-  const { user, setInterlocutor, getFollows, setFollows, getReactions, setReactions } = useContext(AppContext);
-  const [follow, setFollow] = useState(getFollows.includes(userId));
+  const { user, setInterlocutor, getFollows, setFollows, getReactions, setReactions, userSetter } = useContext(AppContext);
+  const [follow, setFollow] = useState<boolean>();
   const [reaction, setReaction] = useState(getReactions.includes(eventID));
+
+  useEffect(() => {
+    setFollow(getFollows.includes(userId));
+  }, [getFollows]);
+
+  useEffect(() => {
+    const newUser = { ...user, user: { ...user.user, reactions: getReactions } };
+    userSetter(newUser);
+  }, [reaction]);
+
+  useEffect(() => {
+    const newUser = { ...user, user: { ...user.user, follows: getFollows } };
+    userSetter(newUser);
+  }, [follow]);
 
   function newReaction () {
     setReaction(!reaction);
-    setReactions((old) => old.includes(eventID) ? old.filter((n: number) => n !== eventID) : [eventID, ...old]);
+    setReactions((old) => {
+      if (old.includes(eventID)) {
+        deleteFollowsAndReactions({
+          reactions: eventID + '',
+          followers: ''
+        });
+        return old.filter((n: number) => n !== eventID);
+      }
+
+      followsAndReactions(
+        {
+          reactions: user.user.id + ',' + eventID,
+          followers: ''
+        }
+      );
+
+      return [eventID, ...old];
+    });
   }
 
   function newFollow () {
     setFollow(!follow);
-    setFollows((old) => old.includes(userId) ? old.filter((n: number) => n !== userId) : [userId, ...old]);
+    setFollows((old) => {
+      if (old.includes(userId)) {
+        deleteFollowsAndReactions({
+          reactions: '',
+          followers: userId + ''
+        });
+        return old.filter((n: number) => n !== userId);
+      }
+
+      followsAndReactions(
+        {
+          reactions: '',
+          followers: userId + ',' + user.user.id
+        }
+      );
+
+      return [userId, ...old];
+    });
   }
 
-  // console.log(getFollows, getReactions)
+  // console.log(getFollows, getReactions, followsStack)
 
   return (
     <article className='event-card' style={{ display: 'flex' }}>
@@ -87,31 +138,61 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
   );
 }
 
-function ButtonGoChat({ user, setInterlocutor, eventUser, reactions, followers }: buttonChatProps) {
+function ButtonGoChat ({ user, setInterlocutor, eventUser, reactions, followers }: buttonChatProps) {
   const navigate = useNavigate();
   // N: go tu chat function
   const goToChat = () => {
     // set event user
     setInterlocutor(eventUser);
-    // navigate('/chat');
-    // console.log(reactions)
+    navigate('/chat');
+    // console.log('nnnnnnn', user)
 
-    let reactionValues = '';
-    let followerValues = '';
+    // let reactionValues = '';
+    // let followerValues = '';
+    // const followerValuesToDelete: number[] = [];
+    // const reactionValuesToDelete: number[] = [];
+
+    // console.log(reactions, reactionsStack);
+    // followsStack.forEach((id: never) => {
+    //   if (followers.includes(id)) {
+    //     console.log('si', id);
+    //     followers = followers.filter(n => n !== id);
+    //   } else {
+    //     console.log('no', id);
+    //   }
+    // });
+    // console.log(followers, getFollows, followsStack)
+
+    // reactionsStack.forEach((id: never) => {
+    //   if (reactions.includes(id)) {
+    //     // console.log('si', id);
+    //     reactions = reactions.filter(n => n !== id);
+    //   } else {
+    //     // console.log('no', id);
+    //   }
+    // });
+    // console.log(reactions);
+
     // reactionsStack.forEach(item => reactions.filter(el => item === el));
     // followsStack.forEach(item => reactions.filter(el => item === el));
 
     // console.log(reactions)
-    reactions.forEach(item => { reactionValues += `(${user.id},${item}) `; });
-    followers.forEach(item => { followerValues += `(${item},${user.id}) `; });
+    // reactions.forEach(item => { reactionValues += `(${user.id},${item}) `; });
+    // followers.forEach(item => { followerValues += `(${item},${user.id}) `; });
 
     // send reactions and follows to db
+
     // followsAndReactions(
     //   {
     //     reactions: reactionValues.trimEnd().split(' ').join(','),
     //     followers: followerValues.trimEnd().split(' ').join(',')
     //   }
     // );
+
+    // deleteFollowsAndReactions({
+    //   reactions: reactionValuesToDelete.join(),
+    //   followers: followerValuesToDelete.join()
+    // });
   };
 
   return (

@@ -3,6 +3,7 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: 109px;
   position: relative;
   padding: rem(22) 0;
@@ -14,10 +15,6 @@
     width: 100%;
     display: flex;
     align-items: center;
-  }
-
-  &__logo {
-    margin-right: auto;
   }
 }
 
@@ -239,6 +236,23 @@ $burder-mediaquery: 1024px; // if you change this value, you must also change it
 }
 
 .logo{
-  width: 100px;
-  width: 100px;
+  max-width: 36px;
+  margin-right: 2px;
+  margin-left: 2px;
+  transform: translateY(6px);
+  transition: filter 2s ease-in-out;
+  &__text {
+    margin-right: auto;
+    user-select: none;
+    cursor: context-menu;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    &:hover {
+      .logo {
+        filter: hue-rotate(200deg);
+      }
+    }
+  }
 }

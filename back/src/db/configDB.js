@@ -50,7 +50,7 @@ class DB {
 
     // J: Follow queries
     followUser: 'INSERT INTO followers_users (user_id, follower_id) VALUES (?, ?)',
-    unfollowUser: 'DELETE FROM followers_users WHERE follower_id = ? AND user_id = ?',
+    unfollowUser: 'DELETE FROM followers WHERE user_id IN(?)',
     // getFollowers: 'SELECT * FROM followers_users WHERE user_id = ?',
     getFollowingUser: 'SELECT * FROM followers_users WHERE follower_id = ?',
     getUserFollowsByID: 'SELECT * FROM followers_users WHERE user_id = ? AND follower_id = ?',

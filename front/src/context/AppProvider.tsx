@@ -8,7 +8,7 @@ export type handlersType = {
 }
 
 type AppProviderProps = {
-  children: ReactNode
+  children: ReactNode;
 }
 
 type userData = {
@@ -38,16 +38,39 @@ function AppProvider ({ children }: AppProviderProps) {
     if (!userLS) return null;
     return JSON.parse(userLS);
   });
+
+  // N: set interlocutor
   const [interlocutor, setInterlocutor] = useState();
-  const [getFollows, setFollows] = useState([]);
-  const [getReactions, setReactions] = useState([]);
-  // const [getFollows, setFollows] = useState(JSON.parse(localStorage.getItem('user')).user.follows);
-  // const [getReactions, setReactions] = useState(JSON.parse(localStorage.getItem('user')).user.reactions);
+
+  const [getFollows, setFollows] = useState(() => {
+    const userLS = localStorage.getItem('user');
+    if (!userLS) return [];
+    return JSON.parse(userLS).user.follows;
+  });
+  const [getReactions, setReactions] = useState(() => {
+    const userLS = localStorage.getItem('user');
+    if (!userLS) return [];
+    return JSON.parse(userLS).user.reactions;
+  });
+
+  // // ---
+  // const [followsStack, setFollowsStack] = useState(() => {
+  //   const userLS = localStorage.getItem('user');
+  //   if (!userLS) return [];
+  //   const data = JSON.parse(userLS);
+  //   return data.user.follows;
+  // });
+
+  // const [reactionsStack, setReactionsStack] = useState(() => {
+  //   const userLS = localStorage.getItem('user');
+  //   if (!userLS) return [];
+  //   const data = JSON.parse(userLS);
+  //   return data.user.reactions;
+  // });
 
   function userSetter (data: userLSData) {
     const { user, token }: { user: userData, token: string } = data;
     // N: check if user and token exist and then add data to localStorage if not user = null
-    console.log(data);
     const userLS = token && user ? data : null;
     localStorage.setItem('user', JSON.stringify(userLS));
     setUser(userLS);
@@ -62,7 +85,7 @@ function AppProvider ({ children }: AppProviderProps) {
     localStorage.removeItem('user');
     navigate('/');
   }
-
+  // console.log('check using of setStacks!!')
   return (
     <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions }}>
       { children }

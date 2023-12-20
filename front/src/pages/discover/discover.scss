@@ -29,7 +29,7 @@
     transition-duration: .3s;
 
     &:first-child, &:nth-child(2) {
-      margin-right: rem(40);
+      margin-right: rem(25);
     }
 
     &.active {
@@ -42,10 +42,11 @@
     }
   }
   &__selection {
-    margin-bottom: rem(30);
+    margin-bottom: 1rem;
   }
   &__radio {
     &-label {
+      font-size: rem(14);
       font-weight: 500;
       border-bottom: 1px solid transparent;
       &:not(:last-child) {

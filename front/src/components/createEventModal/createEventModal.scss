@@ -6,7 +6,7 @@
   right: 0;
   bottom: 0;
   position: fixed;
-  
+
   &__overlay{
     background-color: rgba(49,49,49,0.8);
   }
@@ -24,9 +24,9 @@
     min-width: 300px;
     margin-top: 16px;
     margin-bottom: 16px;
-    
+
     & .btn{
-      
+
     }
   }
 }
@@ -35,4 +35,8 @@
 }
 .form__label-last{
   margin-bottom: 16px;
+}
+
+.divMediaBTN {
+  margin: 0;
 }

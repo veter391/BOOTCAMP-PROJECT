@@ -27,14 +27,32 @@ const setFollowsAndReaction = async (req, res) => {
     console.log(req.body);
 
     if (reactions.length > 0) {
-      const dbReactionInfo = await DB.sendQuery(`INSERT INTO reactions(user_id, event_id) VALUES ${reactions}`);
+      const dbReactionInfo = await DB.sendQuery(`INSERT INTO reactions (user_id, event_id) VALUES (${reactions})`);
     }
 
     if (followers.length > 0) {
-      const dbFollowsInfo = await DB.sendQuery(`INSERT INTO followers(user_id, follower_id) VALUES ${followers}`);
+      const dbFollowsInfo = await DB.sendQuery(`INSERT INTO followers(user_id, follower_id) VALUES (${followers})`);
     }
 
     res.status(200).json({ message: 'Follows and Reactions was sended!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const deleteFollowsAndReaction = async (req, res) => {
+  try {
+    const { reactions, followers } = req.body;
+
+    if (reactions.length > 0) {
+      const dbReactionInfo = await DB.sendQuery(`DELETE FROM reactions WHERE event_id IN(${reactions})`);
+    }
+
+    if (followers.length > 0) {
+      const dbFollowsInfo = await DB.sendQuery(`DELETE FROM followers WHERE user_id IN(${followers})`);
+    }
+
+    res.status(200).json({ message: 'Follows and Reactions was deleted!' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -86,5 +104,6 @@ export default {
   unfollowUser,
   getFollowers,
   getFollowingUser,
-  setFollowsAndReaction
+  setFollowsAndReaction,
+  deleteFollowsAndReaction
 };

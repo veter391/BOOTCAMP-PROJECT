@@ -22,7 +22,7 @@ function CreateEventModal () {
 
   return (
     <>
-      <button onClick={handleToggle} className='btn-reset form__btn btn btn__createEvent'>Crear evento</button>
+      <button onClick={handleToggle} className=' divMediaBTN btn-reset form__btn btn btn__createEvent'>Crear evento</button>
 
       {modal && <div className='modal'>
         <div className='modal__overlay'></div>

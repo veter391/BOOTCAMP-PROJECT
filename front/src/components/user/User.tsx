@@ -6,9 +6,8 @@ import CreateEventModal from '../createEventModal/CreateEventModal';
 
 function User () {
   const { user }: any = useContext(AppContext);
-  const [avatar, setAvatar] = useState<string>('https://picsum.photos/100/100');
+  const [avatar, setAvatar] = useState<string>('./img/user.png');
   const fileInputRef = useRef<HTMLInputElement>(null);
-  console.log(user);
   const handleAvatarClick = (): void => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -24,8 +23,8 @@ function User () {
 
         console.log('Nueva imagen seleccionada:', newAvatar);
 
-        const userId = user?.id;
-        const userToken = user?.token;
+        const userId = user.user?.id;
+        const userToken = user.user?.token;
 
         console.log(userId);
         console.log(userToken);
@@ -54,16 +53,16 @@ function User () {
         id='avatarInput'
         hidden
       />
-      <img
-        src={avatar}
-        alt="avatar"
-        onClick={handleAvatarClick}
-        className='avatar-image'
-      />
+      <div onClick={handleAvatarClick} style={user.user.type === 'org' ? { borderColor: 'rgb(255, 149, 0)' } : { borderColor: 'var(--primary)' }} className="avatar-image">
+        <img
+          src={user.user.avatar || avatar}
+          alt="avatar"
+        />
+      </div>
       <div className='divMedia'>
-        <div>
-          <h2>{!user.name && 'Username'}</h2>
-          <p>{!user.city && 'Location'}</p>
+        <div className='divMediaSubdiv'>
+          <h2>{user.user.name || 'Username'}</h2>
+          <p>{user.user.city || 'Location'}</p>
         </div>
         <CreateEventModal />
       </div>

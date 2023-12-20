@@ -15,8 +15,7 @@ $body-font: "Barlow";
 //-Required Variables!!
 :root {
   --dark-theme: rgb(26, 26, 26);
-  // --dark-theme: rgb(255, 255, 255);
-// --dark-theme: #ededed;
+  --dark-theme-09: rgba(26, 26, 26, 0.9);
   --light-theme: rgba(237, 237, 237);
   // --light-theme: rgba(26, 26, 26);
   // --primary: rgb(157, 255, 0); //rgba(255, 149, 0)
@@ -351,12 +350,12 @@ picture {
   box-shadow: 0 0 10px #DF3600;
 }
 
-// .canvas {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   width: 100%;
-//   height: 100vh;
-//   display: block;
-//   z-index: -1;
-// }
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: block;
+  z-index: -1;
+}
