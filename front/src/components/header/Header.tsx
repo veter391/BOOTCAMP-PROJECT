@@ -49,9 +49,9 @@ function HeaderNavigation ({ burgerActive, userLogOut } : {burgerActive: boolean
           <NavLink className='nav__link' to="/profile">Profile</NavLink>
         </li>
 
-        {/* <li className='nav__item'>
+        <li className='nav__item'>
           <NavLink className='nav__link' to="/chat">Chat</NavLink>
-        </li> */}
+        </li>
 
         <li className='nav__item'>
           <NavLink className='nav__link' to="/discover">Explorar</NavLink>

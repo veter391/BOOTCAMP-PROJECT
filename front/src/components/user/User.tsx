@@ -3,6 +3,7 @@ import './user.scss';
 import { AppContext } from '../../context/AppProvider';
 import uploadImageUser from '../../services/uploads/uploadsImageUser';
 import CreateEventModal from '../createEventModal/CreateEventModal';
+import { _url } from '../../services/configVariables';
 
 function User () {
   const { user, updateAvatar }: any = useContext(AppContext);
@@ -61,7 +62,7 @@ function User () {
       />
       <div onClick={handleAvatarClick} style={user.user.type === 'org' ? { borderColor: 'rgb(255, 149, 0)' } : { borderColor: 'var(--primary)' }} className="avatar-image">
         <img
-          src={user.user.avatar ? `http://localhost:5000/${user.user.avatar}` : './img/user.png'}
+          src={user.user.avatar ? `${_url}/${user.user.avatar}` : './img/user.png'}
           alt="avatar"
         />
       </div>
