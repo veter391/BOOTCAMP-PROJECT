@@ -23,8 +23,8 @@ function User () {
         const userId = user?.user.id;
         const userToken = user?.token;
 
-        console.log(userId);
-        console.log(userToken);
+        // console.log(userId);
+        // console.log(userToken);
 
         if (userId !== undefined && userId !== null && userToken) {
           console.log('user enviado front');
@@ -33,9 +33,9 @@ function User () {
           const response = await uploadImageUser(userId, file, userToken);
 
           updateAvatar(response.data);
-          console.log(userId);
-          console.log(file);
-          console.log(userToken);
+          // console.log(userId);
+          // console.log(file);
+          // console.log(userToken);
           console.log('Imagen subida exitosamente');
         } else {
           console.error('ID de usuario o token no válidos');

@@ -47,6 +47,7 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
   /* @ts-ignore */
   const { user, setInterlocutor, getFollows, setFollows, getReactions, setReactions, userSetter } = useContext(AppContext);
   const [follow, setFollow] = useState<boolean>();
+  const [newAvatar, setNewAvatar] = useState<string | null>(avatar);
   const [reaction, setReaction] = useState(getReactions.includes(eventID));
 
   useEffect(() => {
@@ -62,6 +63,10 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
     const newUser = { ...user, user: { ...user.user, follows: getFollows } };
     userSetter(newUser);
   }, [follow]);
+
+  useEffect(() => {
+    setNewAvatar(user.user.avatar);
+  }, [user]);
 
   function newReaction () {
     setReaction(!reaction);
@@ -143,7 +148,7 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
       </div>
 
       <div className="event-card__info">
-        <img className={`event-card__foto ${type === 'org' && 'event-card__foto-org'}`} src={ (avatar && `${_url}/${avatar}`) || './img/user.png'} alt="event image" />
+        <img className={`event-card__foto ${type === 'org' && 'event-card__foto-org'}`} src={avatar ? `${_url}/${newAvatar}` : './img/user.png'} alt="event image" />
         <h3 className='event-card__name' >{name}</h3>
       </div>
     </article>
