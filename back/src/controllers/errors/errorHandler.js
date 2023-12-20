@@ -10,7 +10,7 @@ function errorHandler (error, req, res, next) {
     });
   }
 
-  res.status(500).send({
+  return res.status(500).send({
     ok: false,
     message: null,
     error: error.message,
