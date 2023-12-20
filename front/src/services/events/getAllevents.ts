@@ -1,3 +1,4 @@
+import { eventDataType } from '../../components/eventFeed/EventFeed';
 import { _url } from '../configVariables';
 
 async function getEvents () {

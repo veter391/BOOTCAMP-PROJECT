@@ -15,6 +15,7 @@ type SessionType = {
 
 function Chat () {
   // N: users id's
+  /* @ts-ignore */
   const { user, interlocutor } = useContext(AppContext);
   // get loading state and chat data
   const { loading, chatTemplate } = useChat(user.user.id, interlocutor);

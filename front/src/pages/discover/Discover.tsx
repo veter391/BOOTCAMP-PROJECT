@@ -44,15 +44,15 @@ function Discover () {
 
 export default Discover;
 
-function Filter ({ title } : { title : string }) {
-  return (
-    <article className='filter'>
-      <label className='filter__label'>
-        <input type="checkbox"/>
-        <h3>{title}</h3>
-      </label>
+// function Filter ({ title } : { title : string }) {
+//   return (
+//     <article className='filter'>
+//       <label className='filter__label'>
+//         <input type="checkbox"/>
+//         <h3>{title}</h3>
+//       </label>
 
-      <img src="https://picsum.photos/15/15" alt="filtericon" />
-    </article>
-  );
-}
+//       <img src="https://picsum.photos/15/15" alt="filtericon" />
+//     </article>
+//   );
+// }

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import EventFeed, { eventDataType } from '../../components/eventFeed/EventFeed';
+import EventFeed from '../../components/eventFeed/EventFeed';
 import User from '../../components/user/User';
 import './account.scss';
 import getEvents from '../../services/events/getAllevents';
@@ -19,7 +19,8 @@ type dataType = {
 }
 
 function Profile () {
-  const {getFollows } = useContext(AppContext);
+  /* @ts-ignore */
+  const { getFollows } = useContext(AppContext);
   const [events, setEvents] = useState<any[]>([]);
 
   function filterFollowers (data: dataType[]) {

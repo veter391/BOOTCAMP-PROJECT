@@ -4,20 +4,31 @@ import './eventCard.scss';
 import { useNavigate } from 'react-router-dom';
 import followsAndReactions from '../../services/sendFollowsAndReactions';
 import deleteFollowsAndReactions from '../../services/deleteFollowsAndReactions';
+import { _url } from '../../services/configVariables';
 
 type EventCardType = {
-  userId: number;
-  title: string;
-  date: string;
-  location: string;
-  description: string;
-  avatar: string;
-  name: string;
-  type: string;
-  eventUser: number | string;
-  eventID: number;
-  reactions: number[];
-  followers: number[];
+    eventID: number;
+    userId: number;
+    key: number;
+    type: string;
+    title: string;
+    date: string;
+    location: string;
+    description: string;
+    avatar: string | null;
+    name: string;
+  // userId: number;
+  // title: string;
+  // date: string;
+  // location: string;
+  // description: string;
+  // avatar: string;
+  // name: string;
+  // type: string;
+  // eventUser: number | string;
+  // eventID: number;
+  // reactions: number[];
+  // followers: number[];
   // setFollowers: () => void;
   // setReactions: () => void;
 }
@@ -33,6 +44,7 @@ type buttonChatProps = {
 }
 
 function EventCard ({ eventID, userId, title, date, type = 'user', location, description, avatar, name }: EventCardType) {
+  /* @ts-ignore */
   const { user, setInterlocutor, getFollows, setFollows, getReactions, setReactions, userSetter } = useContext(AppContext);
   const [follow, setFollow] = useState<boolean>();
   const [reaction, setReaction] = useState(getReactions.includes(eventID));
@@ -53,7 +65,7 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
 
   function newReaction () {
     setReaction(!reaction);
-    setReactions((old) => {
+    setReactions((old: number[]) => {
       if (old.includes(eventID)) {
         deleteFollowsAndReactions({
           reactions: eventID + '',
@@ -75,7 +87,7 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
 
   function newFollow () {
     setFollow(!follow);
-    setFollows((old) => {
+    setFollows((old: number[]) => {
       if (old.includes(userId)) {
         deleteFollowsAndReactions({
           reactions: '',
@@ -131,14 +143,14 @@ function EventCard ({ eventID, userId, title, date, type = 'user', location, des
       </div>
 
       <div className="event-card__info">
-        <img className={`event-card__foto ${type === 'org' && 'event-card__foto-org'}`} src={avatar || './img/user.png'} alt="event image" />
+        <img className={`event-card__foto ${type === 'org' && 'event-card__foto-org'}`} src={ (avatar && `${_url}/${avatar}`) || './img/user.png'} alt="event image" />
         <h3 className='event-card__name' >{name}</h3>
       </div>
     </article>
   );
 }
 
-function ButtonGoChat ({ user, setInterlocutor, eventUser, reactions, followers }: buttonChatProps) {
+function ButtonGoChat ({ setInterlocutor, eventUser }: buttonChatProps) {
   const navigate = useNavigate();
   // N: go tu chat function
   const goToChat = () => {

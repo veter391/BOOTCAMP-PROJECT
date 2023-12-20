@@ -16,6 +16,7 @@ import PrivateRoute from '../PrivateRoute';
 
 // !!! dont toch it !!!
 import { useEffect, useRef, useState } from 'react';
+/* @ts-ignore */
 import GLOBE from 'vanta/dist/vanta.globe.min';
 
 function App () {
@@ -54,6 +55,7 @@ function App () {
       }));
     }
     return () => {
+      /* @ts-ignore */
       if (vantaEffect) vantaEffect.destroy();
     };
   }, [vantaEffect]);

@@ -1,10 +1,10 @@
-import { useContext, useState, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import './user.scss';
 import { AppContext } from '../../context/AppProvider';
 import uploadImageUser from '../../services/uploads/uploadsImageUser';
 import CreateEventModal from '../createEventModal/CreateEventModal';
 
-function User() {
+function User () {
   const { user, updateAvatar }: any = useContext(AppContext);
   // const [avatar, setAvatar] = useState<string>('./img/user.png');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -17,13 +17,9 @@ function User() {
   const picsumAvatar = 'https://picsum.photos/200';
 
   const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
-    
     const file = event.target.files?.[0];
     if (file) {
       try {
-
-
-
         const userId = user?.user.id;
         const userToken = user?.token;
 
@@ -31,9 +27,8 @@ function User() {
         console.log(userToken);
 
         if (userId !== undefined && userId !== null && userToken) {
-
-          console.log('user enviado front' + userId);
-          console.log('user enviado front' + userToken);
+          console.log('user enviado front');
+          // console.log('user enviado front');
 
           const response = await uploadImageUser(userId, file, userToken);
 

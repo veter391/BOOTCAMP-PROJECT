@@ -25,8 +25,9 @@ type userLSData = {
   user: userData;
   token: string;
 }
+
 // export AppContext => create context
-const AppContext = createContext({});
+const AppContext = createContext< object | null>(null);
 const Provider = AppContext.Provider;
 
 function AppProvider ({ children }: AppProviderProps) {
@@ -39,14 +40,12 @@ function AppProvider ({ children }: AppProviderProps) {
     return JSON.parse(userLS);
   });
 
-  console.log(user);
-  
   const updateAvatar = (newAvatar: string) => {
-    const updatedUser = { ...user, user: { ...user.user, avatar: newAvatar } }
+    const updatedUser = { ...user, user: { ...user.user, avatar: newAvatar } };
 
     setUser(updatedUser);
     localStorage.setItem('user', JSON.stringify(updatedUser));
-  }
+  };
 
   // N: set interlocutor
   const [interlocutor, setInterlocutor] = useState();

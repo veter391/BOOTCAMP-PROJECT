@@ -3,6 +3,7 @@ import EventCard from '../eventCard/EventCard';
 import './eventFeed.scss';
 
 export type eventDataType = {
+  name: string,
   id: number,
   user: number,
   user_id: number,
@@ -13,7 +14,6 @@ export type eventDataType = {
   first_name: string,
   last_name: string,
   org_name: string,
-  name: string,
   avatar: string,
   date: string,
   type: string,
@@ -63,7 +63,17 @@ function EventFeed ({ events, type = '' } : {events : eventDataType[], type : st
         {
           eventsClon.map((item: eventDataType) => {
             return (
-              <EventCard eventID={item.id} userId={item.user} key={item.id} type={item.type} title={item.title} date={item.date} location={item.city + ' / ' + item.address} description={item.description} avatar={item.avatar} name={item.name} />
+              <EventCard
+              eventID={item.id}
+              userId={item.user}
+              key={item.id}
+              type={item.type}
+              title={item.title}
+              date={item.date}
+              location={item.city + ' / ' + item.address}
+              description={item.description}
+              avatar={item.avatar}
+              name={item.name} />
             );
           })
         }

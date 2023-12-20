@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppProvider';
 
 function Header () {
-  const [burgerActive, setBurgerActive] = useState(false);
+  const [burgerActive, setBurgerActive] = useState<boolean>(false);
 
   const { user, userLogOut }: any = useContext(AppContext);
   const location = useLocation();
@@ -33,7 +33,7 @@ function Header () {
   );
 }
 
-function HeaderNavigation ({ burgerActive, userLogOut }) {
+function HeaderNavigation ({ burgerActive, userLogOut } : {burgerActive: boolean, userLogOut: () => void}) {
   return (
     <nav className={`header__nav nav ${burgerActive && 'nav--visible'}`} data-nav>
       <ul className='nav__list list-reset'>
@@ -65,7 +65,7 @@ function HeaderNavigation ({ burgerActive, userLogOut }) {
     </nav>
   );
 }
-function AboutNoUser ({ burgerActive }) {
+function AboutNoUser ({ burgerActive } : {burgerActive : boolean}) {
   return (
     <nav className={`header__nav nav noUserNav ${burgerActive && 'nav--visible'}`} data-nav>
       <ul className='nav__list list-reset noUserList'>
