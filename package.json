@@ -1,0 +1,17 @@
+{
+  "name": "bootcamp-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd back && npm i && cd .. && cd front && npm i && cd .. && npm run dev",
+    "dev": "cd back && npm run frontAndBackDev",
+    "build": "concurrently \"cd back && npm run frontBack\" \"cd front && npm run build\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "express-fileupload": "^1.4.3"
+  }
+}

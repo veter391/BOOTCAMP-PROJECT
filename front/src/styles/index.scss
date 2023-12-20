@@ -1,0 +1,372 @@
+@import './imports';
+
+// ::: Inckude Mixins :::
+@include keyframes;
+
+// ::: Variables :::
+//-scss variables
+$maxWidth: 1920; // not px
+$containerPadding: 30; // not px
+$maxWidthContainer: 1596 + ($containerPadding * 2); // not px
+$ContainerPx: 1596 + ($containerPadding * 2) + px; // not px
+$body-font: "Barlow";
+
+
+//-Required Variables!!
+:root {
+  --dark-theme: rgb(26, 26, 26);
+  --dark-theme-09: rgba(26, 26, 26, 0.9);
+  --light-theme: rgba(237, 237, 237);
+  // --light-theme: rgba(26, 26, 26);
+  // --primary: rgb(157, 255, 0); //rgba(255, 149, 0)
+  --primary: rgb(0, 157, 87);
+  --hover: rgb(216, 255, 153);
+  // --focus: rgb(197, 255, 102);
+  --focus: rgb(125, 202, 0);
+  --active: rgb(38, 38, 38);
+  --error: rgb(255, 74, 104);
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* so that padding doesn't affect the look */
+  height: 100%;
+  overflow: overlay; // if browser support overly
+  min-width: 320px;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  height: 100%;
+  min-width: 320px;
+  font-family: $body-font, Arial, sans-serif;
+  font-size: rem(18);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  /* space between lines in text. */
+  color: var(--light-theme);
+  /* text color primari for texts */
+  background-color: var(--dark-theme);
+  /* page bacground color */
+  overflow: overlay; // if browser support overlay
+  letter-spacing: rem(1);
+}
+
+button,
+input {
+  font: inherit;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  transition: color .3s ease;
+}
+
+picture {
+  display: block;
+  width: fit-content;
+}
+
+
+/* #preloader_preload {
+	display: block;
+	position: fixed;
+	z-index: 300;
+	top: 0;left: 0;
+	width: 100%;
+	height: 100%;
+	background: #9B59B6 url(img/rings.svg) center center no-repeat;
+	background-size:124px;
+} */
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0px 0px 0px 0px);
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+.wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100%;
+  position: relative;
+  // max-width: $maxWidth + px;
+  margin: 0 auto;
+  overflow: hidden;
+  /* if you use position: sticky on the site - remove this setting */
+  // overflow: ;
+  // background-color: var(--dark-theme);
+  background-color: transparent
+}
+
+.container {
+  margin: 0 auto;
+  max-width: $maxWidthContainer + px;
+  padding-right: $containerPadding + px;
+  padding-left: $containerPadding + px;
+}
+
+.btn-reset {
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.input-reset {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  background-color: #fff;
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+}
+
+.is-hidden {
+  display: none !important;
+  /* stylelint-disable-line declaration-no-important */
+}
+
+.js-focus-visible:focus:not(.focus-visible) {
+  outline: none;
+}
+
+// if scroll is disable add this class to body
+.not-scroll {
+  position: fixed;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overscroll-behavior: none;
+}
+
+
+//? ::::::: My Scss ::::::::
+// @import 'media-queries';
+
+.form {
+  width: 100%;
+  margin-bottom: rem(30);
+
+  &__label {
+    position: relative;
+    display: block;
+    padding-top: 20px;
+    &-last {
+      margin-bottom: rem(30);
+    }
+    &-checkbox {
+      text-align: center;
+      // N: custom checkbox mixin
+      @include custom-checkbox;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px solid var(--light-theme);
+    padding: rem(15);
+    border-radius: rem(8);
+    background-color: transparent;
+    color: var(--light-theme);
+
+    &::placeholder {
+      color: var(--light-theme);
+      transition: color .3s ease-in-out;
+    }
+
+    &:hover, &.focus-visible {
+      &::placeholder {
+        color: var(--primary);
+      }
+    }
+
+    &:active {
+      &::placeholder {
+        color: var(--focus);
+      }
+    }
+  }
+
+  &__btn {
+    background-color: var(--primary);
+    color: var(--light-theme);
+    margin: 0 auto;
+    background-color: transparent;
+    border-color: var(--primary);
+    transition-property: color, background;
+    transition-timing-function: ease;
+    transition-duration: .3s;
+
+    &:hover {
+      color: var(--dark-theme);
+      background-color: var(--primary);
+    }
+
+    &.focus-visible,
+    &:active {
+      background-color: var(--focus);
+    }
+  }
+
+  &__forgot-password {
+    display: block;
+    width: fit-content;
+    margin-bottom: rem(20);
+    border-bottom: 1px solid transparent;
+    transition-property: color, border-color;
+    transition-timing-function: ease-in-out;
+    transition-duration: .3s;
+    &:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+  }
+}
+
+.btn {
+  display: block;
+  width: fit-content;
+  min-width: 150px;
+  padding: rem(18) rem(28);
+  font-weight: 500;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 8px;
+  text-align: center;
+}
+
+@import 'style';
+
+//? ::::::: My Scss ::::::::
+
+// active classes
+
+.is-fixed {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  z-index: 5;
+}
+
+.colored {
+  transition: color ease-in-out .3s;
+  color: var(--primary);
+}
+
+.colored-error {
+  color: var(--error);
+}
+
+/*define scroll bar styles*/
+/*no supported in firefox!!!*/
+
+*::-webkit-scrollbar {
+  width: 7px;
+  background: transparent;
+  background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background: var(--primary);
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  background-color: transparent;
+}
+
+.ytp-pause-overlay {
+  display: none;
+}
+
+.is-invalid + textarea {
+  border-color: #DF3600;
+  box-shadow: 0 0 10px #DF3600;
+}
+
+.canvas {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: block;
+  z-index: -1;
+}
+
+@media(max-width : 900px) {
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  body {
+    font-size: rem(15);
+  }
+}

@@ -1,0 +1,153 @@
+@import '../../styles/tools/pxconvert';
+
+.event-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  // padding: rem(15);
+  padding-right: rem(15);
+  padding-bottom: rem(15);
+  padding-top: rem(15);
+  margin-bottom: rem(30);
+  border-radius: rem(10);
+  border-bottom: 1px solid var(--active);
+
+  small {
+    display: block;
+    font-style: italic;
+  }
+
+  &__body {
+    margin-right: rem(20);
+  }
+
+  &__location {
+    margin-bottom: 7px;
+  }
+
+  &__location, &__date {
+    font-style: italic;
+    font-size: .7rem;
+  }
+
+  &__foto {
+    max-width: rem(100);
+    max-height: rem(100);
+  }
+  &__title {
+    margin-bottom: rem(15);
+  }
+
+  &__descr {
+    margin-bottom: rem(40);
+  }
+  &__name {
+    // text-align: right;
+    text-wrap:wrap;
+    word-wrap: break-word;
+    // width: fit-content;
+    margin-left: auto;
+
+  }
+  &__info {
+    min-width: 200px;
+    text-align: right;
+  }
+  &__foto {
+    max-width: 120px;
+    max-height: 120px;
+    margin: 0;
+    margin-left: auto;
+    margin-bottom: rem(20);
+    border-radius: 50%;
+    border: 3px solid var(--primary);
+    &-org {
+      border-color: rgba(255, 149, 0);
+    }
+  }
+
+  &__btns {
+    display: flex;
+  }
+  &__date {
+    margin-bottom: rem(35);
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    max-width: rem(50);
+    color: red;
+    transition: color .3s ease-in-out;
+    color: var(--light-theme);
+
+    &:hover, &.focus-visible {
+      color: var(--primary);
+    }
+    &:active {
+      color: var(--focus);
+    }
+    &-star {
+      margin-right: rem(15);
+    }
+  }
+}
+@media (max-width: 900px) {
+  .event-card {
+    // padding-right: 0;
+    flex-direction: column-reverse;
+    &__info {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+    &__foto {
+      margin-left: 0;
+      margin: 0;
+      margin-right: 18px;
+
+      max-width: rem(80);
+      max-height: rem(80);
+    }
+    &__body {
+      margin-right: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &__name {
+      margin: 0;
+      font-size: rem(15);
+    }
+
+    &__title {
+      font-size: rem(17);
+    }
+
+    &__descr {
+      font-size: rem(15);
+    }
+
+    &__location,
+    &__date {
+      font-size: rem(13);
+    }
+
+    &__btn {
+      max-width: rem(50);
+    }
+  }
+}
+
+.choused {
+  color: var(--focus);
+  &:active {
+    color: var(--hover);
+  }
+}
+
+
