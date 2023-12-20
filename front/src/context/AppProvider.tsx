@@ -31,7 +31,7 @@ const AppContext = createContext< object | null>(null);
 const Provider = AppContext.Provider;
 
 function AppProvider ({ children }: AppProviderProps) {
-  const { handleSubmit, register, formState: { errors } } = useForm();
+  const { handleSubmit, register, reset, formState: { errors } } = useForm();
   const handlers: handlersType = { register, errors };
   // Oscar--> create state of user and send it via context to all the app
   const [user, setUser] = useState(() => {
@@ -95,7 +95,7 @@ function AppProvider ({ children }: AppProviderProps) {
   }
   // console.log('check using of setStacks!!')
   return (
-    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions, updateAvatar }}>
+    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions, updateAvatar, reset }}>
       { children }
     </Provider>
   );

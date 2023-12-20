@@ -1,6 +1,6 @@
 import './signup.scss';
 
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { InputValidate } from '../inputValidate/InputValidate';
 import validationScheme from '../../helpers/validationScheme';
 import userRegister from '../../services/userRegister';
@@ -8,7 +8,7 @@ import { AppContext } from '../../context/AppProvider';
 
 function SignUp () {
   // get variavles from context
-  const { handleSubmit, userSetter } : any = useContext(AppContext);
+  const { handleSubmit, userSetter, reset } : any = useContext(AppContext);
   const [signUpError, setSignUpError] = useState();
 
   // company checkbox
@@ -17,7 +17,7 @@ function SignUp () {
   // funciton to run where submit form
   function signUp (values: object) {
     // N: register function for users
-    userRegister({ ...values, state: (isCompany && 'org') || 'user' })
+    userRegister({ ...values, type: isCompany ? 'org' : 'user' })
       .then(data => {
         const { user } = data;
         if (!user) throw new Error('Usuario ya existe!');
@@ -27,8 +27,12 @@ function SignUp () {
       .catch(err => setSignUpError(err.message));
   }
 
+  useEffect(() => {
+    reset();
+  }, [isCompany]);
+
   return (
-    <form onSubmit={handleSubmit(signUp)} className="form" style={{ position: 'relative' }}>
+    <form onSubmit={handleSubmit(signUp)} className="form clear-form" style={{ position: 'relative' }}>
       {signUpError && <p className='colored-error error' style={{ fontSize: '14px', position: 'absolute', left: '0', top: '0', width: '100%', textAlign: 'center' }}>* {signUpError} *</p>}
       {!isCompany && <InputValidate
         classNameLabel="form__label"
@@ -74,7 +78,8 @@ function SignUp () {
       }
 
       <label className="form__label form__label-last form__label-checkbox">
-        <input onChange={() => setIsCompany(!isCompany)} className="form__label-checkbox__field" type="checkbox" name="checkbox" />
+        <input onChange={() => setIsCompany(!isCompany)} checked={isCompany}
+        className="form__label-checkbox__field" type="checkbox" name="checkbox" />
         <span className="form__label-checkbox__content"></span>
         Eres una empresa?
       </label>

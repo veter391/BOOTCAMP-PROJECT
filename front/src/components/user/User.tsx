@@ -14,7 +14,7 @@ function User () {
     }
   };
 
-  const picsumAvatar = 'https://picsum.photos/200';
+  // const picsumAvatar = 'https://picsum.photos/200';
 
   const handleAvatarChange = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
     const file = event.target.files?.[0];
@@ -23,8 +23,8 @@ function User () {
         const userId = user?.user.id;
         const userToken = user?.token;
 
-        console.log(userId);
-        console.log(userToken);
+        // console.log(userId);
+        // console.log(userToken);
 
         if (userId !== undefined && userId !== null && userToken) {
           console.log('user enviado front');
@@ -33,10 +33,9 @@ function User () {
           const response = await uploadImageUser(userId, file, userToken);
 
           updateAvatar(response.data);
-          console.log(userId);
-          console.log(file);
-          console.log(userToken
-          );
+          // console.log(userId);
+          // console.log(file);
+          // console.log(userToken);
           console.log('Imagen subida exitosamente');
         } else {
           console.error('ID de usuario o token no válidos');
@@ -62,7 +61,7 @@ function User () {
       />
       <div onClick={handleAvatarClick} style={user.user.type === 'org' ? { borderColor: 'rgb(255, 149, 0)' } : { borderColor: 'var(--primary)' }} className="avatar-image">
         <img
-          src={user.user.avatar ? `http://localhost:5000/${user.user.avatar}` : picsumAvatar}
+          src={user.user.avatar ? `http://localhost:5000/${user.user.avatar}` : './img/user.png'}
           alt="avatar"
         />
       </div>

@@ -6,7 +6,8 @@ const CreateOrganizationSchema = z.object({
   password: z.string().min(3).max(20),
   city: z.string().min(2).max(20),
   address: z.string().min(5).max(45),
-  cif: z.string().length(9)
+  cif: z.string().length(9),
+  type: z.string().max(5)
 });
 
 const GetOrganizationByIdSchema = z.object({

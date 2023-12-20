@@ -23,7 +23,7 @@ function LogIn () {
   };
 
   return (
-    <form onSubmit={handleSubmit(logIn)} className='form' style={{ position: 'relative' }}>
+    <form onSubmit={handleSubmit(logIn)} className='form clear-form' style={{ position: 'relative' }}>
       {logInError && <p className='colored-error error' style={{ fontSize: '14px', position: 'absolute', left: '0', top: '0', width: '100%', textAlign: 'center' }}>* {logInError} *</p>}
       <InputValidate
         classNameLabel='form__label'
