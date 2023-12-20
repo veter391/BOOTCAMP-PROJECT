@@ -1,13 +1,13 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import crypto from 'node:crypto';
-import nodemailer from '../../helpers/nodemailer.js';
+// import crypto from 'node:crypto';
+// import nodemailer from '../../helpers/nodemailer.js';
 
 import DB from '../../db/configDB.js';
 import { errorMap } from '../../helpers/errorMap.js';
 import { CreateUserSchema } from '../../schemas/userSchema.js';
 import { CreateOrganizationSchema } from '../../schemas/organizationSchema.js';
-import emailService from '../../helpers/nodemailer.js';
+// import emailService from '../../helpers/nodemailer.js';
 
 async function registerUser (req, res, next) {
   // N: chack if object has cif and return true or false
@@ -78,15 +78,15 @@ async function registerUser (req, res, next) {
 
     infoToUser.exp = Date.now() + (1000 * 60 * 60 * 24);
     // generate confirmation code
-    const confirmationCode = crypto.randomUUID();
+    // const confirmationCode = crypto.randomUUID();
 
-    const emailData = {
-      to: email,
-      confirmationCode,
-      usuario: `${first_name} ${last_name}`
-    };
+    // const emailData = {
+    //   to: email,
+    //   confirmationCode,
+    //   usuario: `${first_name} ${last_name}`
+    // };
 
-    emailService.sendConfirmationEmail(emailData);
+    // emailService.sendConfirmationEmail(emailData);
 
     console.log(token);
     if (token) {
