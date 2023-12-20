@@ -1,8 +1,13 @@
 import DB from '../../db/configDB.js';
 import { CreateUserSchema, UpdateUserSchema } from '../../schemas/userSchema.js';
+import crypto from 'node:crypto';
+import path from 'node:path';
+import fs from 'node:fs';
+
 
 // CREATE USER
 const createUser = async (req, res) => {
+
   try {
     const {
       first_name,
@@ -66,27 +71,50 @@ const updateUser = async (req, res) => {
       password
     } = UpdateUserSchema.parse(req.body);
 
-    const dataFile = req.file;
-    const avatar = dataFile.filename;
-    console.log(avatar);
+    const avatar = req.files?.avatar;
 
+    if (!avatar) {
+      return res.status(400).send({ error: 'No has pasado un avatar'})
+    }
+
+    const [user] = await DB.sendQuery('SELECT id, avatar FROM users WHERE id = ?', [req.user.id])
+    
+    if (user.avatar) {
+      const oldAvatarPath = path.join(process.cwd(), 'uploads', user.avatar)
+      fs.rmSync(oldAvatarPath)
+    }
+
+
+    const avatarName = crypto.randomUUID();
+    const avatarExtension = avatar.name.split('.').at(-1);
+    const nombreAvatarMasExtension = avatarName + '.' + avatarExtension;
+
+    // pocess.cwd() es el directorio desde donde se lanzó npm start
+    const avatarPath = path.join(process.cwd(), 'uploads', `${avatarName}.${avatarExtension}` );
+    
+    avatar.mv(avatarPath, (err) => {
+      if (err) {
+        return res.status(500).send({error: err.message})
+      }
+    });
+    
     const dbInfo = await DB.sendQuery(DB.query.updateUser, [
       first_name,
       last_name,
       email,
       city,
       password,
-      avatar,
+      nombreAvatarMasExtension,
       id
     ]);
 
     if (dbInfo.affectedRows !== 0) {
-      res.status(200).json({ message: `User ${id} updated successfully` });
+      return res.status(200).json({ message: `User ${id} updated successfully`, data: nombreAvatarMasExtension });
     } else {
-      res.status(404).json({ message: 'User not found or no changes applied' });
+      return res.status(404).json({ message: 'User not found or no changes applied' });
     }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 

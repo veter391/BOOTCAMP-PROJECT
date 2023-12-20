@@ -39,6 +39,15 @@ function AppProvider ({ children }: AppProviderProps) {
     return JSON.parse(userLS);
   });
 
+  console.log(user);
+  
+  const updateAvatar = (newAvatar: string) => {
+    const updatedUser = { ...user, user: { ...user.user, avatar: newAvatar } }
+
+    setUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+  }
+
   // N: set interlocutor
   const [interlocutor, setInterlocutor] = useState();
 
@@ -87,7 +96,7 @@ function AppProvider ({ children }: AppProviderProps) {
   }
   // console.log('check using of setStacks!!')
   return (
-    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions }}>
+    <Provider value={{ handlers, handleSubmit, user, userSetter, userLogOut, interlocutor, setInterlocutor, getFollows, setFollows, getReactions, setReactions, updateAvatar }}>
       { children }
     </Provider>
   );
