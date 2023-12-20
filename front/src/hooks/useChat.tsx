@@ -71,7 +71,7 @@ export default function useChat (meID: idType, otherID: idType) {
         name: user.first_name || user.org_name,
         email: user.email,
         photoUrl: `${_url}/${user.avatar}` || './img/user.png',
-        welcomeMessage: otherID === 63 ? `hola, soy ${user.first_name} de cnpeople.\nDe momento tengo poca lógica,\npero espero poder ayudarte en el futuro.\nPodré responder preguntas relacionadas con nuestra plataforma\ny ayudar si surge algún malentendido.\n\ncon amor tu ${user.first_name} ;)` : `Hola soy ${user.first_name}!`,
+        welcomeMessage: otherID === 63 ? `hola, soy ${user.first_name}.\nDe momento tengo poca lógica,\npero espero poder ayudarte en el futuro.\nPodré responder preguntas relacionadas con nuestra plataforma\ny ayudar si surge algún malentendido.\n\ncon amor tu ${user.first_name} ;)` : `Hola soy ${user.first_name}!`,
         role: 'default'
       };
     });
