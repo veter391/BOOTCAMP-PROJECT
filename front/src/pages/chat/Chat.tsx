@@ -17,7 +17,7 @@ function Chat () {
   // N: users id's
   /* @ts-ignore */
   const { user, interlocutor } = useContext(AppContext);
-  const newInterlocutor = user.user.id === interlocutor ? 63 : interlocutor;
+  const newInterlocutor = !interlocutor || user.user.id === interlocutor ? 63 : interlocutor;
   // get loading state and chat data
   const { loading, chatTemplate } = useChat(user.user.id, newInterlocutor);
 
