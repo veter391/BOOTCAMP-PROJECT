@@ -68,8 +68,8 @@ function User () {
       </div>
       <div className='divMedia'>
         <div className='divMediaSubdiv'>
-          <h2>{user.name || 'Username'}</h2>
-          <p>{user.city || 'Location'}</p>
+          <h2>{user.user.name || 'Username'}</h2>
+          <p>{user.user.city || 'Location'}</p>
         </div>
         <CreateEventModal />
       </div>
