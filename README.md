@@ -13,10 +13,10 @@ A valuable learning experience that expanded my horizons in various aspects. ðŸŒ
 [cnpeople](https://cnpeople.vercel.app/)
 
 ## Tools
-front: React, TypeScript, Vite
-back: Node, Express, JavaScript,
-BBDD: MySql, sql
-more: sass, talk.js, three.js
+* front: React, TypeScript, Vite
+* back: Node, Express, JavaScript,
+* BBDD: MySql, sql
+* more: sass, talk.js, three.js
 
 ## Other bash comands
 ``` bash
