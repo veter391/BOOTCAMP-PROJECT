@@ -10,7 +10,7 @@ A valuable learning experience that expanded my horizons in various aspects. ðŸŒ
 ```
 
 ## Demo
-[cnpeople](https://cnpeople.vercel.app/)https://cnpeople.vercel.app/
+[cnpeople](https://cnpeople.vercel.app/)
 
 ## Tools
 front: React, TypeScript, Vite
